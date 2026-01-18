@@ -334,6 +334,15 @@ $(BIN)/exec/hypervolume_calculator_exec : $(BIN)/instance/instance.o \
 
 hypervolume_calculator_exec : $(BIN)/exec/hypervolume_calculator_exec
 
+$(BIN)/exec/hypervolume_ratio_calculator_exec : $(BIN)/instance/instance.o \
+                                                $(BIN)/utils/argument_parser.o \
+                                                $(BIN)/exec/hypervolume_ratio_calculator_exec.o
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(INC)
+	@echo
+
+hypervolume_ratio_calculator_exec : $(BIN)/exec/hypervolume_ratio_calculator_exec
+
 $(BIN)/exec/results_aggregator_exec : $(BIN)/utils/argument_parser.o \
                                       $(BIN)/exec/results_aggregator_exec.o
 	@echo "--> Linking objects..."
@@ -362,8 +371,8 @@ instance_generator_exec : $(BIN)/exec/instance_generator_exec
 
 $(BIN)/exec/reference_pareto_front_calculator_exec : $(BIN)/instance/instance.o \
                                                      $(BIN)/solution/solution.o \
-													 $(BIN)/solver/solver.o \
-													 $(BIN)/utils/argument_parser.o \
+                                                     $(BIN)/solver/solver.o \
+                                                     $(BIN)/utils/argument_parser.o \
                                                      $(BIN)/exec/reference_pareto_front_calculator_exec.o
 	@echo "--> Linking objects..."
 	$(CPP) -o $@ $^ $(CARGS) $(INC)
@@ -371,17 +380,17 @@ $(BIN)/exec/reference_pareto_front_calculator_exec : $(BIN)/instance/instance.o 
 
 reference_pareto_front_calculator_exec : $(BIN)/exec/reference_pareto_front_calculator_exec
 
-$(BIN)/exec/modified_generational_distance_calculator_exec : $(BIN)/instance/instance.o \
-													 		 $(BIN)/utils/argument_parser.o \
-                                                     		 $(BIN)/exec/modified_generational_distance_calculator_exec.o
+$(BIN)/exec/normalized_modified_generational_distance_calculator_exec : $(BIN)/instance/instance.o \
+                                                                        $(BIN)/utils/argument_parser.o \
+                                                                        $(BIN)/exec/normalized_modified_generational_distance_calculator_exec.o
 	@echo "--> Linking objects..."
 	$(CPP) -o $@ $^ $(CARGS) $(INC)
 	@echo
 
-modified_generational_distance_calculator_exec : $(BIN)/exec/modified_generational_distance_calculator_exec
+normalized_modified_generational_distance_calculator_exec : $(BIN)/exec/normalized_modified_generational_distance_calculator_exec
 
 $(BIN)/exec/multiplicative_epsilon_calculator_exec : $(BIN)/instance/instance.o \
-													 $(BIN)/utils/argument_parser.o \
+                                                     $(BIN)/utils/argument_parser.o \
                                                      $(BIN)/exec/multiplicative_epsilon_calculator_exec.o
 	@echo "--> Linking objects..."
 	$(CPP) -o $@ $^ $(CARGS) $(INC)
@@ -411,11 +420,12 @@ execs : christofides_solver_exec \
         ihs_solver_exec \
         nsbrkga_solver_exec \
         hypervolume_calculator_exec \
+				hypervolume_ratio_calculator_exec \
         results_aggregator_exec \
         instance_parser_exec \
         instance_generator_exec \
-		reference_pareto_front_calculator_exec \
-		modified_generational_distance_calculator_exec \
-		multiplicative_epsilon_calculator_exec
+        reference_pareto_front_calculator_exec \
+        normalized_modified_generational_distance_calculator_exec \
+        multiplicative_epsilon_calculator_exec
 
 all : tests execs
