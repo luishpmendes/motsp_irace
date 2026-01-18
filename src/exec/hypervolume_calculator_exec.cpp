@@ -34,21 +34,10 @@ double compute_hypervolume(
     return hv.compute(reference_point_prime);
 }
 
-static inline
-double compute_hypervolume_ratio(
-        const double & reference_hypervolume,
-        const std::vector<NSBRKGA::Sense> & senses,
-        const std::vector<double> & reference_point,
-        const std::vector<std::vector<double>> & front) {
-    double hypervolume = compute_hypervolume(senses, reference_point, front);
-    return hypervolume / reference_hypervolume;
-}
-
 int main(int argc, char * argv[]) {
     Argument_Parser arg_parser(argc, argv);
 
-    if(arg_parser.option_exists("--instance") &&
-       arg_parser.option_exists("--reference-pareto")) {
+    if(arg_parser.option_exists("--instance")) {
         std::ifstream ifs;
         motsp::Instance instance;
 
@@ -64,41 +53,12 @@ int main(int argc, char * argv[]) {
         }
 
         std::vector<double> reference_point = instance.primal_bound;
-        std::vector<std::vector<double>> reference_pareto;
-        double reference_hypervolume;
         std::vector<std::vector<std::vector<double>>> paretos;
         std::vector<std::vector<unsigned>> iteration_snapshots;
         std::vector<std::vector<double>> time_snapshots;
         std::vector<std::vector<std::vector<std::vector<double>>>>
             best_solutions_snapshots;
         unsigned num_solvers;
-
-        ifs.open(arg_parser.option_value("--reference-pareto"));
-
-        if(ifs.is_open()) {
-            for(std::string line; std::getline(ifs, line);) {
-                std::istringstream iss(line);
-                std::vector<double> cost(instance.num_objectives, 0.0);
-
-                for(unsigned j = 0; j < instance.num_objectives; j++) {
-                    iss >> cost[j];
-                }
-
-                reference_pareto.push_back(cost);
-            }
-
-            ifs.close();
-        } else {
-            throw std::runtime_error("File " +
-                    arg_parser.option_value("--reference-pareto") +
-                    " not found.");
-        }
-
-        reference_hypervolume = compute_hypervolume(instance.senses,
-                                                    reference_point,
-                                                    reference_pareto);
-
-        assert(reference_hypervolume > 0.0);
 
         for(num_solvers = 0;
             arg_parser.option_exists("--pareto-" +
@@ -194,8 +154,7 @@ int main(int argc, char * argv[]) {
                                              std::to_string(i)));
 
             if(ofs.is_open()) {
-                double hypervolume_ratio = compute_hypervolume_ratio(
-                        reference_hypervolume,
+                double hypervolume_ratio = compute_hypervolume(
                         instance.senses,
                         reference_point,
                         paretos[i]);
@@ -229,8 +188,7 @@ int main(int argc, char * argv[]) {
                 for(unsigned j = 0;
                     j < best_solutions_snapshots[i].size();
                     j++) {
-                    double hypervolume_ratio = compute_hypervolume_ratio(
-                            reference_hypervolume,
+                    double hypervolume_ratio = compute_hypervolume(
                             instance.senses,
                             reference_point,
                             best_solutions_snapshots[i][j]);
@@ -260,7 +218,6 @@ int main(int argc, char * argv[]) {
     } else {
         std::cerr << "./hypervolume_calculator_exec "
                   << "--instance <instance_filename> "
-                  << "--reference-pareto <reference_pareto_filename> "
                   << "--pareto-i <pareto_filename> "
                   << "--best-solutions-snapshots-i <best_solutions_snapshots_filename> "
                   << "--hypervolume-i <hypervolume_filename> "

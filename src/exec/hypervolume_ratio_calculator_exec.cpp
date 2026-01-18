@@ -1,69 +1,47 @@
 #include "instance/instance.hpp"
 #include "utils/argument_parser.hpp"
-#include <cassert>
+#include <pagmo/utils/hypervolume.hpp>
 #include <fstream>
 
 static inline
-double modified_distance(const std::vector<NSBRKGA::Sense> & senses,
-                         const std::vector<double> & reference_point,
-                         const std::vector<double> & point) {
-    double distance = 0.0, delta;
+double compute_hypervolume(
+        const std::vector<NSBRKGA::Sense> & senses,
+        const std::vector<double> & reference_point,
+        const std::vector<std::vector<double>> & front) {
+    std::vector<double> reference_point_prime(reference_point.size());
+    std::vector<std::vector<double>> front_prime(front.size());
 
-    for(unsigned i = 0; i < senses.size(); i++) {
-        delta = 0;
-
-        if(senses[i] == NSBRKGA::Sense::MINIMIZE) {
-            if(point[i] > reference_point[i]) {
-                delta = point[i] - reference_point[i];
-            }
-        } else { // senses[i] == NSBRKGA::Sense::MAXIMIZE
-            if(reference_point[i] > point[i]) {
-                delta = reference_point[i] - point[i];
-            }
+    for (unsigned i = 0; i < reference_point.size(); i++) {
+        if (senses[i] == NSBRKGA::Sense::MINIMIZE) {
+            reference_point_prime[i] = reference_point[i];
+        } else {
+            reference_point_prime[i] = -reference_point[i];
         }
-
-        distance += delta * delta;
     }
 
-    return sqrt(distance);
+    for (unsigned i = 0; i < front.size(); i++) {
+        front_prime[i] = std::vector<double>(front[i].size());
+        for (unsigned j = 0; j < front[i].size(); j++) {
+            if (senses[j] == NSBRKGA::Sense::MINIMIZE) {
+                front_prime[i][j] = front[i][j];
+            } else {
+                front_prime[i][j] = -front[i][j];
+            }
+        }
+    }
+
+    pagmo::hypervolume hv(front_prime);
+    return hv.compute(reference_point_prime);
 }
 
 static inline
-double modified_inverted_generational_distance(
+double compute_hypervolume_ratio(
+        const double & reference_hypervolume,
         const std::vector<NSBRKGA::Sense> & senses,
-        const std::vector<std::vector<double>> & reference_front,
+        const std::vector<double> & reference_point,
         const std::vector<std::vector<double>> & front) {
-    double igd_plus = 0.0, min_distance, distance;
-
-    for(unsigned i = 0; i < reference_front.size(); i++) {
-        min_distance = modified_distance(senses,
-                                         reference_front[i],
-                                         front.front());
-
-        for(unsigned j = 1; j < front.size(); j++) {
-            distance = modified_distance(senses, reference_front[i], front[j]);
-
-            if(distance < min_distance) {
-                min_distance = distance;
-            }
-        }
-
-        igd_plus += min_distance;
-    }
-
-    return igd_plus / reference_front.size();
-}
-
-static inline
-double normalized_modified_inverted_generational_distance(
-        const double & reference_igd_plus,
-        const std::vector<NSBRKGA::Sense> & senses,
-        const std::vector<std::vector<double>> & reference_front,
-        const std::vector<std::vector<double>> & front) {
-    double igd_plus = modified_inverted_generational_distance(senses,
-                                                              reference_front,
-                                                              front);
-    return igd_plus / reference_igd_plus;
+    double hypervolume = compute_hypervolume(senses, reference_point, front);
+    return hypervolume / reference_hypervolume;
 }
 
 int main(int argc, char * argv[]) {
@@ -87,7 +65,7 @@ int main(int argc, char * argv[]) {
 
         std::vector<double> reference_point = instance.primal_bound;
         std::vector<std::vector<double>> reference_pareto;
-        double reference_igd_plus;
+        double reference_hypervolume;
         std::vector<std::vector<std::vector<double>>> paretos;
         std::vector<std::vector<unsigned>> iteration_snapshots;
         std::vector<std::vector<double>> time_snapshots;
@@ -116,21 +94,20 @@ int main(int argc, char * argv[]) {
                     " not found.");
         }
 
-        reference_igd_plus = modified_inverted_generational_distance(
-                instance.senses,
-                reference_pareto,
-                {reference_point});
+        reference_hypervolume = compute_hypervolume(instance.senses,
+                                                    reference_point,
+                                                    reference_pareto);
 
-        assert(reference_igd_plus > 0.0);
+        assert(reference_hypervolume > 0.0);
 
         for(num_solvers = 0;
             arg_parser.option_exists("--pareto-" +
                                      std::to_string(num_solvers)) ||
             arg_parser.option_exists("--best-solutions-snapshots-" +
                                      std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--igd-plus-" +
+            arg_parser.option_exists("--hvr-" +
                                      std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--igd-plus-snapshots-" +
+            arg_parser.option_exists("--hvr-snapshots-" +
                                      std::to_string(num_solvers));
             num_solvers++) {}
 
@@ -212,31 +189,32 @@ int main(int argc, char * argv[]) {
 
         for(unsigned i = 0; i < num_solvers; i++) {
             std::ofstream ofs;
-            ofs.open(arg_parser.option_value("--igd-plus-" +
+
+            ofs.open(arg_parser.option_value("--hvr-" +
                                              std::to_string(i)));
 
             if(ofs.is_open()) {
-                double normalized_igd_plus = normalized_modified_inverted_generational_distance(
-                        reference_igd_plus,
+                double hypervolume_ratio = compute_hypervolume_ratio(
+                        reference_hypervolume,
                         instance.senses,
-                        reference_pareto,
+                        reference_point,
                         paretos[i]);
 
-                assert(normalized_igd_plus >= 0.0);
-                assert(normalized_igd_plus <= 1.0);
+                assert(hypervolume_ratio >= 0.0);
+                assert(hypervolume_ratio <= 1.0);
 
-                ofs << normalized_igd_plus << std::endl;
+                ofs << hypervolume_ratio << std::endl;
 
                 if(ofs.eof() || ofs.fail() || ofs.bad()) {
                     throw std::runtime_error("Error writing file " +
-                            arg_parser.option_value("--igd-plus-" +
+                            arg_parser.option_value("--hvr-" +
                                 std::to_string(i)) + ".");
                 }
 
                 ofs.close();
             } else {
                 throw std::runtime_error("File " +
-                        arg_parser.option_value("--igd-plus-" +
+                        arg_parser.option_value("--hvr-" +
                             std::to_string(i)) + " not created.");
             }
         }
@@ -244,30 +222,30 @@ int main(int argc, char * argv[]) {
         for(unsigned i = 0; i < num_solvers; i++) {
             std::ofstream ofs;
 
-            ofs.open(arg_parser.option_value("--igd-plus-snapshots-" +
+            ofs.open(arg_parser.option_value("--hvr-snapshots-" +
                                              std::to_string(i)));
 
             if(ofs.is_open()) {
                 for(unsigned j = 0;
                     j < best_solutions_snapshots[i].size();
                     j++) {
-                    double normalized_igd_plus = normalized_modified_inverted_generational_distance(
-                            reference_igd_plus,
+                    double hypervolume_ratio = compute_hypervolume_ratio(
+                            reference_hypervolume,
                             instance.senses,
-                            reference_pareto,
+                            reference_point,
                             best_solutions_snapshots[i][j]);
 
-                    assert(normalized_igd_plus >= 0.0);
-                    assert(normalized_igd_plus <= 1.0);
+                    assert(hypervolume_ratio >= 0.0);
+                    assert(hypervolume_ratio <= 1.0);
 
                     ofs << iteration_snapshots[i][j] << ","
                         << time_snapshots[i][j] << ","
-                        << normalized_igd_plus << std::endl;
+                        << hypervolume_ratio << std::endl;
 
                     if(ofs.eof() || ofs.fail() || ofs.bad()) {
                         throw std::runtime_error("Error writing file " +
                                 arg_parser.option_value(
-                                    "--igd-plus-snapshots-" +
+                                    "--hvr-snapshots-" +
                                     std::to_string(i)) + ".");
                     }
                 }
@@ -275,18 +253,18 @@ int main(int argc, char * argv[]) {
                 ofs.close();
             } else {
                 throw std::runtime_error("File " +
-                        arg_parser.option_value("--igd-plus-snapshots-" +
+                        arg_parser.option_value("--hvr-snapshots-" +
                             std::to_string(i)) + " not created.");
             }
         }
     } else {
-        std::cerr << "./modified_inverted_generational_distance_exec "
+        std::cerr << "./hypervolume_ratio_calculator_exec "
                   << "--instance <instance_filename> "
                   << "--reference-pareto <reference_pareto_filename> "
                   << "--pareto-i <pareto_filename> "
                   << "--best-solutions-snapshots-i <best_solutions_snapshots_filename> "
-                  << "--igd-plus-i <modified_inverted_generational_distance_filename> "
-                  << "--igd-plus-snapshots-i <modified_inverted_generational_distance_snapshots_filename> "
+                  << "--hvr-i <hypervolume_filename> "
+                  << "--hvr-snapshots-i <hypervolume_snapshots_filename> "
                   << std::endl;
     }
 
