@@ -1,0 +1,28 @@
+# iRace Scenario Configuration for NSGA-II (MOTSP)
+
+# Working directory for executing the solver
+execDir = "./"
+
+# Directory containing training instance files
+trainInstancesDir = "../instances"
+
+# File listing the representative subset of training instances
+trainInstancesFile = "./instances.txt"
+
+# Path to the target-runner script
+targetRunner = "./nsga2-tunner.sh"
+
+# Tuning budget: 24 hours = 86400 seconds
+# (When using maxTime, target-runner must output "cost time")
+maxTime = 86400
+
+# Number of parallel evaluations (1 = sequential)
+parallel = 1
+
+# Log file for storing iRace results (R data file)
+logFile = "./irace-output.Rdata"
+
+# Parameter definitions file
+parameterFile = "./nsga2-parameters.txt"
+
+# (Optional settings can be added: e.g., seed, statistical test type, etc.)

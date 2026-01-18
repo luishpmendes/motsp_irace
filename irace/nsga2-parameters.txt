@@ -1,0 +1,11 @@
+# iRace Parameter Definition File for NSGA-II (MOTSP)
+# Format: name "switch" type (min, max) [conditional]
+
+population_size          "--population-size "         i       (100, 500)
+crossover_probability    "--crossover-probability "   r       (0.01, 0.99)
+crossover_distribution   "--crossover-distribution "  r       (1.00, 99.00)
+mutation_probability     "--mutation-probability "    r       (0.01, 0.99)
+mutation_distribution    "--mutation-distribution "   r       (1.00, 99.00)
+
+[global]
+digits = 3
