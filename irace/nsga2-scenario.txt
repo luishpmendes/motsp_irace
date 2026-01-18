@@ -14,7 +14,7 @@ targetRunner = "./nsga2-tunner.sh"
 
 # Tuning budget: 24 hours = 86400 seconds
 # (When using maxTime, target-runner must output "cost time")
-maxTime = 86400
+maxTime = 3600 # revert later
 
 # Number of parallel evaluations (1 = sequential)
 parallel = 1

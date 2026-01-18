@@ -39,7 +39,7 @@ HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_ratio_calculator_exec"
 TIME_LIMIT=60  # Each run is capped at 60 seconds
 
 # Create unique temporary directory for this run to avoid conflicts
-TMP_DIR=$(mktemp -d -t irace_nsga2)
+TMP_DIR="$(mktemp -d --tmpdir "irace_nsga2.XXXXXX")"
 PARETO_FILE="${TMP_DIR}/pareto.txt"
 HV_FILE="${TMP_DIR}/hv.txt"
 
@@ -49,8 +49,8 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Record start time
-START_TIME=$(date +%s.%N)
+# Record start time (ns)
+START_TIME_NS=$(date +%s%N)
 
 # Run the NSGA-II solver with the given configuration
 if ! "$SOLVER" \
@@ -60,19 +60,17 @@ if ! "$SOLVER" \
     --pareto "$PARETO_FILE" \
     "${PARAMS[@]}" \
     > /dev/null 2>&1; then
-    END_TIME=$(date +%s.%N)
-    ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
-    ELAPSED_INT=$(printf "%.0f" "$ELAPSED")
+    END_TIME_NS=$(date +%s%N)
+    ELAPSED_NS=$((END_TIME_NS - START_TIME_NS))
+    ELAPSED_INT=$(( (ELAPSED_NS + 500000000) / 1000000000 ))
     echo "1e18 $ELAPSED_INT"
     exit 0
 fi
 
-# Record end time
-END_TIME=$(date +%s.%N)
-
-# Calculate elapsed time in seconds (integer)
-ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
-ELAPSED_INT=$(printf "%.0f" "$ELAPSED")
+# Record end time (ns) and compute elapsed seconds
+END_TIME_NS=$(date +%s%N)
+ELAPSED_NS=$((END_TIME_NS - START_TIME_NS))
+ELAPSED_INT=$(( (ELAPSED_NS + 500000000) / 1000000000 ))
 
 # Check if Pareto file was created and has content
 if [ ! -s "$PARETO_FILE" ]; then
