@@ -10,6 +10,7 @@ c2                       "--c2 "                      r       (0.20, 4.00)
 chi                      "--chi "                     r       (0.30, 1.20)
 v_coeff                  "--v-coeff "                 r       (0.01, 1.00)
 leader_selection_range   "--leader-selection-range "  i       (0, 100)
+diversity_mechanism      "--diversity-mechanism "     c       ("crowding distance", "niche count", "max min")
 
 [global]
 digits = 2
