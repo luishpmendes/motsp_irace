@@ -10,4 +10,4 @@ mutation_probability     "--mutation-probability "    r       (0.01, 0.99)
 mutation_distribution    "--mutation-distribution "   r       (1.00, 99.00)
 
 [global]
-digits = 3
+digits = 2
