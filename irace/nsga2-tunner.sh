@@ -11,7 +11,7 @@
 #   $5+: Parameter settings (e.g., --population-size 100 --crossover-probability 0.8 ...)
 #
 # Output: A single line with "cost time" where:
-#   - cost: Negative hypervolume ratio (to minimize in iRace, thus maximizing HVR)
+#   - cost: Negative hypervolume (to minimize in iRace, thus maximizing hypervolume)
 #   - time: Elapsed time in seconds
 ###############################################################################
 
@@ -31,15 +31,33 @@ shift 4
 # Remaining arguments are the tunable parameters
 PARAMS=("$@")
 
+# Transform --population-size-factor to --population-size (multiply by 4)
+# This ensures population_size is always a multiple of 4
+TRANSFORMED_PARAMS=()
+i=0
+while [ $i -lt ${#PARAMS[@]} ]; do
+    if [ "${PARAMS[$i]}" = "--population-size-factor" ]; then
+        FACTOR="${PARAMS[$((i+1))]}"
+        POPULATION_SIZE=$((FACTOR * 4))
+        TRANSFORMED_PARAMS+=("--population-size" "$POPULATION_SIZE")
+        i=$((i + 2))
+    else
+        TRANSFORMED_PARAMS+=("${PARAMS[$i]}")
+        i=$((i + 1))
+    fi
+done
+PARAMS=("${TRANSFORMED_PARAMS[@]}")
+
 # Executables (adjust paths if needed)
 SOLVER="${PROJECT_DIR}/bin/exec/nsga2_solver_exec"
-HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_ratio_calculator_exec"
+HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Fixed solver settings
-TIME_LIMIT=60  # Each run is capped at 60 seconds
+TIME_LIMIT=300  # Each run is capped at 5 minutes (300 seconds)
 
-# Create unique temporary directory for this run to avoid conflicts
-TMP_DIR="$(mktemp -d --tmpdir "irace_nsga2.XXXXXX")"
+# Create directory for this run
+mkdir -p "${PROJECT_DIR}/irace/irace_nsga2"
+TMP_DIR="${PROJECT_DIR}/irace/irace_nsga2"
 PARETO_FILE="${TMP_DIR}/pareto.txt"
 HV_FILE="${TMP_DIR}/hv.txt"
 
@@ -79,12 +97,15 @@ if [ ! -s "$PARETO_FILE" ]; then
     exit 0
 fi
 
-# Compute hypervolume using the hypervolume ratioalculator
+# Compute hypervolume using the hypervolume calculator
 if ! "$HV_CALC" \
     --instance "$INSTANCE" \
     --pareto-0 "$PARETO_FILE" \
-    --hvr-0 "$HV_FILE" \
+    --hypervolume-0 "$HV_FILE" \
     > /dev/null 2>&1; then
+    # Print failed command
+    echo "Failed to compute hypervolume"
+    echo "$HV_CALC --instance $INSTANCE --pareto-0 $PARETO_FILE --hypervolume-0 $HV_FILE"
     echo "1e18 $ELAPSED_INT"
     exit 0
 fi
@@ -94,15 +115,11 @@ if [ -s "$HV_FILE" ]; then
     HV=$(tr -d '[:space:]' < "$HV_FILE")
 else
     # If hypervolume computation failed, return worst cost
-    echo "1e18 $ELAPSED_INT"
     exit 0
 fi
 
-# Compute cost as negative hypervolume ratio (to minimize in iRace = maximize HVR)
-# The hypervolume ratio calculator returns a ratio in [0, 1], so we negate it
-COST=$(echo "-1 * $HV" | bc -l)
-
+# Compute cost as negative hypervolume (to minimize in iRace = maximize HV)
 # Output the result in iRace format: "cost time"
-echo "$COST $ELAPSED_INT"
+echo "-$HV $ELAPSED_INT"
 
 exit 0

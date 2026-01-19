@@ -154,15 +154,14 @@ int main(int argc, char * argv[]) {
                                              std::to_string(i)));
 
             if(ofs.is_open()) {
-                double hypervolume_ratio = compute_hypervolume(
+                double hypervolume = compute_hypervolume(
                         instance.senses,
                         reference_point,
                         paretos[i]);
 
-                assert(hypervolume_ratio >= 0.0);
-                assert(hypervolume_ratio <= 1.0);
+                assert(hypervolume >= 0.0);
 
-                ofs << hypervolume_ratio << std::endl;
+                ofs << hypervolume << std::endl;
 
                 if(ofs.eof() || ofs.fail() || ofs.bad()) {
                     throw std::runtime_error("Error writing file " +
@@ -181,38 +180,41 @@ int main(int argc, char * argv[]) {
         for(unsigned i = 0; i < num_solvers; i++) {
             std::ofstream ofs;
 
-            ofs.open(arg_parser.option_value("--hypervolume-snapshots-" +
-                                             std::to_string(i)));
+            if(arg_parser.option_exists("--hypervolume-snapshots-" +
+                                             std::to_string(i))) {
 
-            if(ofs.is_open()) {
-                for(unsigned j = 0;
-                    j < best_solutions_snapshots[i].size();
-                    j++) {
-                    double hypervolume_ratio = compute_hypervolume(
-                            instance.senses,
-                            reference_point,
-                            best_solutions_snapshots[i][j]);
+                ofs.open(arg_parser.option_value("--hypervolume-snapshots-" +
+                                                std::to_string(i)));
 
-                    assert(hypervolume_ratio >= 0.0);
-                    assert(hypervolume_ratio <= 1.0);
+                if(ofs.is_open()) {
+                    for(unsigned j = 0;
+                        j < best_solutions_snapshots[i].size();
+                        j++) {
+                        double hypervolume = compute_hypervolume(
+                                instance.senses,
+                                reference_point,
+                                best_solutions_snapshots[i][j]);
 
-                    ofs << iteration_snapshots[i][j] << ","
-                        << time_snapshots[i][j] << ","
-                        << hypervolume_ratio << std::endl;
+                        assert(hypervolume >= 0.0);
 
-                    if(ofs.eof() || ofs.fail() || ofs.bad()) {
-                        throw std::runtime_error("Error writing file " +
-                                arg_parser.option_value(
-                                    "--hypervolume-snapshots-" +
-                                    std::to_string(i)) + ".");
+                        ofs << iteration_snapshots[i][j] << ","
+                            << time_snapshots[i][j] << ","
+                            << hypervolume << std::endl;
+
+                        if(ofs.eof() || ofs.fail() || ofs.bad()) {
+                            throw std::runtime_error("Error writing file " +
+                                    arg_parser.option_value(
+                                        "--hypervolume-snapshots-" +
+                                        std::to_string(i)) + ".");
+                        }
                     }
-                }
 
-                ofs.close();
-            } else {
-                throw std::runtime_error("File " +
-                        arg_parser.option_value("--hypervolume-snapshots-" +
-                            std::to_string(i)) + " not created.");
+                    ofs.close();
+                } else {
+                    throw std::runtime_error("File " +
+                            arg_parser.option_value("--hypervolume-snapshots-" +
+                                std::to_string(i)) + " not created.");
+                }
             }
         }
     } else {

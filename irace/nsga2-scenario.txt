@@ -12,9 +12,9 @@ trainInstancesFile = "./instances.txt"
 # Path to the target-runner script
 targetRunner = "./nsga2-tunner.sh"
 
-# Tuning budget: 24 hours = 86400 seconds
+# Tuning budget: 48 hours = 172800 seconds
 # (When using maxTime, target-runner must output "cost time")
-maxTime = 3600 # revert later
+maxTime = 172800
 
 # Number of parallel evaluations (1 = sequential)
 parallel = 1
