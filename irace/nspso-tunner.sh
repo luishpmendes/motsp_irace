@@ -41,6 +41,24 @@ while [ $i -lt ${#PARAMS[@]} ]; do
         POPULATION_SIZE=$((FACTOR * 4))
         TRANSFORMED_PARAMS+=("--population-size" "$POPULATION_SIZE")
         i=$((i + 2))
+    elif [ "${PARAMS[$i]}" = "--diversity-mechanism" ]; then
+        # Handle diversity-mechanism values that may contain spaces
+        VALUE="${PARAMS[$((i+1))]}"
+        # Check if the next word is part of a multi-word value
+        if [ "$VALUE" = "crowding" ] && [ "${PARAMS[$((i+2))]}" = "distance" ]; then
+            TRANSFORMED_PARAMS+=("--diversity-mechanism" "crowding distance")
+            i=$((i + 3))
+        elif [ "$VALUE" = "niche" ] && [ "${PARAMS[$((i+2))]}" = "count" ]; then
+            TRANSFORMED_PARAMS+=("--diversity-mechanism" "niche count")
+            i=$((i + 3))
+        elif [ "$VALUE" = "max" ] && [ "${PARAMS[$((i+2))]}" = "min" ]; then
+            TRANSFORMED_PARAMS+=("--diversity-mechanism" "max min")
+            i=$((i + 3))
+        else
+            # Single word value (shouldn't happen but handle it)
+            TRANSFORMED_PARAMS+=("--diversity-mechanism" "$VALUE")
+            i=$((i + 2))
+        fi
     else
         TRANSFORMED_PARAMS+=("${PARAMS[$i]}")
         i=$((i + 1))
@@ -53,7 +71,7 @@ SOLVER="${PROJECT_DIR}/bin/exec/nspso_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Fixed solver settings
-TIME_LIMIT=60  # Each run is capped at 5 minutes (300 seconds)
+TIME_LIMIT=300  # Each run is capped at 5 minutes (300 seconds)
 
 # Create directory for this run
 mkdir -p "${PROJECT_DIR}/irace/irace_nspso"
@@ -78,6 +96,7 @@ if ! "$SOLVER" \
     --pareto "$PARETO_FILE" \
     "${PARAMS[@]}" \
     > /dev/null 2>&1; then
+    # Print the failed command for debugging
     END_TIME_NS=$(date +%s%N)
     ELAPSED_NS=$((END_TIME_NS - START_TIME_NS))
     ELAPSED_INT=$(( (ELAPSED_NS + 500000000) / 1000000000 ))
