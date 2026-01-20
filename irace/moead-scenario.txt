@@ -10,7 +10,7 @@ trainInstancesDir = "../instances"
 trainInstancesFile = "./instances.txt"
 
 # Path to the target-runner script
-targetRunner = "./nspso-tunner.sh"
+targetRunner = "./moead-tunner.sh"
 
 # Tuning budget: 48 hours = 172800 seconds
 # (When using maxTime, target-runner must output "cost time")
@@ -20,9 +20,9 @@ maxTime = 172800
 parallel = 1
 
 # Log file for storing iRace results (R data file)
-logFile = "./irace-nspso.Rdata"
+logFile = "./irace-moead.Rdata"
 
 # Parameter definitions file
-parameterFile = "./nspso-parameters.txt"
+parameterFile = "./moead-parameters.txt"
 
 # (Optional settings can be added: e.g., seed, statistical test type, etc.)

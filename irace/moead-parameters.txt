@@ -1,0 +1,17 @@
+# iRace Parameter Definition File for MOEA/D (MOTSP)
+# Format: name "switch" type (min, max) [conditional]
+
+# population_size_factor is multiplied by 4 in the runner script to ensure
+# population_size is always a multiple of 4 (range: 100 to 500)
+population_size_factor   "--population-size-factor "  i       (25, 125)
+weight_generation        "--weight-generation "       c       ("grid", "low discrepancy", "random")
+decomposition            "--decomposition "           c       ("weighted", "tchebycheff", "bi")
+neighbours               "--neighbours "              i       (2, 50)
+cr                       "--cr "                      r       (0.01, 0.99)
+f                        "--f "                       r       (0.01, 0.99)
+eta_m                    "--eta-m "                   r       (1.00, 99.00)
+realb                    "--realb "                   r       (0.01, 0.99)
+limit                    "--limit "                   i       (1, 20)
+
+[global]
+digits = 2

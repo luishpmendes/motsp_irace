@@ -20,7 +20,7 @@ maxTime = 172800
 parallel = 1
 
 # Log file for storing iRace results (R data file)
-logFile = "./irace-output.Rdata"
+logFile = "./irace-nsga2.Rdata"
 
 # Parameter definitions file
 parameterFile = "./nsga2-parameters.txt"
