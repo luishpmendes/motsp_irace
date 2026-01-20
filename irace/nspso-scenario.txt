@@ -14,7 +14,7 @@ targetRunner = "./nspso-tunner.sh"
 
 # Tuning budget: 48 hours = 172800 seconds
 # (When using maxTime, target-runner must output "cost time")
-maxTime = 3600 # rever later
+maxTime = 172800
 
 # Number of parallel evaluations (1 = sequential)
 parallel = 1
