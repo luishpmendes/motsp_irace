@@ -1,0 +1,60 @@
+# iRace Parameter Definition File for NS-BRKGA (MOTSP)
+# Format: name "switch" type (min, max) [conditional]
+
+# Population Parameters
+# population_size_factor is multiplied by 4 in the runner script to ensure
+# population_size is always a multiple of 4 (range: 100 to 500)
+population_size_factor   "--population-size-factor "  i       (25, 125)
+
+# Elite percentages: min must be less than max
+min_elites_percentage    "--min-elites-percentage "   r       (0.05, 0.25)
+max_elites_percentage    "--max-elites-percentage "   r       (0.30, 0.50)
+
+# Mutation Parameters
+mutation_probability     "--mutation-probability "    r       (0.00, 1.00)
+mutation_distribution    "--mutation-distribution "   r       (1.00, 100.00)
+
+# Parent Selection Parameters
+# num_elite_parents must be <= num_total_parents
+num_total_parents        "--num-total-parents "       i       (2, 5)
+num_elite_parents        "--num-elite-parents "       i       (1, 5)
+
+# Bias and Diversity Types
+# CONSTANT=0, CUBIC=1, EXPONENTIAL=2, LINEAR=3, LOGINVERSE=4, QUADRATIC=5, SQRT=6
+bias_type                "--bias-type "               c       (0, 1, 2, 3, 4, 5, 6)
+# NONE=0, AVERAGE_DISTANCE_TO_CENTROID=1, AVERAGE_DISTANCE_BETWEEN_INDIVIDUALS=2, POWER_MEAN_BASED=3
+diversity_type           "--diversity-type "          c       (0, 1, 2, 3)
+
+# Multi-Population Parameters
+# Constraint: num_populations * num_exchange_individuals < population_size
+num_populations          "--num-populations "         i       (1, 5)
+exchange_interval        "--exchange-interval "       i       (0, 1000)
+num_exchange_individuals "--num-exchange-individuals " i      (1, 50)
+
+# Path Relinking Parameters
+# DIRECT=0, PERMUTATION=1, BINARY_SEARCH=2
+pr_type                  "--pr-type "                 c       (0, 1, 2)
+# HAMMING, KENDALL_TAU, EUCLIDEAN (handled in runner script)
+pr_dist_func             "--pr-dist-func "            c       ("HAMMING", "KENDALL_TAU", "EUCLIDEAN")
+pr_percentage            "--pr-percentage "           r       (0.00, 1.00)
+pr_interval              "--pr-interval "             i       (0, 1000)
+
+# Shake Parameters
+shake_interval           "--shake-interval "          i       (0, 500)
+shake_intensity          "--shake-intensity "         r       (0.00, 1.00)
+shake_distribution       "--shake-distribution "      r       (1.00, 100.00)
+
+# Reset Parameters
+reset_interval           "--reset-interval "          i       (0, 1000)
+reset_intensity          "--reset-intensity "         r       (0.00, 1.00)
+
+[global]
+digits = 2
+
+[forbidden]
+# Elite percentages constraint: min must be less than max
+(min_elites_percentage >= max_elites_percentage)
+# Parent constraint: num_elite_parents must not exceed num_total_parents
+(num_elite_parents > num_total_parents)
+# Shake and Reset constraint
+(shake_interval >= reset_interval)
