@@ -139,7 +139,7 @@ int main (int argc, char * argv[]) {
             if (s.compare("HAMMING") == 0) {
                 solver.pr_dist_func =
                     std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-                        new NSBRKGA::KendallTauDistance());
+                        new NSBRKGA::HammingDistance());
             } else if (s.compare("KENDALL_TAU") == 0) {
                 solver.pr_dist_func =
                     std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
