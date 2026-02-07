@@ -26,8 +26,6 @@ mkdir -p ${path}/hvr
 mkdir -p ${path}/hvr_snapshots
 mkdir -p ${path}/nigd_plus
 mkdir -p ${path}/nigd_plus_snapshots
-# mkdir -p ${path}/multiplicative_epsilon
-# mkdir -p ${path}/multiplicative_epsilon_snapshots
 mkdir -p ${path}/metrics
 mkdir -p ${path}/metrics_snapshots
 
@@ -405,8 +403,6 @@ python3 ${path}/plotter_hvr.py &
 python3 ${path}/plotter_hvr_snapshots.py &
 python3 ${path}/plotter_nigd_plus.py &
 python3 ${path}/plotter_nigd_plus_snapshots.py &
-# python3 ${path}/plotter_multiplicative_epsilon.py &
-# python3 ${path}/plotter_multiplicative_epsilon_snapshots.py &
 python3 ${path}/plotter_metrics.py &
 python3 ${path}/plotter_metrics_snapshots.py &
 python3 ${path}/plotter_num_non_dominated_snapshots.py &
@@ -444,7 +440,6 @@ wait
 
 rm ${path}/hvr_snapshots/snapshot_*.png &
 rm ${path}/nigd_plus_snapshots/snapshot_*.png &
-# rm ${path}/multiplicative_epsilon_snapshots/snapshot_*.png &
 rm ${path}/metrics_snapshots/raincloud_*.png &
 rm ${path}/metrics_snapshots/scatter_*.png
 

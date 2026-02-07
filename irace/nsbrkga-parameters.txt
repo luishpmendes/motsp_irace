@@ -58,3 +58,5 @@ digits = 2
 (num_elite_parents > num_total_parents)
 # Shake and Reset constraint
 (shake_interval >= reset_interval)
+# Multi-Population constraint
+(num_populations * num_exchange_individuals >= population_size_factor * 4)
