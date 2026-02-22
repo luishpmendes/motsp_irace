@@ -86,6 +86,12 @@ class NSBRKGA_Solver : public Solver {
         std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
             new NSBRKGA::EuclideanDistance());
 
+    /******************************************************************
+     * Type of distance function used in path relinking.
+     ******************************************************************/
+    NSBRKGA::DistanceFunctionType pr_dist_func_type =
+        NSBRKGA::DistanceFunctionType::EUCLIDEAN;
+
     /*****************************************
      * Percentage of the path to be computed.
      *****************************************/
@@ -228,6 +234,14 @@ class NSBRKGA_Solver : public Solver {
      * Solve the instance.
      **********************/
     void solve();
+
+    /******************************************************************
+     * Sets the distance function type and updates the distance
+     * function pointer accordingly.
+     *
+     * @param t the distance function type.
+     ******************************************************************/
+    void set_pr_dist_func_type(NSBRKGA::DistanceFunctionType t);
 
     /*****************************************************************
      * Standard stream operator.

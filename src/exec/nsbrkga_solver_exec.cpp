@@ -133,22 +133,19 @@ int main (int argc, char * argv[]) {
         }
 
         if(arg_parser.option_exists("--pr-dist-func")) {
-            std::string s = arg_parser.option_value("--pr-dist-func");
-            std::transform(s.begin(), s.end(), s.begin(), ::toupper);
-
-            if (s.compare("HAMMING") == 0) {
-                solver.pr_dist_func =
-                    std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-                        new NSBRKGA::HammingDistance());
-            } else if (s.compare("KENDALL_TAU") == 0) {
-                solver.pr_dist_func =
-                    std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-                        new NSBRKGA::KendallTauDistance());
-            } else if (s.compare("EUCLIDEAN") == 0) {
-                solver.pr_dist_func =
-                    std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-                        new NSBRKGA::EuclideanDistance());
+            std::stringstream ss(arg_parser.option_value("--pr-dist-func"));
+            NSBRKGA::DistanceFunctionType t;
+            ss >> t;
+            if(ss.fail()) {
+                std::string allowed;
+                for(const auto & name :
+                    EnumIO<NSBRKGA::DistanceFunctionType>::enum_names()) {
+                    allowed += " " + name;
+                }
+                throw std::runtime_error(
+                    "Invalid --pr-dist-func value. Allowed:" + allowed);
             }
+            solver.set_pr_dist_func_type(t);
         }
 
         if(arg_parser.option_exists("--pr-percentage")) {

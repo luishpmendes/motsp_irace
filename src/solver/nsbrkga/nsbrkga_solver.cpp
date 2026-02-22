@@ -7,6 +7,11 @@ NSBRKGA_Solver::NSBRKGA_Solver(const Instance & instance)
 
 NSBRKGA_Solver::NSBRKGA_Solver() = default;
 
+void NSBRKGA_Solver::set_pr_dist_func_type(NSBRKGA::DistanceFunctionType t) {
+    this->pr_dist_func_type = t;
+    this->pr_dist_func = NSBRKGA::make_distance_function(t);
+}
+
 void NSBRKGA_Solver::capture_snapshot(
         const NSBRKGA::NSBRKGA<Decoder> & algorithm) {
     double time_snapshot = this->elapsed_time();
@@ -296,6 +301,9 @@ std::ostream & operator <<(std::ostream & os, const NSBRKGA_Solver & solver) {
        << "Type of path relink that will be used: "
        << EnumIO<NSBRKGA::PathRelinking::Type>::enum_names().at(
                static_cast<int>(solver.pr_type)) << std::endl
+       << "Distance function used in path relinking: "
+       << EnumIO<NSBRKGA::DistanceFunctionType>::enum_names().at(
+               static_cast<int>(solver.pr_dist_func_type)) << std::endl
        << "Percentage of the path to be computed: " << solver.pr_percentage	
        << std::endl
        << "Interval at which the path relink is applied: "

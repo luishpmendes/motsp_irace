@@ -15,7 +15,8 @@ exchange_interval        "--exchange-interval "       i       (0, 1000)
 num_exchange_individuals "--num-exchange-individuals " i      (1, 100)
 # DIRECT=0, PERMUTATION=1, BINARY_SEARCH=2
 pr_type                  "--pr-type "                 c       (0, 1, 2)
-pr_dist_func             "--pr-dist-func "            c       ("HAMMING", "KENDALL_TAU", "EUCLIDEAN")
+# HAMMING=0, KENDALL_TAU=1, EUCLIDEAN=2
+pr_dist_func             "--pr-dist-func "            c       (0, 1, 2)
 pr_percentage            "--pr-percentage "           r       (0.00, 1.00)
 pr_interval              "--pr-interval "             i       (0, 1000)
 shake_interval           "--shake-interval "          i       (0, 1000)
