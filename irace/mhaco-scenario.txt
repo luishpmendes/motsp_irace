@@ -1,28 +1,8 @@
-# iRace Scenario Configuration for MHACO (MOTSP)
-
-# Working directory for executing the solver
 execDir = "./"
-
-# Directory containing training instance files
 trainInstancesDir = "../instances"
-
-# File listing the representative subset of training instances
 trainInstancesFile = "./instances.txt"
-
-# Path to the target-runner script
 targetRunner = "./mhaco-tunner.sh"
-
-# Tuning budget: 48 hours = 172800 seconds
-# (When using maxTime, target-runner must output "cost time")
 maxTime = 172800
-
-# Number of parallel evaluations (1 = sequential)
 parallel = 1
-
-# Log file for storing iRace results (R data file)
 logFile = "./irace-mhaco.Rdata"
-
-# Parameter definitions file
 parameterFile = "./mhaco-parameters.txt"
-
-# (Optional settings can be added: e.g., seed, statistical test type, etc.)

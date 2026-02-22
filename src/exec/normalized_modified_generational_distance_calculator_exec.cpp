@@ -229,7 +229,7 @@ int main(int argc, char * argv[]) {
 
                 if(ofs.eof() || ofs.fail() || ofs.bad()) {
                     throw std::runtime_error("Error writing file " +
-                            arg_parser.option_value("--igd-plus-" +
+                            arg_parser.option_value("--nigd-plus-" +
                                 std::to_string(i)) + ".");
                 }
 

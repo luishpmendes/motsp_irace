@@ -100,6 +100,7 @@ plt.figure()
 plt.xlabel(fontsize="large", xlabel="Number of Objectives")
 plt.ylabel(fontsize="large", ylabel="Hypervolume Ratio")
 plt.tick_params(axis="both", which="both", labelsize="large")
+plt.xticks(fontsize="large", ticks=ms)
 plt.grid(alpha=0.5, color='gray', linestyle='dashed', linewidth=0.5, which='both')
 for i in range(len(solvers)):
     y = []
@@ -122,6 +123,7 @@ plt.figure()
 plt.xlabel(fontsize="large", xlabel="Number of Objectives")
 plt.ylabel(fontsize="large", ylabel="Hypervolume Ratio")
 plt.tick_params(axis="both", which="both", labelsize="large")
+plt.xticks(fontsize="large", ticks=ms)
 plt.grid(alpha=0.5, color='gray', linestyle='dashed', linewidth=0.5, which='both')
 for i in range(len(solvers)):
     y0 = []

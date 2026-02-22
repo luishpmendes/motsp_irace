@@ -1,13 +1,12 @@
 #include "instance/instance.hpp"
 #include "utils/argument_parser.hpp"
-#include <pagmo/utils/hypervolume.hpp>
 #include <fstream>
+#include <pagmo/utils/hypervolume.hpp>
 
-static inline
-double compute_hypervolume(
-        const std::vector<NSBRKGA::Sense> & senses,
-        const std::vector<double> & reference_point,
-        const std::vector<std::vector<double>> & front) {
+static inline double
+compute_hypervolume(const std::vector<NSBRKGA::Sense> &senses,
+                    const std::vector<double> &reference_point,
+                    const std::vector<std::vector<double>> &front) {
     std::vector<double> reference_point_prime(reference_point.size());
     std::vector<std::vector<double>> front_prime(front.size());
 
@@ -34,33 +33,33 @@ double compute_hypervolume(
     return hv.compute(reference_point_prime);
 }
 
-static inline
-double compute_hypervolume_ratio(
-        const double & reference_hypervolume,
-        const std::vector<NSBRKGA::Sense> & senses,
-        const std::vector<double> & reference_point,
-        const std::vector<std::vector<double>> & front) {
+static inline double
+compute_hypervolume_ratio(const double &reference_hypervolume,
+                          const std::vector<NSBRKGA::Sense> &senses,
+                          const std::vector<double> &reference_point,
+                          const std::vector<std::vector<double>> &front) {
     double hypervolume = compute_hypervolume(senses, reference_point, front);
     return hypervolume / reference_hypervolume;
 }
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
     Argument_Parser arg_parser(argc, argv);
 
-    if(arg_parser.option_exists("--instance") &&
-       arg_parser.option_exists("--reference-pareto")) {
+    if (arg_parser.option_exists("--instance") &&
+        arg_parser.option_exists("--reference-pareto")) {
         std::ifstream ifs;
         motsp::Instance instance;
 
         ifs.open(arg_parser.option_value("--instance"));
 
-        if(ifs.is_open()) {
+        if (ifs.is_open()) {
             ifs >> instance;
 
             ifs.close();
         } else {
             throw std::runtime_error("File " +
-                    arg_parser.option_value("--instance") + " not found.");
+                                     arg_parser.option_value("--instance") +
+                                     " not found.");
         }
 
         std::vector<double> reference_point = instance.primal_bound;
@@ -75,12 +74,12 @@ int main(int argc, char * argv[]) {
 
         ifs.open(arg_parser.option_value("--reference-pareto"));
 
-        if(ifs.is_open()) {
-            for(std::string line; std::getline(ifs, line);) {
+        if (ifs.is_open()) {
+            for (std::string line; std::getline(ifs, line);) {
                 std::istringstream iss(line);
                 std::vector<double> cost(instance.num_objectives, 0.0);
 
-                for(unsigned j = 0; j < instance.num_objectives; j++) {
+                for (unsigned j = 0; j < instance.num_objectives; j++) {
                     iss >> cost[j];
                 }
 
@@ -89,44 +88,43 @@ int main(int argc, char * argv[]) {
 
             ifs.close();
         } else {
-            throw std::runtime_error("File " +
-                    arg_parser.option_value("--reference-pareto") +
-                    " not found.");
+            throw std::runtime_error(
+                "File " + arg_parser.option_value("--reference-pareto") +
+                " not found.");
         }
 
-        reference_hypervolume = compute_hypervolume(instance.senses,
-                                                    reference_point,
-                                                    reference_pareto);
+        reference_hypervolume = compute_hypervolume(
+            instance.senses, reference_point, reference_pareto);
 
         assert(reference_hypervolume > 0.0);
 
-        for(num_solvers = 0;
-            arg_parser.option_exists("--pareto-" +
-                                     std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--best-solutions-snapshots-" +
-                                     std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--hvr-" +
-                                     std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--hvr-snapshots-" +
-                                     std::to_string(num_solvers));
-            num_solvers++) {}
+        for (num_solvers = 0;
+             arg_parser.option_exists("--pareto-" +
+                                      std::to_string(num_solvers)) ||
+             arg_parser.option_exists("--best-solutions-snapshots-" +
+                                      std::to_string(num_solvers)) ||
+             arg_parser.option_exists("--hvr-" + std::to_string(num_solvers)) ||
+             arg_parser.option_exists("--hvr-snapshots-" +
+                                      std::to_string(num_solvers));
+             num_solvers++) {
+        }
 
         paretos.resize(num_solvers);
         iteration_snapshots.resize(num_solvers);
         time_snapshots.resize(num_solvers);
         best_solutions_snapshots.resize(num_solvers);
 
-        for(unsigned i = 0; i < num_solvers; i++) {
-            if(arg_parser.option_exists("--pareto-" + std::to_string(i))) {
-                ifs.open(arg_parser.option_value("--pareto-" +
-                                                 std::to_string(i)));
+        for (unsigned i = 0; i < num_solvers; i++) {
+            if (arg_parser.option_exists("--pareto-" + std::to_string(i))) {
+                ifs.open(
+                    arg_parser.option_value("--pareto-" + std::to_string(i)));
 
-                if(ifs.is_open()) {
-                    for(std::string line; std::getline(ifs, line);) {
+                if (ifs.is_open()) {
+                    for (std::string line; std::getline(ifs, line);) {
                         std::istringstream iss(line);
                         std::vector<double> cost(instance.num_objectives, 0.0);
 
-                        for(unsigned j = 0; j < instance.num_objectives; j++) {
+                        for (unsigned j = 0; j < instance.num_objectives; j++) {
                             iss >> cost[j];
                         }
 
@@ -135,25 +133,27 @@ int main(int argc, char * argv[]) {
 
                     ifs.close();
                 } else {
-                    throw std::runtime_error("File " +
-                            arg_parser.option_value("--pareto-" +
-                                std::to_string(i)) + " not found.");
+                    throw std::runtime_error(
+                        "File " +
+                        arg_parser.option_value("--pareto-" +
+                                                std::to_string(i)) +
+                        " not found.");
                 }
             }
         }
 
-        for(unsigned i = 0; i < num_solvers; i++) {
-            if(arg_parser.option_exists("--best-solutions-snapshots-" +
-                                        std::to_string(i))) {
+        for (unsigned i = 0; i < num_solvers; i++) {
+            if (arg_parser.option_exists("--best-solutions-snapshots-" +
+                                         std::to_string(i))) {
                 std::string best_solutions_snapshots_filename =
                     arg_parser.option_value("--best-solutions-snapshots-" +
                                             std::to_string(i));
 
-                for(unsigned j = 0; ; j++) {
+                for (unsigned j = 0;; j++) {
                     ifs.open(best_solutions_snapshots_filename +
                              std::to_string(j) + ".txt");
 
-                    if(ifs.is_open()) {
+                    if (ifs.is_open()) {
                         unsigned iteration;
                         double time;
 
@@ -165,14 +165,13 @@ int main(int argc, char * argv[]) {
 
                         ifs.ignore();
 
-                        for(std::string line; std::getline(ifs, line);) {
+                        for (std::string line; std::getline(ifs, line);) {
                             std::istringstream iss(line);
                             std::vector<double> cost(instance.num_objectives,
                                                      0.0);
 
-                            for(unsigned j = 0;
-                                j < instance.num_objectives;
-                                j++) {
+                            for (unsigned j = 0; j < instance.num_objectives;
+                                 j++) {
                                 iss >> cost[j];
                             }
 
@@ -187,74 +186,73 @@ int main(int argc, char * argv[]) {
             }
         }
 
-        for(unsigned i = 0; i < num_solvers; i++) {
+        for (unsigned i = 0; i < num_solvers; i++) {
             std::ofstream ofs;
 
-            ofs.open(arg_parser.option_value("--hvr-" +
-                                             std::to_string(i)));
+            ofs.open(arg_parser.option_value("--hvr-" + std::to_string(i)));
 
-            if(ofs.is_open()) {
+            if (ofs.is_open()) {
                 double hypervolume_ratio = compute_hypervolume_ratio(
-                        reference_hypervolume,
-                        instance.senses,
-                        reference_point,
-                        paretos[i]);
+                    reference_hypervolume, instance.senses, reference_point,
+                    paretos[i]);
 
                 assert(hypervolume_ratio >= 0.0);
                 assert(hypervolume_ratio <= 1.0);
 
                 ofs << hypervolume_ratio << std::endl;
 
-                if(ofs.eof() || ofs.fail() || ofs.bad()) {
-                    throw std::runtime_error("Error writing file " +
-                            arg_parser.option_value("--hvr-" +
-                                std::to_string(i)) + ".");
+                if (ofs.eof() || ofs.fail() || ofs.bad()) {
+                    throw std::runtime_error(
+                        "Error writing file " +
+                        arg_parser.option_value("--hvr-" + std::to_string(i)) +
+                        ".");
                 }
 
                 ofs.close();
             } else {
-                throw std::runtime_error("File " +
-                        arg_parser.option_value("--hvr-" +
-                            std::to_string(i)) + " not created.");
+                throw std::runtime_error(
+                    "File " +
+                    arg_parser.option_value("--hvr-" + std::to_string(i)) +
+                    " not created.");
             }
         }
 
-        for(unsigned i = 0; i < num_solvers; i++) {
+        for (unsigned i = 0; i < num_solvers; i++) {
             std::ofstream ofs;
 
             ofs.open(arg_parser.option_value("--hvr-snapshots-" +
                                              std::to_string(i)));
 
-            if(ofs.is_open()) {
-                for(unsigned j = 0;
-                    j < best_solutions_snapshots[i].size();
-                    j++) {
+            if (ofs.is_open()) {
+                for (unsigned j = 0; j < best_solutions_snapshots[i].size();
+                     j++) {
                     double hypervolume_ratio = compute_hypervolume_ratio(
-                            reference_hypervolume,
-                            instance.senses,
-                            reference_point,
-                            best_solutions_snapshots[i][j]);
+                        reference_hypervolume, instance.senses, reference_point,
+                        best_solutions_snapshots[i][j]);
 
                     assert(hypervolume_ratio >= 0.0);
                     assert(hypervolume_ratio <= 1.0);
 
                     ofs << iteration_snapshots[i][j] << ","
-                        << time_snapshots[i][j] << ","
-                        << hypervolume_ratio << std::endl;
+                        << time_snapshots[i][j] << "," << hypervolume_ratio
+                        << std::endl;
 
-                    if(ofs.eof() || ofs.fail() || ofs.bad()) {
-                        throw std::runtime_error("Error writing file " +
-                                arg_parser.option_value(
-                                    "--hvr-snapshots-" +
-                                    std::to_string(i)) + ".");
+                    if (ofs.eof() || ofs.fail() || ofs.bad()) {
+                        throw std::runtime_error(
+                            "Error writing file " +
+                            arg_parser.option_value("--hvr-snapshots-" +
+                                                    std::to_string(i)) +
+                            ".");
                     }
                 }
 
                 ofs.close();
             } else {
-                throw std::runtime_error("File " +
-                        arg_parser.option_value("--hvr-snapshots-" +
-                            std::to_string(i)) + " not created.");
+                throw std::runtime_error(
+                    "File " +
+                    arg_parser.option_value("--hvr-snapshots-" +
+                                            std::to_string(i)) +
+                    " not created.");
             }
         }
     } else {
@@ -262,10 +260,10 @@ int main(int argc, char * argv[]) {
                   << "--instance <instance_filename> "
                   << "--reference-pareto <reference_pareto_filename> "
                   << "--pareto-i <pareto_filename> "
-                  << "--best-solutions-snapshots-i <best_solutions_snapshots_filename> "
-                  << "--hvr-i <hypervolume_filename> "
-                  << "--hvr-snapshots-i <hypervolume_snapshots_filename> "
-                  << std::endl;
+                  << "--best-solutions-snapshots-i "
+                     "<best_solutions_snapshots_filename> "
+                  << "--hvr-i <hvr_filename> "
+                  << "--hvr-snapshots-i <hvr_snapshots_filename> " << std::endl;
     }
 
     return 0;

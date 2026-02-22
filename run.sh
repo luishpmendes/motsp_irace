@@ -44,7 +44,6 @@ do
     do
         for seed in ${seeds[@]}
         do
-
             command="${path}/bin/exec/${solver}_solver_exec "
             command+="--instance ${path}/instances/${instance}.txt "
             command+="--seed ${seed} "
@@ -102,7 +101,6 @@ eval $final_command
 
 wait
 
-instances=(kroAB100 kroAB200 kroAB500 kroAB1000 kroAB2000 kroABC100 kroABC200 kroABC500 kroABC1000 kroABC2000 kroABCD100 kroABCD200 kroABCD500 kroABCD1000 kroABCD2000)
 solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
 
 commands=()
@@ -330,8 +328,6 @@ do
         command+="--hvr-statistics ${path}/hvr/${instance}_${solver}_stats.txt "
         command+="--nigd-pluses ${path}/nigd_plus/${instance}_${solver}.txt "
         command+="--nigd-pluses-statistics ${path}/nigd_plus/${instance}_${solver}_stats.txt "
-        # command+="--multiplicative-epsilons ${path}/multiplicative_epsilon/${instance}_${solver}.txt "
-        # command+="--multiplicative-epsilons-statistics ${path}/multiplicative_epsilon/${instance}_${solver}_stats.txt "
         command+="--statistics-best ${path}/statistics/${instance}_${solver}_best.txt "
         command+="--statistics-median ${path}/statistics/${instance}_${solver}_median.txt "
         command+="--pareto-best ${path}/pareto/${instance}_${solver}_best.txt "
@@ -360,8 +356,6 @@ do
             command+="--hvr-snapshots-${j} ${path}/hvr_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--nigd-plus-${j} ${path}/nigd_plus/${instance}_${solver}_${seed}.txt "
             command+="--nigd-plus-snapshots-${j} ${path}/nigd_plus_snapshots/${instance}_${solver}_${seed}.txt "
-            # command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/${instance}_${solver}_${seed}.txt "
-            # command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
             command+="--num-non-dominated-snapshots-${j} ${path}/num_non_dominated_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--populations-snapshots-${j} ${path}/populations_snapshots/${instance}_${solver}_${seed}_ "
@@ -430,9 +424,8 @@ do
     done
 done
 
-ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hypervolume.mp4 &
+ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr.mp4 &
 ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/igd_plus.mp4 &
-ffmpeg -y -r 5 -i ${path}/multiplicative_epsilon_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/multiplicative_epsilon_snapshots/multiplicative_epsilon.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4
 
