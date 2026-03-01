@@ -111,6 +111,22 @@ int main (int argc, char * argv[]) {
             ss >> solver.diversity_type;
         }
 
+        if(arg_parser.option_exists("--crossover-type")) {
+            std::stringstream ss(arg_parser.option_value("--crossover-type"));
+            NSBRKGA::CrossoverType t;
+            ss >> t;
+            if(ss.fail()) {
+                std::string allowed;
+                for(const auto & name :
+                    EnumIO<NSBRKGA::CrossoverType>::enum_names()) {
+                    allowed += " " + name;
+                }
+                throw std::runtime_error(
+                    "Invalid --crossover-type value. Allowed:" + allowed);
+            }
+            solver.crossover_type = t;
+        }
+
         if(arg_parser.option_exists("--num-populations")) {
             solver.num_populations =
                 std::stoul(arg_parser.option_value("--num-populations"));
@@ -655,6 +671,7 @@ int main (int argc, char * argv[]) {
                   << "--num-elite-parents <num_elite_parents> "
                   << "--bias-type <bias_type> "
                   << "--diversity-type <diversity_type> "
+                  << "--crossover-type <crossover_type> "
                   << "--num-populations <num_populations> "
                   << "--exchange-interval <exchange_interval> "
                   << "--num-exchange-individuals <num_exchange_individuals> "

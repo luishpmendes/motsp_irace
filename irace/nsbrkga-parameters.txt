@@ -10,6 +10,8 @@ num_elite_parents           "--num-elite-parents "           i   (1, 5)
 bias_type                "--bias-type "               c       (0, 1, 2, 3, 4, 5, 6)
 # NONE=0, AVERAGE_DISTANCE_TO_CENTROID=1, AVERAGE_DISTANCE_BETWEEN_INDIVIDUALS=2, POWER_MEAN_BASED=3
 diversity_type           "--diversity-type "          c       (0, 1, 2, 3)
+# ROULETTE=0, GEOMETRIC=1
+crossover_type           "--crossover-type "          c       (0, 1)
 num_populations          "--num-populations "         i       (1, 5)
 exchange_interval        "--exchange-interval "       i       (0, 1000)
 num_exchange_individuals "--num-exchange-individuals " i      (1, 100)

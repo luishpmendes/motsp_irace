@@ -47,6 +47,7 @@ int main() {
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
             NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+    assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);
@@ -290,6 +291,7 @@ int main() {
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
             NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+    assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);
@@ -533,6 +535,7 @@ int main() {
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
             NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+    assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);

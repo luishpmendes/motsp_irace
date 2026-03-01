@@ -57,6 +57,12 @@ class NSBRKGA_Solver : public Solver {
     NSBRKGA::DiversityFunctionType diversity_type =
         NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID;
 
+    /**********************************************************************
+     * Type of crossover that will be used.
+     **********************************************************************/
+    NSBRKGA::CrossoverType crossover_type =
+        NSBRKGA::CrossoverType::ROULETTE;
+
     /**********************************************
      * Number of independent parallel populations.
      **********************************************/

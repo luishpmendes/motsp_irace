@@ -88,6 +88,7 @@ void NSBRKGA_Solver::solve() {
     params.num_elite_parents = this->num_elite_parents;
     params.bias_type = this->bias_type;
     params.diversity_type = this->diversity_type;
+    params.crossover_type = this->crossover_type;
     params.num_independent_populations = this->num_populations;
     params.pr_type = this->pr_type;
     params.pr_percentage = this->pr_percentage;
@@ -292,6 +293,9 @@ std::ostream & operator <<(std::ostream & os, const NSBRKGA_Solver & solver) {
        << "Type of diversity that will be used: "
        << EnumIO<NSBRKGA::DiversityFunctionType>::enum_names().at(
                static_cast<int>(solver.diversity_type)) << std::endl
+       << "Type of crossover that will be used: "
+       << EnumIO<NSBRKGA::CrossoverType>::enum_names().at(
+               static_cast<int>(solver.crossover_type)) << std::endl
        << "Number of independent parallel populations: "
        << solver.num_populations << std::endl
        << "Interval at which the elite solutions are exchanged between populations: "
