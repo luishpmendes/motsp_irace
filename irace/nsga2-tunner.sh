@@ -1,4 +1,5 @@
 #!/bin/bash
+export LC_NUMERIC=C
 ###############################################################################
 # NSGA-II Target Runner for iRace
 # 
@@ -21,7 +22,8 @@ SOLVER="${PROJECT_DIR}/bin/exec/nsga2_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Time limit per run (seconds)
-TIME_LIMIT=300
+# TIME_LIMIT=900
+TIME_LIMIT=30
 
 # Create temporary directory for this run
 TMPDIR=$(mktemp -d)
@@ -81,7 +83,7 @@ if [ ! -f "$HV_FILE" ]; then
 fi
 
 # Read hypervolume and negate (iRace minimizes, we want to maximize HV)
-HV=$(cat "$HV_FILE")
-COST=$(echo "-$HV" | bc -l)
+HV=$(tr -d '[:space:]' < "$HV_FILE")
+COST=$(awk -v hv="$HV" 'BEGIN { printf "%.17g", -hv }')
 
 echo "$COST $ELAPSED_INT"

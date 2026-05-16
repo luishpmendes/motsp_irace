@@ -1,7 +1,12 @@
 #!/bin/bash
 export LC_NUMERIC=C
 ###############################################################################
-# IHS Target Runner for iRace
+# NS-BRKGA Ablation — Stage 1 Target Runner for iRace
+#
+# Vanilla NS-BRKGA: single population, fixed elite size, no advanced features.
+#
+# Special handling: maps --elites-percentage to both --min-elites-percentage
+# and --max-elites-percentage with the same value.
 ###############################################################################
 
 CONFIG_ID="$1"
@@ -12,7 +17,7 @@ shift 4
 PARAMS=("$@")
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-SOLVER="${PROJECT_DIR}/bin/exec/ihs_solver_exec"
+SOLVER="${PROJECT_DIR}/bin/exec/nsbrkga_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 # TIME_LIMIT=900
 TIME_LIMIT=30
@@ -23,6 +28,7 @@ trap "rm -rf $TMPDIR" EXIT
 PARETO_FILE="${TMPDIR}/pareto.txt"
 HV_FILE="${TMPDIR}/hv.txt"
 
+# Transform parameters
 TRANSFORMED_PARAMS=()
 i=0
 while [ $i -lt ${#PARAMS[@]} ]; do
@@ -30,6 +36,12 @@ while [ $i -lt ${#PARAMS[@]} ]; do
         FACTOR="${PARAMS[$((i+1))]}"
         POPULATION_SIZE=$((FACTOR * 4))
         TRANSFORMED_PARAMS+=("--population-size" "$POPULATION_SIZE")
+        i=$((i + 2))
+    elif [ "${PARAMS[$i]}" = "--elites-percentage" ]; then
+        # Stage 1: single elite percentage maps to both min and max
+        ELITES_PCT="${PARAMS[$((i+1))]}"
+        TRANSFORMED_PARAMS+=("--min-elites-percentage" "$ELITES_PCT")
+        TRANSFORMED_PARAMS+=("--max-elites-percentage" "$ELITES_PCT")
         i=$((i + 2))
     else
         TRANSFORMED_PARAMS+=("${PARAMS[$i]}")

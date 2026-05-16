@@ -1,0 +1,60 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.3.c5b213a
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /home/luishpmendes/R/x86_64-pc-linux-gnu-library/4.1/irace
+# called with: --scenario nsbrkga-scenario-stage1.txt
+# 2026-05-16 18:38:56 -03: Reading parameter file '/home/luishpmendes/UNICAMP/Doutorado/motsp_irace/irace/nsbrkga-parameters-stage1.txt'.
+# 2026-05-16 18:38:56 -03: 2 expression(s) specifying forbidden configurations read.
+# 2026-05-16 18:38:56 -03: Estimating execution time using 5% of 1800 = 90
+# 2026-05-16 18:44:01 -03: Estimated execution time is 31 based on 2 configurations and 5 instances. Used time: 302, remaining time: 1498, remaining budget (experiments): 48
+Warning: == irace == With the current settings and estimated time per run (31) irace will not have enough budget to execute the minimum number of iterations (5). Execution will continue by assuming that the estimated time is too high and reducing the minimum number of iterations, however, if the estimation was correct or too low, results might not be better than random sampling.
+
+# 2026-05-16 18:44:01 -03: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 1
+# minNbSurvival: 5
+# nbParameters: 8
+# seed: 1052808653
+# confidence level: 0.95
+# budget: 48
+# time budget: 1498
+# mu: 5
+# deterministic: FALSE
+
+# 2026-05-16 18:44:01 -03: Stopped because there is not enough budget to enforce the value of nbConfigurations.
+# Iteration: 1
+# nbIterations: 1
+# experimentsUsed: 10
+# timeUsed: 302
+# remainingBudget: 48
+# currentBudget: 48
+# number of elites: 2
+# nbConfigurations: 8
+# Total CPU user time: 303.653, CPU sys time: 0.803, Wall-clock time: 304.533
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+  population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+1                     71               0.2                 0.91                 26.54                 5                 5         1              1              0               1                 0                        1           0              0              0
+2                    122               0.4                 0.41                 76.04                 3                 2         4              0              0               1                 0                        1           0              0              0
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+1 --population-size-factor 71 --elites-percentage 0.2 --mutation-probability 0.91 --mutation-distribution 26.54 --num-total-parents 5 --num-elite-parents 5 --bias-type 1 --crossover-type 1 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+2 --population-size-factor 122 --elites-percentage 0.4 --mutation-probability 0.41 --mutation-distribution 76.04 --num-total-parents 3 --num-elite-parents 2 --bias-type 4 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-05-16 18:44:01 -03: No test instances, skip testing

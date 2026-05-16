@@ -1,0 +1,34 @@
+# NS-BRKGA Ablation Study — Stage 3: Multiple Populations
+#
+# Unlock: num_populations >= 2, exchange_interval > 0, num_exchange_individuals tuned.
+# Still no path relinking, no shaking, no reset.
+
+population_size_factor      "--population-size-factor "      i   (25, 125)
+min_elites_percentage       "--min-elites-percentage "       r   (0.01, 0.99)
+max_elites_percentage       "--max-elites-percentage "       r   (0.01, 0.99)
+mutation_probability        "--mutation-probability "        r   (0.00, 1.00)
+mutation_distribution       "--mutation-distribution "       r   (1.00, 100.00)
+num_total_parents           "--num-total-parents "           i   (2, 5)
+num_elite_parents           "--num-elite-parents "           i   (1, 5)
+# CONSTANT=0, CUBIC=1, EXPONENTIAL=2, LINEAR=3, LOGINVERSE=4, QUADRATIC=5, SQRT=6
+bias_type                "--bias-type "               c       (0, 1, 2, 3, 4, 5, 6)
+# NONE=0, AVERAGE_DISTANCE_TO_CENTROID=1, AVERAGE_DISTANCE_BETWEEN_INDIVIDUALS=2, POWER_MEAN_BASED=3
+diversity_type           "--diversity-type "          c       (0, 1, 2, 3)
+# ROULETTE=0, GEOMETRIC=1
+crossover_type           "--crossover-type "          c       (0, 1)
+num_populations          "--num-populations "         i       (2, 5)
+exchange_interval        "--exchange-interval "       i       (1, 1000)
+num_exchange_individuals "--num-exchange-individuals " i      (1, 100)
+# Fixed: no path relinking, no shaking, no reset
+pr_interval              "--pr-interval "             c       (0)
+shake_interval           "--shake-interval "          c       (0)
+reset_interval           "--reset-interval "          c       (0)
+
+[global]
+digits = 2
+
+[forbidden]
+(min_elites_percentage >= max_elites_percentage)
+(num_elite_parents > num_total_parents)
+(num_populations * num_exchange_individuals >= population_size_factor * 4)
+(num_elite_parents > (population_size_factor * 4) * min_elites_percentage)

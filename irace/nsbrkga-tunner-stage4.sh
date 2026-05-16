@@ -1,7 +1,9 @@
 #!/bin/bash
 export LC_NUMERIC=C
 ###############################################################################
-# IHS Target Runner for iRace
+# NS-BRKGA Ablation — Stage 4 Target Runner for iRace
+#
+# Path relinking.
 ###############################################################################
 
 CONFIG_ID="$1"
@@ -12,7 +14,7 @@ shift 4
 PARAMS=("$@")
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-SOLVER="${PROJECT_DIR}/bin/exec/ihs_solver_exec"
+SOLVER="${PROJECT_DIR}/bin/exec/nsbrkga_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 # TIME_LIMIT=900
 TIME_LIMIT=30
@@ -23,6 +25,7 @@ trap "rm -rf $TMPDIR" EXIT
 PARETO_FILE="${TMPDIR}/pareto.txt"
 HV_FILE="${TMPDIR}/hv.txt"
 
+# Transform parameters
 TRANSFORMED_PARAMS=()
 i=0
 while [ $i -lt ${#PARAMS[@]} ]; do

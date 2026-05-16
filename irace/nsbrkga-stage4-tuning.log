@@ -1,0 +1,24 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.3.c5b213a
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /home/luishpmendes/R/x86_64-pc-linux-gnu-library/4.1/irace
+# called with: --scenario nsbrkga-scenario-stage4.txt
+# 2026-05-16 18:38:56 -03: Reading parameter file '/home/luishpmendes/UNICAMP/Doutorado/motsp_irace/irace/nsbrkga-parameters-stage4.txt'.
+# 2026-05-16 18:38:56 -03: 4 expression(s) specifying forbidden configurations read.
+# 2026-05-16 18:38:56 -03: Estimating execution time using 5% of 1800 = 90
+# 2026-05-16 18:47:36 -03: Estimated execution time is 52 based on 2 configurations and 5 instances. Used time: 517, remaining time: 1283, remaining budget (experiments): 25
+Error: == irace == Insufficient budget: With the current settings and estimated time per run (52) irace will require a value of 'maxTime' of at least '2701'.
+Execution halted

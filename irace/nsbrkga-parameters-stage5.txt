@@ -1,4 +1,10 @@
-# NS-BRKGA Parameters for iRace Tuning
+# NS-BRKGA Ablation Study — Stage 5: Shaking
+#
+# Unlock: shake_interval > 0, shake_intensity, shake_distribution tuned.
+# Still no reset.
+# Note: no shake_interval >= reset_interval constraint here because
+# reset_interval is fixed at 0, so the original constraint is inapplicable.
+
 population_size_factor      "--population-size-factor "      i   (25, 125)
 min_elites_percentage       "--min-elites-percentage "       r   (0.01, 0.99)
 max_elites_percentage       "--max-elites-percentage "       r   (0.01, 0.99)
@@ -12,20 +18,20 @@ bias_type                "--bias-type "               c       (0, 1, 2, 3, 4, 5,
 diversity_type           "--diversity-type "          c       (0, 1, 2, 3)
 # ROULETTE=0, GEOMETRIC=1
 crossover_type           "--crossover-type "          c       (0, 1)
-num_populations          "--num-populations "         i       (1, 5)
-exchange_interval        "--exchange-interval "       i       (0, 1000)
+num_populations          "--num-populations "         i       (2, 5)
+exchange_interval        "--exchange-interval "       i       (1, 1000)
 num_exchange_individuals "--num-exchange-individuals " i      (1, 100)
 # DIRECT=0, PERMUTATION=1, BINARY_SEARCH=2
 pr_type                  "--pr-type "                 c       (0, 1, 2)
 # HAMMING=0, KENDALL_TAU=1, EUCLIDEAN=2
 pr_dist_func             "--pr-dist-func "            c       (0, 1, 2)
-pr_percentage            "--pr-percentage "           r       (0.00, 1.00)
-pr_interval              "--pr-interval "             i       (0, 1000)
-shake_interval           "--shake-interval "          i       (0, 1000)
-shake_intensity          "--shake-intensity "         r       (0.00, 1.00)
+pr_percentage            "--pr-percentage "           r       (0.01, 1.00)
+pr_interval              "--pr-interval "             i       (1, 1000)
+shake_interval           "--shake-interval "          i       (1, 1000)
+shake_intensity          "--shake-intensity "         r       (0.01, 1.00)
 shake_distribution       "--shake-distribution "      r       (1.00, 100.00)
-reset_interval           "--reset-interval "          i       (0, 1000)
-reset_intensity          "--reset-intensity "         r       (0.00, 1.00)
+# Fixed: no reset
+reset_interval           "--reset-interval "          c       (0)
 
 [global]
 digits = 2
@@ -33,6 +39,5 @@ digits = 2
 [forbidden]
 (min_elites_percentage >= max_elites_percentage)
 (num_elite_parents > num_total_parents)
-(shake_interval >= reset_interval)
 (num_populations * num_exchange_individuals >= population_size_factor * 4)
 (num_elite_parents > (population_size_factor * 4) * min_elites_percentage)

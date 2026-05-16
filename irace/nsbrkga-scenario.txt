@@ -1,8 +1,0 @@
-execDir = "./"
-trainInstancesDir = "../instances"
-trainInstancesFile = "./instances.txt"
-targetRunner = "./nsbrkga-tunner.sh"
-maxTime = 172800
-parallel = 1
-logFile = "./irace-nsbrkga.Rdata"
-parameterFile = "./nsbrkga-parameters.txt"

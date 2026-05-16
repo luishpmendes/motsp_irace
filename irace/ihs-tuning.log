@@ -1,0 +1,101 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.3.c5b213a
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /home/luishpmendes/R/x86_64-pc-linux-gnu-library/4.1/irace
+# called with: --scenario ihs-scenario.txt
+# 2026-05-16 18:38:56 -03: Reading parameter file '/home/luishpmendes/UNICAMP/Doutorado/motsp_irace/irace/ihs-parameters.txt'.
+# 2026-05-16 18:38:56 -03: 2 expression(s) specifying forbidden configurations read.
+# 2026-05-16 18:38:56 -03: Estimating execution time using 5% of 1800 = 90
+# 2026-05-16 18:44:00 -03: Estimated execution time is 31 based on 2 configurations and 5 instances. Used time: 302, remaining time: 1498, remaining budget (experiments): 48
+Warning: == irace == With the current settings and estimated time per run (31) irace will not have enough budget to execute the minimum number of iterations (4). Execution will continue by assuming that the estimated time is too high and reducing the minimum number of iterations, however, if the estimation was correct or too low, results might not be better than random sampling.
+
+# 2026-05-16 18:44:00 -03: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 1
+# minNbSurvival: 4
+# nbParameters: 6
+# seed: 996109570
+# confidence level: 0.95
+# budget: 48
+# time budget: 1498
+# mu: 5
+# deterministic: FALSE
+
+# 2026-05-16 18:44:00 -03: Iteration 1 of 1
+# experimentsUsed: 10
+# timeUsed: 302
+# boundEstimate: 31
+# remainingBudget: 48
+# currentBudget: 48
+# nbConfigurations: 8
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          2|          8|          2|-2.632630000e+11|          6|00:03:00|   NA|  NA|    NA|
+|x|          5|          8|          4|-8.772500129e+18|         12|00:03:02|-0.07|0.46|0.6409|
+|x|          4|          8|          2|-5.799233445e+18|         18|00:03:00|+0.26|0.51|0.5576|
+|x|          1|          8|          4|-4.386256865e+18|         24|00:03:05|+0.17|0.38|0.8309|
+|-|          3|          5|          4|-3.917593492e+18|         30|00:03:00|-0.13|0.10|0.9277|
+|=|          6|          5|          4|-3.607104577e+18|         35|00:02:30|-0.09|0.09|0.9085|
+|=|          7|          5|          4|-5.617561066e+18|         40|00:02:31|-0.03|0.12|0.8686|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:           4    mean value: -5.617561066e+18
+Description of the best-so-far configuration:
+  .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+4    4                     41 0.640788 0.219737  0.53242 0.200638 0.837572       NA
+
+# 2026-05-16 19:04:11 -03: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+  population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+4                     41 0.640788 0.219737 0.532420 0.200638 0.837572
+2                     52 0.851600 0.653172 0.704549 0.018877 0.707821
+6                     28 0.028288 0.342237 0.593670 0.076889 0.715072
+1                     40 0.729100 0.040672 0.765799 0.390127 0.585321
+# 2026-05-16 19:04:11 -03: Stopped because there is not enough budget to enforce the value of nbConfigurations.
+# Iteration: 2
+# nbIterations: 2
+# experimentsUsed: 50
+# timeUsed: 1503
+# remainingBudget: 10
+# currentBudget: 10
+# number of elites: 4
+# nbConfigurations: 5
+# Total CPU user time: 1510.25, CPU sys time: 4.983, Wall-clock time: 1515.452
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+  population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+4                     41 0.640788 0.219737 0.532420 0.200638 0.837572
+2                     52 0.851600 0.653172 0.704549 0.018877 0.707821
+6                     28 0.028288 0.342237 0.593670 0.076889 0.715072
+1                     40 0.729100 0.040672 0.765799 0.390127 0.585321
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+4 --population-size-factor 41 --phmcr 0.640788 --ppar-min 0.219737 --ppar-max 0.53242 --bw-min 0.200638 --bw-max 0.837572
+2 --population-size-factor 52 --phmcr 0.8516 --ppar-min 0.653172 --ppar-max 0.704549 --bw-min 0.018877 --bw-max 0.707821
+6 --population-size-factor 28 --phmcr 0.028288 --ppar-min 0.342237 --ppar-max 0.59367 --bw-min 0.076889 --bw-max 0.715072
+1 --population-size-factor 40 --phmcr 0.7291 --ppar-min 0.040672 --ppar-max 0.765799 --bw-min 0.390127 --bw-max 0.585321
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-05-16 19:04:11 -03: No test instances, skip testing

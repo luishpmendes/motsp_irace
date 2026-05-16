@@ -1,0 +1,8 @@
+execDir = "./"
+trainInstancesDir = "../instances"
+trainInstancesFile = "./instances.txt"
+targetRunner = "./nsbrkga-tunner-stage2.sh"
+maxTime = 1800
+parallel = 1
+logFile = "./irace-nsbrkga-stage2.Rdata"
+parameterFile = "./nsbrkga-parameters-stage2.txt"
