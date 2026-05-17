@@ -1,8 +1,12 @@
 execDir = "./"
 trainInstancesDir = "../instances"
-trainInstancesFile = "./instances.txt"
+trainInstancesFile = "./train-instances.txt"
 targetRunner = "./nsbrkga-tunner-stage5.sh"
 maxTime = 2160000
 parallel = 1
 logFile = "./irace-nsbrkga-stage5.Rdata"
 parameterFile = "./nsbrkga-parameters-stage5.txt"
+testInstancesDir = "../instances"
+testInstancesFile = "./test-instances.txt"
+testNbElites = 5
+testIterationElites = 0

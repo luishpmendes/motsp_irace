@@ -1,8 +1,12 @@
 execDir = "./"
 trainInstancesDir = "../instances"
-trainInstancesFile = "./instances.txt"
+trainInstancesFile = "./train-instances.txt"
 targetRunner = "./ihs-tunner.sh"
 maxTime = 2160000
 parallel = 1
 logFile = "./irace-ihs.Rdata"
 parameterFile = "./ihs-parameters.txt"
+testInstancesDir = "../instances"
+testInstancesFile = "./test-instances.txt"
+testNbElites = 5
+testIterationElites = 0

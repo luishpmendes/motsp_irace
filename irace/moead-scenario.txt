@@ -1,8 +1,12 @@
 execDir = "./"
 trainInstancesDir = "../instances"
-trainInstancesFile = "./instances.txt"
+trainInstancesFile = "./train-instances.txt"
 targetRunner = "./moead-tunner.sh"
 maxTime = 2160000
 parallel = 1
 logFile = "./irace-moead.Rdata"
 parameterFile = "./moead-parameters.txt"
+testInstancesDir = "../instances"
+testInstancesFile = "./test-instances.txt"
+testNbElites = 5
+testIterationElites = 0

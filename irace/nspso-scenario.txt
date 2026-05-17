@@ -1,8 +1,12 @@
 execDir = "./"
 trainInstancesDir = "../instances"
-trainInstancesFile = "./instances.txt"
+trainInstancesFile = "./train-instances.txt"
 targetRunner = "./nspso-tunner.sh"
 maxTime = 2160000
 parallel = 1
 logFile = "./irace-nspso.Rdata"
 parameterFile = "./nspso-parameters.txt"
+testInstancesDir = "../instances"
+testInstancesFile = "./test-instances.txt"
+testNbElites = 5
+testIterationElites = 0
