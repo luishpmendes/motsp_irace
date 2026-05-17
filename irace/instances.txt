@@ -1,5 +1,0 @@
-kroAB100.txt
-kroAB200.txt
-kroABC500.txt
-kroABC1000.txt
-kroAB2000.txt
