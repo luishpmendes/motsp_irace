@@ -1,11 +1,12 @@
 CPP=g++
 CARGS=-std=c++17 -O3 -g0 -m64
 BRKGAINC=-I ../nsbrkga/nsbrkga
-LEMONINC=-I /opt/lemon/include -L /opt/lemon/lib -lemon
-GRBINC=-I /opt/gurobi1003/linux64/include/ -L /opt/gurobi1003/linux64/lib -lgurobi_c++ -lgurobi100 -lm
-BOOSTINC=-I /opt/boost/include -L /opt/boost/lib -lboost_serialization
+# LEMONINC=-I /opt/lemon/include -L /opt/lemon/lib -lemon
+# GRBINC=-I /opt/gurobi1003/linux64/include/ -L /opt/gurobi1003/linux64/lib -lgurobi_c++ -lgurobi100 -lm
+# BOOSTINC=-I /opt/boost/include -L /opt/boost/lib -lboost_serialization
 PAGMOINC=-I /opt/pagmo/include -L /opt/pagmo/lib -Wl,-R/opt/pagmo/lib -lpagmo -ltbb -pthread
-INC=-I src $(BRKGAINC) $(LEMONINC) $(GRBINC) $(BOOSTINC) $(PAGMOINC)
+# INC=-I src $(BRKGAINC) $(LEMONINC) $(GRBINC) $(BOOSTINC) $(PAGMOINC)
+INC=-I src $(BRKGAINC) $(PAGMOINC)
 MKDIR=mkdir -p
 RM=rm -rf
 SRC=$(PWD)/src
@@ -58,63 +59,63 @@ $(BIN)/test/two_opt_test : $(BIN)/instance/instance.o \
 
 two_opt_test : $(BIN)/test/two_opt_test
 
-$(BIN)/test/christofides_solver_test : $(BIN)/instance/instance.o \
-                                       $(BIN)/solution/solution.o \
-                                       $(BIN)/solver/local_search/two_opt.o \
-                                       $(BIN)/solver/solver.o \
-                                       $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                       $(BIN)/test/christofides_solver_test.o
-	@echo "--> Linking objects..."
-	$(CPP) -o $@ $^ $(CARGS) $(INC)
-	@echo
-	@echo "--> Running test..."
-	$(BIN)/test/christofides_solver_test
-	@echo
+# $(BIN)/test/christofides_solver_test : $(BIN)/instance/instance.o \
+#                                        $(BIN)/solution/solution.o \
+#                                        $(BIN)/solver/local_search/two_opt.o \
+#                                        $(BIN)/solver/solver.o \
+#                                        $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
+#                                        $(BIN)/test/christofides_solver_test.o
+# 	@echo "--> Linking objects..."
+# 	$(CPP) -o $@ $^ $(CARGS) $(INC)
+# 	@echo
+# 	@echo "--> Running test..."
+# 	$(BIN)/test/christofides_solver_test
+# 	@echo
 
-christofides_solver_test : $(BIN)/test/christofides_solver_test
+# christofides_solver_test : $(BIN)/test/christofides_solver_test
 
-$(BIN)/exec/christofides_solver_exec : $(BIN)/instance/instance.o \
-                                       $(BIN)/solution/solution.o \
-                                       $(BIN)/solver/local_search/two_opt.o \
-                                       $(BIN)/solver/solver.o \
-                                       $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                       $(BIN)/utils/argument_parser.o \
-                                       $(BIN)/exec/christofides_solver_exec.o
-	@echo "--> Linking objects..."
-	$(CPP) -o $@ $^ $(CARGS) $(INC)
-	@echo
+# $(BIN)/exec/christofides_solver_exec : $(BIN)/instance/instance.o \
+#                                        $(BIN)/solution/solution.o \
+#                                        $(BIN)/solver/local_search/two_opt.o \
+#                                        $(BIN)/solver/solver.o \
+#                                        $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
+#                                        $(BIN)/utils/argument_parser.o \
+#                                        $(BIN)/exec/christofides_solver_exec.o
+# 	@echo "--> Linking objects..."
+# 	$(CPP) -o $@ $^ $(CARGS) $(INC)
+# 	@echo
 
-christofides_solver_exec : $(BIN)/exec/christofides_solver_exec
+# christofides_solver_exec : $(BIN)/exec/christofides_solver_exec
 
-$(BIN)/test/branch_and_cut_solver_test : $(BIN)/instance/instance.o \
-                                         $(BIN)/solution/solution.o \
-                                         $(BIN)/solver/local_search/two_opt.o \
-                                         $(BIN)/solver/solver.o \
-                                         $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                         $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
-                                         $(BIN)/test/branch_and_cut_solver_test.o
-	@echo "--> Linking objects..."
-	$(CPP) -o $@ $^ $(CARGS) $(INC)
-	@echo
-	@echo "--> Running test..."
-	$(BIN)/test/branch_and_cut_solver_test
-	@echo
+# $(BIN)/test/branch_and_cut_solver_test : $(BIN)/instance/instance.o \
+#                                          $(BIN)/solution/solution.o \
+#                                          $(BIN)/solver/local_search/two_opt.o \
+#                                          $(BIN)/solver/solver.o \
+#                                          $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
+#                                          $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
+#                                          $(BIN)/test/branch_and_cut_solver_test.o
+# 	@echo "--> Linking objects..."
+# 	$(CPP) -o $@ $^ $(CARGS) $(INC)
+# 	@echo
+# 	@echo "--> Running test..."
+# 	$(BIN)/test/branch_and_cut_solver_test
+# 	@echo
 
-branch_and_cut_solver_test : $(BIN)/test/branch_and_cut_solver_test
+# branch_and_cut_solver_test : $(BIN)/test/branch_and_cut_solver_test
 
-$(BIN)/exec/branch_and_cut_solver_exec : $(BIN)/instance/instance.o \
-                                         $(BIN)/solution/solution.o \
-                                         $(BIN)/solver/local_search/two_opt.o \
-                                         $(BIN)/solver/solver.o \
-                                         $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                         $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
-                                         $(BIN)/utils/argument_parser.o \
-                                         $(BIN)/exec/branch_and_cut_solver_exec.o
-	@echo "--> Linking objects..."
-	$(CPP) -o $@ $^ $(CARGS) $(INC)
-	@echo
+# $(BIN)/exec/branch_and_cut_solver_exec : $(BIN)/instance/instance.o \
+#                                          $(BIN)/solution/solution.o \
+#                                          $(BIN)/solver/local_search/two_opt.o \
+#                                          $(BIN)/solver/solver.o \
+#                                          $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
+#                                          $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
+#                                          $(BIN)/utils/argument_parser.o \
+#                                          $(BIN)/exec/branch_and_cut_solver_exec.o
+# 	@echo "--> Linking objects..."
+# 	$(CPP) -o $@ $^ $(CARGS) $(INC)
+# 	@echo
 
-branch_and_cut_solver_exec : $(BIN)/exec/branch_and_cut_solver_exec
+# branch_and_cut_solver_exec : $(BIN)/exec/branch_and_cut_solver_exec
 
 $(BIN)/test/nsga2_solver_test : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
@@ -136,9 +137,6 @@ $(BIN)/exec/nsga2_solver_exec : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
                                 $(BIN)/solver/local_search/two_opt.o \
                                 $(BIN)/solver/solver.o \
-                                $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                                 $(BIN)/solver/nsga2/problem.o \
                                 $(BIN)/solver/nsga2/nsga2_solver.o \
                                 $(BIN)/utils/argument_parser.o \
@@ -169,9 +167,6 @@ $(BIN)/exec/nspso_solver_exec : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
                                 $(BIN)/solver/local_search/two_opt.o \
                                 $(BIN)/solver/solver.o \
-                                $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                                 $(BIN)/solver/nspso/problem.o \
                                 $(BIN)/solver/nspso/nspso_solver.o \
                                 $(BIN)/utils/argument_parser.o \
@@ -202,9 +197,6 @@ $(BIN)/exec/moead_solver_exec : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
                                 $(BIN)/solver/local_search/two_opt.o \
                                 $(BIN)/solver/solver.o \
-                                $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                                 $(BIN)/solver/moead/problem.o \
                                 $(BIN)/solver/moead/moead_solver.o \
                                 $(BIN)/utils/argument_parser.o \
@@ -235,9 +227,6 @@ $(BIN)/exec/mhaco_solver_exec : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
                                 $(BIN)/solver/local_search/two_opt.o \
                                 $(BIN)/solver/solver.o \
-                                $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                                 $(BIN)/solver/mhaco/problem.o \
                                 $(BIN)/solver/mhaco/mhaco_solver.o \
                                 $(BIN)/utils/argument_parser.o \
@@ -268,9 +257,6 @@ $(BIN)/exec/ihs_solver_exec : $(BIN)/instance/instance.o \
                               $(BIN)/solution/solution.o \
                               $(BIN)/solver/local_search/two_opt.o \
                               $(BIN)/solver/solver.o \
-                              $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                              $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                              $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                               $(BIN)/solver/ihs/problem.o \
                               $(BIN)/solver/ihs/ihs_solver.o \
                               $(BIN)/utils/argument_parser.o \
@@ -301,9 +287,6 @@ $(BIN)/exec/nsbrkga_solver_exec : $(BIN)/instance/instance.o \
                                   $(BIN)/solution/solution.o \
                                   $(BIN)/solver/local_search/two_opt.o \
                                   $(BIN)/solver/solver.o \
-                                  $(BIN)/solver/weighted_sum/christofides/christofides_solver.o \
-                                  $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_callback.o \
-                                  $(BIN)/solver/weighted_sum/branch_and_cut/branch_and_cut_solver.o \
                                   $(BIN)/solver/nsbrkga/decoder.o \
                                   $(BIN)/solver/nsbrkga/nsbrkga_solver.o \
                                   $(BIN)/utils/argument_parser.o \
@@ -401,8 +384,6 @@ multiplicative_epsilon_calculator_exec : $(BIN)/exec/multiplicative_epsilon_calc
 tests : instance_test \
         solution_test \
         two_opt_test \
-        christofides_solver_test \
-        branch_and_cut_solver_test \
         nsga2_solver_test \
         nspso_solver_test \
         moead_solver_test \
@@ -411,16 +392,14 @@ tests : instance_test \
         nsbrkga_solver_test \
         statistics_test
 
-execs : christofides_solver_exec \
-        branch_and_cut_solver_exec \
-        nsga2_solver_exec \
+execs : nsga2_solver_exec \
         nspso_solver_exec \
         moead_solver_exec \
         mhaco_solver_exec \
         ihs_solver_exec \
         nsbrkga_solver_exec \
         hypervolume_calculator_exec \
-				hypervolume_ratio_calculator_exec \
+        hypervolume_ratio_calculator_exec \
         results_aggregator_exec \
         instance_parser_exec \
         instance_generator_exec \

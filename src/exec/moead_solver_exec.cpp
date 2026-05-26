@@ -1,6 +1,6 @@
 #include "utils/argument_parser.hpp"
-#include "solver/weighted_sum/christofides/christofides_solver.hpp"
-#include "solver/weighted_sum/branch_and_cut/branch_and_cut_solver.hpp"
+// #include "solver/weighted_sum/christofides/christofides_solver.hpp"
+// #include "solver/weighted_sum/branch_and_cut/branch_and_cut_solver.hpp"
 #include "solver/moead/moead_solver.hpp"
 
 int main (int argc, char * argv[]) {
@@ -125,61 +125,61 @@ int main (int argc, char * argv[]) {
         }
 
 
-        if(initial_individuals_method == 1) {
-            motsp::Christofides_Solver initial_solver(instance);
+        // if(initial_individuals_method == 1) {
+        //     motsp::Christofides_Solver initial_solver(instance);
 
-            initial_solver.set_seed(solver.seed);
-            initial_solver.time_limit = double(solver.time_limit) *
-                initial_individuals_time_percentage;
-            initial_solver.iterations_limit = double(solver.population_size) *
-                initial_individuals_percentage;
-            initial_solver.max_num_solutions = double(solver.population_size) *
-                initial_individuals_percentage;
-            initial_solver.max_num_snapshots = double(solver.max_num_snapshots)
-                * initial_individuals_percentage;
+        //     initial_solver.set_seed(solver.seed);
+        //     initial_solver.time_limit = double(solver.time_limit) *
+        //         initial_individuals_time_percentage;
+        //     initial_solver.iterations_limit = double(solver.population_size) *
+        //         initial_individuals_percentage;
+        //     initial_solver.max_num_solutions = double(solver.population_size) *
+        //         initial_individuals_percentage;
+        //     initial_solver.max_num_snapshots = double(solver.max_num_snapshots)
+        //         * initial_individuals_percentage;
 
-            initial_solver.solve();
+        //     initial_solver.solve();
 
-            solver.initial_individuals = initial_solver.best_individuals;
-            initial_time = initial_solver.solving_time;
-            initial_iterations = initial_solver.num_iterations;
-            initial_best_solutions_snapshots =
-                initial_solver.best_solutions_snapshots;
-            initial_num_non_dominated_snapshots =
-                initial_solver.num_non_dominated_snapshots;
-            initial_num_fronts_snapshots = initial_solver.num_fronts_snapshots;
-            initial_populations_snapshots =
-                initial_solver.populations_snapshots;
-            solver.num_snapshots = initial_solver.num_snapshots;
-            solver.max_num_snapshots -= initial_solver.num_snapshots;
-        } else if (initial_individuals_method == 2) {
-            motsp::Branch_and_Cut_Solver initial_solver(instance);
+        //     solver.initial_individuals = initial_solver.best_individuals;
+        //     initial_time = initial_solver.solving_time;
+        //     initial_iterations = initial_solver.num_iterations;
+        //     initial_best_solutions_snapshots =
+        //         initial_solver.best_solutions_snapshots;
+        //     initial_num_non_dominated_snapshots =
+        //         initial_solver.num_non_dominated_snapshots;
+        //     initial_num_fronts_snapshots = initial_solver.num_fronts_snapshots;
+        //     initial_populations_snapshots =
+        //         initial_solver.populations_snapshots;
+        //     solver.num_snapshots = initial_solver.num_snapshots;
+        //     solver.max_num_snapshots -= initial_solver.num_snapshots;
+        // } else if (initial_individuals_method == 2) {
+        //     motsp::Branch_and_Cut_Solver initial_solver(instance);
 
-            initial_solver.set_seed(solver.seed);
-            initial_solver.time_limit = double(solver.time_limit) *
-                initial_individuals_time_percentage;
-            initial_solver.iterations_limit = double(solver.population_size) *
-                initial_individuals_percentage;
-            initial_solver.max_num_solutions = double(solver.population_size) *
-                initial_individuals_percentage;
-            initial_solver.max_num_snapshots = double(solver.max_num_snapshots)
-                * initial_individuals_percentage;
+        //     initial_solver.set_seed(solver.seed);
+        //     initial_solver.time_limit = double(solver.time_limit) *
+        //         initial_individuals_time_percentage;
+        //     initial_solver.iterations_limit = double(solver.population_size) *
+        //         initial_individuals_percentage;
+        //     initial_solver.max_num_solutions = double(solver.population_size) *
+        //         initial_individuals_percentage;
+        //     initial_solver.max_num_snapshots = double(solver.max_num_snapshots)
+        //         * initial_individuals_percentage;
 
-            initial_solver.solve();
+        //     initial_solver.solve();
 
-            solver.initial_individuals = initial_solver.best_individuals;
-            initial_time = initial_solver.solving_time;
-            initial_iterations = initial_solver.num_iterations;
-            initial_best_solutions_snapshots =
-                initial_solver.best_solutions_snapshots;
-            initial_num_non_dominated_snapshots =
-                initial_solver.num_non_dominated_snapshots;
-            initial_num_fronts_snapshots = initial_solver.num_fronts_snapshots;
-            initial_populations_snapshots =
-                initial_solver.populations_snapshots;
-            solver.num_snapshots = initial_solver.num_snapshots;
-            solver.max_num_snapshots -= initial_solver.num_snapshots;
-        }
+        //     solver.initial_individuals = initial_solver.best_individuals;
+        //     initial_time = initial_solver.solving_time;
+        //     initial_iterations = initial_solver.num_iterations;
+        //     initial_best_solutions_snapshots =
+        //         initial_solver.best_solutions_snapshots;
+        //     initial_num_non_dominated_snapshots =
+        //         initial_solver.num_non_dominated_snapshots;
+        //     initial_num_fronts_snapshots = initial_solver.num_fronts_snapshots;
+        //     initial_populations_snapshots =
+        //         initial_solver.populations_snapshots;
+        //     solver.num_snapshots = initial_solver.num_snapshots;
+        //     solver.max_num_snapshots -= initial_solver.num_snapshots;
+        // }
 
         solver.time_limit -= initial_time;
         solver.iterations_limit -= initial_iterations;
