@@ -22,8 +22,7 @@ SOLVER="${PROJECT_DIR}/bin/exec/nsga2_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Time limit per run (seconds)
-# TIME_LIMIT=900
-TIME_LIMIT=30
+TIME_LIMIT=900
 
 # Create temporary directory for this run
 TMPDIR=$(mktemp -d)
