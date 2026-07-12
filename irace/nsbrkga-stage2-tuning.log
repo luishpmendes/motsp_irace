@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # irace: An implementation in R of (Elitist) Iterated Racing
-# Version: 4.3.c5b213a
+# Version: 4.4.3.dd8d85f
 # Copyright (C) 2010-2025
 # Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
 # Jeremie Dubois-Lacoste
@@ -14,47 +14,89 @@
 #     race: Racing methods for the selection of the best
 #     Copyright (C) 2003 Mauro Birattari
 #------------------------------------------------------------------------------
-# installed at: /home/luishpmendes/R/x86_64-pc-linux-gnu-library/4.1/irace
+# installed at: /home/luispmendes/R/library/irace
 # called with: --scenario nsbrkga-scenario-stage2.txt
-# 2026-05-16 18:38:56 -03: Reading parameter file '/home/luishpmendes/UNICAMP/Doutorado/motsp_irace/irace/nsbrkga-parameters-stage2.txt'.
-# 2026-05-16 18:38:56 -03: 3 expression(s) specifying forbidden configurations read.
-# 2026-05-16 18:38:56 -03: Estimating execution time using 5% of 1800 = 90
-# 2026-05-16 18:44:01 -03: Estimated execution time is 31 based on 2 configurations and 5 instances. Used time: 303, remaining time: 1497, remaining budget (experiments): 48
-Warning: == irace == With the current settings and estimated time per run (31) irace will not have enough budget to execute the minimum number of iterations (5). Execution will continue by assuming that the estimated time is too high and reducing the minimum number of iterations, however, if the estimation was correct or too low, results might not be better than random sampling.
-
-# 2026-05-16 18:44:01 -03: Initialization
+# 2026-05-27 00:59:18 UTC: Reading parameter file '/home/luispmendes/motsp_irace/irace/nsbrkga-parameters-stage2.txt'.
+# 2026-05-27 00:59:18 UTC: 3 expression(s) specifying forbidden configurations read.
+# 2026-05-27 00:59:18 UTC: Estimating execution time using 5% of 2160000 = 108000
+# 2026-05-28 05:47:07 UTC: Estimated execution time is 901 based on 23 configurations and 5 instances. Used time: 103583, remaining time: 2056417, remaining budget (experiments): 2282
+# 2026-05-28 05:47:07 UTC: Initialization
 # Elitist race
 # Elitist new instances: 1
 # Elitist limit: 2
-# nbIterations: 1
+# nbIterations: 5
 # minNbSurvival: 5
 # nbParameters: 10
-# seed: 1817172173
+# seed: 1063988096
 # confidence level: 0.95
-# budget: 48
-# time budget: 1497
+# budget: 2282
+# time budget: 2056417
 # mu: 5
 # deterministic: FALSE
 
-# 2026-05-16 18:44:01 -03: Stopped because there is not enough budget to enforce the value of nbConfigurations.
-# Iteration: 1
-# nbIterations: 1
-# experimentsUsed: 10
-# timeUsed: 303
-# remainingBudget: 48
-# currentBudget: 48
-# number of elites: 2
-# nbConfigurations: 8
-# Total CPU user time: 304.378, CPU sys time: 0.756, Wall-clock time: 305.272
-# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
-  population_size_factor min_elites_percentage max_elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type diversity_type crossover_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
-1                     63                  0.05                  0.77                 0.31                 35.67                 4                 2         6              3              0               1                 0                        1           0              0              0
-2                     89                  0.30                  0.53                 0.06                 60.42                 3                 1         1              0              1               1                 0                        1           0              0              0
-# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
-1 --population-size-factor 63 --min-elites-percentage 0.05 --max-elites-percentage 0.77 --mutation-probability 0.31 --mutation-distribution 35.67 --num-total-parents 4 --num-elite-parents 2 --bias-type 6 --diversity-type 3 --crossover-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
-2 --population-size-factor 89 --min-elites-percentage 0.3 --max-elites-percentage 0.53 --mutation-probability 0.06 --mutation-distribution 60.42 --num-total-parents 3 --num-elite-parents 1 --bias-type 1 --diversity-type 0 --crossover-type 1 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+# 2026-05-28 05:47:07 UTC: Iteration 1 of 5
+# experimentsUsed: 115
+# timeUsed: 103583
+# boundEstimate: 901
+# remainingBudget: 2282
+# currentBudget: 456
+# nbConfigurations: 76
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
 
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          2|         65|         39|-2.644150000e+18|         42|10:30:18|   NA|  NA|    NA|
+|x|          3|         65|         60|-1.268460050e+18|         84|10:30:06|+0.78|0.89|0.3432|
+|x|          5|         65|         60|-9.079267002e+17|        126|10:30:08|+0.78|0.85|0.2481|
+|x|          4|         65|         33|-7.557231761e+23|        168|10:30:21|+0.74|0.81|0.3418|
+|-|          1|         13|         33|-1.593359785e+26|        210|10:33:58|+0.35|0.48|0.6225|
+|-|          6|          5|         33|-2.638868155e+26|        223|03:16:13|+0.19|0.32|0.7140|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          33    mean value: -2.638868155e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor min_elites_percentage max_elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type diversity_type crossover_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+33   33                     93                  0.38                  0.84                 0.11                 84.57                 4                 4         2              0              1               1                 0                        1           0              0              0       NA
 
-# Testing of elite configurations: 1 
-# Testing iteration configurations: FALSE 
-# 2026-05-16 18:44:01 -03: No test instances, skip testing
+# 2026-05-30 13:38:15 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   population_size_factor min_elites_percentage max_elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type diversity_type crossover_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+33                     93                  0.38                  0.84                 0.11                 84.57                 4                 4         2              0              1               1                 0                        1           0              0              0
+39                    120                  0.18                  0.21                 0.00                  5.68                 2                 2         6              3              0               1                 0                        1           0              0              0
+23                     74                  0.04                  0.41                 0.10                 76.50                 2                 1         6              2              0               1                 0                        1           0              0              0
+60                     64                  0.25                  0.94                 0.03                 60.60                 5                 4         0              2              0               1                 0                        1           0              0              0
+4                      43                  0.39                  0.56                 0.15                 40.48                 4                 3         2              1              0               1                 0                        1           0              0              0
+# 2026-05-30 13:38:15 UTC: Iteration 2 of 5
+# experimentsUsed: 338
+# timeUsed: 304464
+# boundEstimate: 900.781065088757
+# remainingBudget: 2060
+# currentBudget: 515
+# nbConfigurations: 77
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          7|         77|        108|-3.296270000e+18|         77|19:15:42|   NA|  NA|    NA|
+Error: == irace == The output of targetRunner should not be more than two numbers!
+== irace == The call to targetRunner was:
+/home/luispmendes/motsp_irace/irace/nsbrkga-tunner-stage2.sh 92 5 1078835387 /home/luispmendes/motsp_irace/instances/kroABCD2000.txt  --population-size-factor 30 --min-elites-percentage 0.58 --max-elites-percentage 0.98 --mutation-probability 0.17 --mutation-distribution 39.88 --num-total-parents 4 --num-elite-parents 2 --bias-type 2 --diversity-type 3 --crossover-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+== irace == The output was:
+/home/luispmendes/motsp_irace/irace/nsbrkga-tunner-stage2.sh: line 49: 628484 Segmentation fault      (core dumped) "$SOLVER" --instance "$INSTANCE" --seed "$SEED" --time-limit "$TIME_LIMIT" --pareto "$PARETO_FILE" "${TRANSFORMED_PARAMS[@]}" > /dev/null 2>&1
+Inf 13
+== irace == This is not a bug in irace, but means that something failed when running the command(s) above or they were terminated before completion. Try to run the command(s) above from the execution directory '/home/luispmendes/motsp_irace/irace' to investigate the issue. See also Appendix B (targetRunner troubleshooting checklist) of the User Guide (https://cran.r-project.org/package=irace/vignettes/irace-package.pdf).
+Execution halted

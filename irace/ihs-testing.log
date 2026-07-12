@@ -1,0 +1,14 @@
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: 0 
+# 2026-06-21 07:33:38 UTC: Testing configurations (in no particular order): 317
+    population_size_factor    phmcr ppar_min ppar_max bw_min   bw_max
+317                     46 0.975727 0.470562 0.829922  7e-06 0.974409
+# 2026-06-21 08:18:43 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          317
+1t 2082739522 -8.71691e+12
+2t  158460273 -6.31755e+25
+3t 1218094380 -1.73000e+20
+# 2026-06-21 08:18:43 UTC: Finished testing
+[1] TRUE

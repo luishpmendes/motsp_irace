@@ -1,0 +1,12 @@
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: 0 
+# 2026-06-21 09:03:49 UTC: Testing configurations (in no particular order): 
+data frame with 0 columns and 0 rows
+Error in seq_len(nrow(x)) : 
+  argument must be coercible to non-negative integer
+Calls: testing_fromlog -> testing_common -> testConfigurations -> seq_nrow
+In addition: Warning message:
+In seq_len(nrow(x)) : first element used of 'length.out' argument
+Execution halted
