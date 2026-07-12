@@ -26,24 +26,19 @@ wait
 # Results are tee'd to *-testing.log files, separate from the tuning logs.
 # ---------------------------------------------------------------------------
 
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsga2.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsga2-testing.log
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsga2.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsga2-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nspso.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nspso-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-moead.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee moead-testing.log & 
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-mhaco.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee mhaco-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-ihs.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee ihs-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage1.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage1-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage2.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage2-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage3.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage3-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage4.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage4-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage5.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage5-testing.log &
+Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage6.Rdata', testNbElites=5, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage6-testing.log &
 
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nspso.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nspso-testing.log
+# Wait for all testing jobs to finish before exiting.
+wait
 
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-moead.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee moead-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-mhaco.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee mhaco-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-ihs.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee ihs-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage1.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage1-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage2.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage2-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage3.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage3-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage4.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage4-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage5.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage5-testing.log
-
-Rscript -e "library(irace); testing_fromlog(logFile='./irace-nsbrkga-stage6.Rdata', testNbElites=1, testIterationElites=0, testInstancesDir='../instances', testInstancesFile='./test-instances.txt')" 2>&1 | tee nsbrkga-stage6-testing.log
+exit 0
