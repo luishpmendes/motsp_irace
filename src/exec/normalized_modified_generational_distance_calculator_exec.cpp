@@ -280,7 +280,7 @@ int main(int argc, char * argv[]) {
             }
         }
     } else {
-        std::cerr << "./normalized_modified_inverted_generational_distance_exec "
+        std::cerr << "./normalized_modified_generational_distance_calculator_exec "
                   << "--instance <instance_filename> "
                   << "--reference-pareto <reference_pareto_filename> "
                   << "--pareto-i <pareto_filename> "

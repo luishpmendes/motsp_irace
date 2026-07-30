@@ -7,7 +7,7 @@ This folder contains iRace configurations for **offline algorithm configuration*
 | Algorithm | Scenario File | Parameters File | Target Runner |
 |-----------|---------------|-----------------|---------------|
 | NSGA-II   | `nsga2-scenario.txt` | `nsga2-parameters.txt` | `nsga2-tunner.sh` |
-| NS-BRKGA  | `nsbrkga-scenario.txt` | `nsbrkga-parameters.txt` | `nsbrkga-tunner.sh` |
+| NS-BRKGA  | `nsbrkga-scenario-stage<N>.txt` | `nsbrkga-parameters-stage<N>.txt` | `nsbrkga-tunner-stage<N>.sh` (N = 1..6) |
 | MOEA/D    | `moead-scenario.txt` | `moead-parameters.txt` | `moead-tunner.sh` |
 | NSPSO     | `nspso-scenario.txt` | `nspso-parameters.txt` | `nspso-tunner.sh` |
 | IHS       | `ihs-scenario.txt` | `ihs-parameters.txt` | `ihs-tunner.sh` |
@@ -18,7 +18,9 @@ This folder contains iRace configurations for **offline algorithm configuration*
 - **`*-scenario.txt`** — iRace scenario configuration (paths, budget, log file)
 - **`*-parameters.txt`** — Parameter space definition (name, switch, type, range, constraints)
 - **`*-tunner.sh`** — Target runner script that iRace calls to evaluate a configuration
-- **`instances.txt`** — List of training instance filenames (one per line)
+- **`train-instances.txt`** — List of training instance filenames (one per line)
+- **`test-instances.txt`** — List of test instance filenames used by the testing phase
+- **`irace_runner.sh`** — Driver that runs all eleven tunings, then the testing phase
 
 ## Prerequisites
 
@@ -31,7 +33,8 @@ This folder contains iRace configurations for **offline algorithm configuration*
    - `nsga2_solver_exec`, `nsbrkga_solver_exec`, etc.
    - `hypervolume_calculator_exec`
 
-3. **Training instances** in `../instances/` matching the names in `instances.txt`.
+3. **Training and test instances** in `../instances/` matching the names in
+   `train-instances.txt` and `test-instances.txt`.
 
 ## How iRace Calls the Target Runner
 
@@ -45,7 +48,7 @@ iRace invokes the target runner with:
   - `cost`: Negative hypervolume (minimized by iRace → maximized HV)
   - `time`: Elapsed seconds (integer)
 
-On failure, runners return a large penalty (`1e18`) to avoid crashing iRace.
+On failure, runners print `Inf` as the cost to avoid crashing iRace.
 
 ## Quick Start
 
@@ -56,9 +59,14 @@ Run tuning from inside the `irace/` directory:
 Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga2-scenario.txt'))"
 ```
 
-**NS-BRKGA:**
+**NS-BRKGA (one ablation stage, N = 1..6):**
 ```bash
-Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsbrkga-scenario.txt'))"
+Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsbrkga-scenario-stage1.txt'))"
+```
+
+**Everything (all eleven tunings in parallel, then the testing phase):**
+```bash
+./irace_runner.sh
 ```
 
 Optional: redirect output to a log:
@@ -84,7 +92,7 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 - **Forbidden constraints** (in `[forbidden]` section):
   - `min_elites_percentage >= max_elites_percentage` — rejected
   - `num_elite_parents > num_total_parents` — rejected
-  - `shake_interval >= reset_interval` — rejected
+  - `shake_interval >= reset_interval` — rejected (stage 6 only)
 
 ## Output Artifacts
 
@@ -104,4 +112,4 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 | `command not found` errors | Ensure solver binaries are built in `../bin/exec/` |
 | iRace reports non-numeric output | Runner must print exactly `cost time` (two numbers) |
 | `No such file or directory` | Check working directory; run from inside `irace/` |
-| Instance not found | Verify entries in `instances.txt` match files in `../instances/` |
+| Instance not found | Verify entries in `train-instances.txt` / `test-instances.txt` match files in `../instances/` |

@@ -7,8 +7,7 @@
 
 int main(int argc, char* argv[]) {
   Argument_Parser arg_parser(argc, argv);
-  std::vector<double> hvr_values, nigd_plus_values,
-      multiplicative_epsilon_values;
+  std::vector<double> hvr_values, nigd_plus_values;
 
   unsigned num_hvrs, index_best, index_median, num_nigd_pluses;
   std::vector<std::pair<double, unsigned>> hvrs, nigd_pluses;

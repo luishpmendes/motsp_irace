@@ -37,16 +37,6 @@ for instance in instances:
                         metrics[1][i].append(float(row[0]))
                     csv_file.close()
 
-# for instance in instances:
-#     for i in range(len(solvers)):
-#         for seed in seeds:
-#             filename = os.path.join(dirname, "multiplicative_epsilon/" + instance + "_" + solvers[i] + "_" + str(seed) + ".txt")
-#             if os.path.exists(filename):
-#                 with open(filename) as csv_file:
-#                     data = csv.reader(csv_file, delimiter = ",")
-#                     for row in data:
-#                         metrics[2][i].append(float(row[0]))
-#                     csv_file.close()
 
 fig, axs = plt.subplots(1, ncols = len(metrics), figsize = (12.0 * len(metrics), 12.0 * 1), squeeze = False, num = 1, clear = True)
 fig.suptitle("Multi-Objective Travelling Salesman Problem", fontsize = 42)
@@ -84,7 +74,6 @@ for instance in instances:
     for solver in solvers:
         metrics[0].append([])
         metrics[1].append([])
-        # metrics[2].append([])
     
     for i in range(len(solvers)):
         for seed in seeds:
@@ -106,15 +95,6 @@ for instance in instances:
                         metrics[1][i].append(float(row[0]))
                     csv_file.close()
 
-    # for i in range(len(solvers)):
-    #     for seed in seeds:
-    #         filename = os.path.join(dirname, "multiplicative_epsilon/" + instance + "_" + solvers[i] + "_" + str(seed) + ".txt")
-    #         if os.path.exists(filename):
-    #             with open(filename) as csv_file:
-    #                 data = csv.reader(csv_file, delimiter = ",")
-    #                 for row in data:
-    #                     metrics[2][i].append(float(row[0]))
-    #                 csv_file.close()
 
     fig, axs = plt.subplots(nrows = 1, ncols = len(metrics), figsize = (12.0 * len(metrics), 12.0 * 1), squeeze = False, num = 1, clear = True)
     fig.set_size_inches(12.0 * len(metrics), 12.0 * 1)

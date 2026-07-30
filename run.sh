@@ -258,57 +258,6 @@ eval $final_command
 
 wait
 
-# commands=()
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     commands[$i]="("
-# done
-
-# i=0
-
-# for instance in ${instances[@]}
-# do
-#     command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
-#     command+="--instance ${path}/instances/${instance}.txt "
-#     command+="--reference-pareto ${path}/pareto/${instance}.txt "
-#     j=0;
-#     for solver in ${solvers[@]}
-#     do
-#         for seed in ${seeds[@]}
-#         do
-#             command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
-#             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
-#             command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/${instance}_${solver}_${seed}.txt "
-#             command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/${instance}_${solver}_${seed}.txt "
-#             j=$((j+1))
-#         done
-#     done
-#     if [ $i -lt $num_processes ]
-#     then
-#         commands[$i]+="$command"
-#     else
-#         commands[$((i%num_processes))]+=" && $command"
-#     fi
-#     i=$((i+1))
-# done
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     commands[$i]+=") &>> ${path}/log_${i}.txt"
-# done
-
-# final_command=""
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     command=${commands[$i]}
-#     final_command+="$command & "
-# done
-
-# eval $final_command
-
-# wait
 
 commands=()
 
@@ -425,7 +374,7 @@ do
 done
 
 ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr.mp4 &
-ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/igd_plus.mp4 &
+ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4
 

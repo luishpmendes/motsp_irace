@@ -51,15 +51,15 @@ for m in ms:
                         axs[j][j].set_yticks([])
                         axs[j][j].set_ylabel(ylabel = "Density", fontsize = "x-large")
                         sns.kdeplot(data = ys[j], ax = axs[j][j], color = colors[i], label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), alpha = 0.80)
-                        axs[j][j].legend(loc = "best")
-                        for l in range(m):
-                            if j != l:
-                                axs[j][l].set_xlim(left = min_ys[l], right = max_ys[l])
-                                axs[j][l].set_ylim(bottom = min_ys[j], top = max_ys[j])
-                                axs[j][l].set_xlabel(xlabel = "$f_{" + str(l + 1) + "}$", fontsize = "x-large")
-                                axs[j][l].set_ylabel(ylabel = "$f_{" + str(j + 1) + "}$", fontsize = "x-large")
-                                axs[j][l].scatter(x = ys[l], y = ys[j], color = colors[i], label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), alpha = 0.80)
-                                axs[j][l].legend(loc = "best", fontsize = "large")
+                        axs[j][j].legend(loc = "best", fontsize = "large")
+                        for k in range(m):
+                            if j != k:
+                                axs[j][k].set_xlim(left = min_ys[k], right = max_ys[k])
+                                axs[j][k].set_ylim(bottom = min_ys[j], top = max_ys[j])
+                                axs[j][k].set_xlabel(xlabel = "$f_{" + str(k + 1) + "}$", fontsize = "x-large")
+                                axs[j][k].set_ylabel(ylabel = "$f_{" + str(j + 1) + "}$", fontsize = "x-large")
+                                axs[j][k].scatter(x = ys[k], y = ys[j], color = colors[i], label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), alpha = 0.80)
+                                axs[j][k].legend(loc = "best", fontsize = "large")
                     del ys
             plt.subplots_adjust(wspace = 0.16 + 0.07 * m, hspace = 0.16 + 0.07 * m)
             filename = os.path.join(dirname, "pareto/" + instance + "_" + version + ".png")
