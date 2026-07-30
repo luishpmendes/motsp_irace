@@ -208,10 +208,12 @@ void NSBRKGA_Solver::solve() {
             //     pr_time_limit = this->time_next_snapshot;
             // }
 
+            const double remaining = std::max(0.0, remaining_time());
+
             auto result = algorithm.pathRelink(
                     params.pr_type,
                     this->pr_dist_func,
-                    pr_time_limit - this->elapsed_time(),
+                    remaining,
                     params.pr_percentage);
 
             const auto pr_time = Solver::elapsed_time(pr_start_time);
