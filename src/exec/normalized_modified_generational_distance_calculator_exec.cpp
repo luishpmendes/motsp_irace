@@ -35,6 +35,15 @@ double modified_inverted_generational_distance(
         const std::vector<std::vector<double>> & front) {
     double igd_plus = 0.0, min_distance, distance;
 
+    if(reference_front.empty()) {
+        throw std::runtime_error("The reference Pareto front is empty.");
+    }
+
+    if(front.empty()) {
+        throw std::runtime_error("Cannot compute the inverted generational "
+                                 "distance to an empty front.");
+    }
+
     for(unsigned i = 0; i < reference_front.size(); i++) {
         min_distance = modified_distance(senses,
                                          reference_front[i],
@@ -223,7 +232,9 @@ int main(int argc, char * argv[]) {
                         paretos[i]);
 
                 assert(normalized_igd_plus >= 0.0);
-                assert(normalized_igd_plus <= 1.0);
+                // No upper bound is asserted: the ratio exceeds 1
+                // only when every point of the front is worse than
+                // the reference point.
 
                 ofs << normalized_igd_plus << std::endl;
 
@@ -258,7 +269,9 @@ int main(int argc, char * argv[]) {
                             best_solutions_snapshots[i][j]);
 
                     assert(normalized_igd_plus >= 0.0);
-                    assert(normalized_igd_plus <= 1.0);
+                    // No upper bound is asserted: the ratio exceeds 1
+                    // only when every point of the front is worse than
+                    // the reference point.
 
                     ofs << iteration_snapshots[i][j] << ","
                         << time_snapshots[i][j] << ","

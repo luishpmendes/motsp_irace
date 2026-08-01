@@ -8,7 +8,7 @@ compute_hypervolume(const std::vector<NSBRKGA::Sense> &senses,
                     const std::vector<double> &reference_point,
                     const std::vector<std::vector<double>> &front) {
     std::vector<double> reference_point_prime(reference_point.size());
-    std::vector<std::vector<double>> front_prime(front.size());
+    std::vector<std::vector<double>> front_prime;
 
     for (unsigned i = 0; i < reference_point.size(); i++) {
         if (senses[i] == NSBRKGA::Sense::MINIMIZE) {
@@ -19,14 +19,30 @@ compute_hypervolume(const std::vector<NSBRKGA::Sense> &senses,
     }
 
     for (unsigned i = 0; i < front.size(); i++) {
-        front_prime[i] = std::vector<double>(front[i].size());
+        std::vector<double> point_prime(front[i].size());
+        bool dominates_reference_point = true;
+
         for (unsigned j = 0; j < front[i].size(); j++) {
             if (senses[j] == NSBRKGA::Sense::MINIMIZE) {
-                front_prime[i][j] = front[i][j];
+                point_prime[j] = front[i][j];
             } else {
-                front_prime[i][j] = -front[i][j];
+                point_prime[j] = -front[i][j];
+            }
+
+            if (point_prime[j] >= reference_point_prime[j]) {
+                dominates_reference_point = false;
             }
         }
+
+        // Pagmo requires every point to dominate the reference point. A point
+        // that does not encloses no volume, so it is simply left out.
+        if (dominates_reference_point) {
+            front_prime.push_back(point_prime);
+        }
+    }
+
+    if (front_prime.empty()) {
+        return 0.0;
     }
 
     pagmo::hypervolume hv(front_prime);
@@ -197,7 +213,9 @@ int main(int argc, char *argv[]) {
                     paretos[i]);
 
                 assert(hypervolume_ratio >= 0.0);
-                assert(hypervolume_ratio <= 1.0);
+                // No upper bound is asserted: the reference front
+                // is capped by --max-num-solutions, so a front may
+                // enclose slightly more volume than the archive.
 
                 ofs << hypervolume_ratio << std::endl;
 
@@ -231,7 +249,9 @@ int main(int argc, char *argv[]) {
                         best_solutions_snapshots[i][j]);
 
                     assert(hypervolume_ratio >= 0.0);
-                    assert(hypervolume_ratio <= 1.0);
+                    // No upper bound is asserted: the reference front
+                    // is capped by --max-num-solutions, so a front may
+                    // enclose slightly more volume than the archive.
 
                     ofs << iteration_snapshots[i][j] << ","
                         << time_snapshots[i][j] << "," << hypervolume_ratio
