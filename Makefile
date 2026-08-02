@@ -147,6 +147,36 @@ $(BIN)/exec/nsga2_solver_exec : $(BIN)/instance/instance.o \
 
 nsga2_solver_exec : $(BIN)/exec/nsga2_solver_exec
 
+$(BIN)/test/nsga3_solver_test : $(BIN)/instance/instance.o \
+                                $(BIN)/solution/solution.o \
+                                $(BIN)/solver/local_search/two_opt.o \
+                                $(BIN)/solver/solver.o \
+                                $(BIN)/solver/nsga3/problem.o \
+                                $(BIN)/solver/nsga3/nsga3_solver.o \
+                                $(BIN)/test/nsga3_solver_test.o
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(INC)
+	@echo
+	@echo "--> Running test..."
+	$(BIN)/test/nsga3_solver_test
+	@echo
+
+nsga3_solver_test : $(BIN)/test/nsga3_solver_test
+
+$(BIN)/exec/nsga3_solver_exec : $(BIN)/instance/instance.o \
+                                $(BIN)/solution/solution.o \
+                                $(BIN)/solver/local_search/two_opt.o \
+                                $(BIN)/solver/solver.o \
+                                $(BIN)/solver/nsga3/problem.o \
+                                $(BIN)/solver/nsga3/nsga3_solver.o \
+                                $(BIN)/utils/argument_parser.o \
+                                $(BIN)/exec/nsga3_solver_exec.o
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(INC)
+	@echo
+
+nsga3_solver_exec : $(BIN)/exec/nsga3_solver_exec
+
 $(BIN)/test/nspso_solver_test : $(BIN)/instance/instance.o \
                                 $(BIN)/solution/solution.o \
                                 $(BIN)/solver/local_search/two_opt.o \
@@ -376,6 +406,7 @@ tests : instance_test \
         solution_test \
         two_opt_test \
         nsga2_solver_test \
+        nsga3_solver_test \
         nspso_solver_test \
         moead_solver_test \
         mhaco_solver_test \
@@ -384,6 +415,7 @@ tests : instance_test \
         statistics_test
 
 execs : nsga2_solver_exec \
+        nsga3_solver_exec \
         nspso_solver_exec \
         moead_solver_exec \
         mhaco_solver_exec \

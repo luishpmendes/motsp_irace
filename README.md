@@ -2,6 +2,38 @@
 Multi-Objective Travelling Salesman Problem
 
 
+## Dependencies
+
+The `Makefile` hardcodes the prefixes below; they are not discovered.
+
+* **pagmo — must be built from the `nsga3` branch of
+  [`pmslavin/pagmo2`](https://github.com/pmslavin/pagmo2/tree/nsga3), installed to `/opt/pagmo`.**
+  `pagmo::nsga3` does not exist in upstream pagmo (2.19.1 or otherwise), so the stock package
+  builds every solver except `nsga3_solver_exec`.
+
+  ```bash
+  git clone -b nsga3 https://github.com/pmslavin/pagmo2.git
+  cmake -S pagmo2 -B pagmo2/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/pagmo
+  cmake --build pagmo2/build -j"$(nproc)"
+  sudo cmake --install pagmo2/build
+  ```
+
+  Verify with `nm -D /opt/pagmo/lib/libpagmo.so | grep nsga3` — it must print symbols.
+* **NS-BRKGA** — header-only, expected as a sibling checkout at `../nsbrkga/nsbrkga`.
+* **TBB** and a C++17 compiler (`libtbb-dev`, `g++`).
+
+## Building
+
+`clean` is the first rule, so a bare `make` deletes `bin/`. Use explicit targets, from the
+repository root (the tests open `instances/*` by relative path):
+
+```bash
+make execs               # all executables
+make tests               # builds and runs every test
+make all                 # both
+make nsga3_solver_test   # one test: builds, links and runs it
+```
+
 ## Reference Pareto front
 
 `run.sh` builds, for each instance, a reference Pareto front at `pareto/<instance>.txt`.

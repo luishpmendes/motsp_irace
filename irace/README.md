@@ -7,6 +7,7 @@ This folder contains iRace configurations for **offline algorithm configuration*
 | Algorithm | Scenario File | Parameters File | Target Runner |
 |-----------|---------------|-----------------|---------------|
 | NSGA-II   | `nsga2-scenario.txt` | `nsga2-parameters.txt` | `nsga2-tunner.sh` |
+| NSGA-III  | `nsga3-scenario.txt` | `nsga3-parameters.txt` | `nsga3-tunner.sh` |
 | NS-BRKGA  | `nsbrkga-scenario-stage<N>.txt` | `nsbrkga-parameters-stage<N>.txt` | `nsbrkga-tunner-stage<N>.sh` (N = 1..6) |
 | MOEA/D    | `moead-scenario.txt` | `moead-parameters.txt` | `moead-tunner.sh` |
 | NSPSO     | `nspso-scenario.txt` | `nspso-parameters.txt` | `nspso-tunner.sh` |
@@ -20,7 +21,7 @@ This folder contains iRace configurations for **offline algorithm configuration*
 - **`*-tunner.sh`** — Target runner script that iRace calls to evaluate a configuration
 - **`train-instances.txt`** — List of training instance filenames (one per line)
 - **`test-instances.txt`** — List of test instance filenames used by the testing phase
-- **`irace_runner.sh`** — Driver that runs all eleven tunings, then the testing phase
+- **`irace_runner.sh`** — Driver that runs all twelve tunings, then the testing phase
 
 ## Prerequisites
 
@@ -64,7 +65,12 @@ Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga2-scenario.
 Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsbrkga-scenario-stage1.txt'))"
 ```
 
-**Everything (all eleven tunings in parallel, then the testing phase):**
+**NSGA-III:**
+```bash
+Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga3-scenario.txt'))"
+```
+
+**Everything (all twelve tunings in parallel, then the testing phase):**
 ```bash
 ./irace_runner.sh
 ```
@@ -86,6 +92,21 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 ### NSGA-II Parameters
 - **`population_size_factor`**: The runner multiplies this by 4 → actual `population_size` (range 100–500).
 - Other params: `crossover_probability`, `crossover_distribution`, `mutation_probability`, `mutation_distribution`.
+
+### NSGA-III Parameters
+- Same five parameters as NSGA-II, plus **`divisions`** — the number of divisions per objective
+  used to build the reference-point hyperplane.
+- NSGA-III generates `C(m + divisions - 1, divisions)` reference points for an `m`-objective
+  instance and requires **`population_size > that count`**, on top of the usual
+  **`population_size` divisible by 4** (which `population_size_factor × 4` guarantees).
+- The `[forbidden]` rule
+  `population_size_factor * 4 <= choose(4 + divisions - 1, divisions)`
+  evaluates that bound at `m = 4`, the largest objective count in the instance set
+  (`kroABCD*`), so no sampled configuration can be rejected on any instance.
+- `nsga3-tunner.sh` always passes `--memory`, matching how `run.sh` invokes the solver, so
+  tuning and the final experiments use the same algorithm configuration.
+- The solver validates all of the above itself and aborts with an explicit message rather than
+  running an invalid configuration.
 
 ### NS-BRKGA Parameters
 - Uses the same `population_size_factor` convention.

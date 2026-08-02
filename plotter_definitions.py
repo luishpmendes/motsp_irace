@@ -1,8 +1,9 @@
 instances = ["kroAB100",   "kroAB200",   "kroAB500",   "kroAB1000",   "kroAB2000",
              "kroABC100",  "kroABC200",  "kroABC500",  "kroABC1000",  "kroABC2000",
              "kroABCD100", "kroABCD200", "kroABCD500", "kroABCD1000", "kroABCD2000"]
-solvers = ["nsga2", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
+solvers = ["nsga2", "nsga3", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
 solver_labels = {"nsga2": "NSGA-II",
+                 "nsga3": "NSGA-III",
                  "nspso": "NSPSO",
                  "moead": "MOEA/D-DE",
                  "mhaco": "MHACO",

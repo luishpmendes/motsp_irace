@@ -1,0 +1,18 @@
+# NSGA-III Parameters for iRace Tuning
+# Format: name switch type range [| conditions]
+population_size_factor   "--population-size-factor "   i   (25, 125)
+crossover_probability    "--crossover-probability "    r   (0.01, 0.99)
+crossover_distribution   "--crossover-distribution "   r   (1.00, 99.00)
+mutation_probability     "--mutation-probability "     r   (0.01, 0.99)
+mutation_distribution    "--mutation-distribution "    r   (1.00, 99.00)
+divisions                "--divisions "                i   (1, 10)
+
+# NSGA-III generates C(m + divisions - 1, divisions) reference points for an
+# m-objective instance and requires a population strictly larger than that set.
+# The runner turns population_size_factor into population_size = factor * 4, and
+# the instance set reaches m = 4 (kroABCD*), so the worst case is evaluated here.
+[forbidden]
+population_size_factor * 4 <= choose(4 + divisions - 1, divisions)
+
+[global]
+digits = 2
