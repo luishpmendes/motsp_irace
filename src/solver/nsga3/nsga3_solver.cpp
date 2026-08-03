@@ -1,43 +1,11 @@
 #include "solver/nsga3/nsga3_solver.hpp"
 #include "solver/nsga3/problem.hpp"
-// <pagmo/algorithm.hpp> must precede <pagmo/algorithms/nsga3.hpp>: the latter
-// uses PAGMO_S11N_ALGORITHM_EXPORT_KEY without including its definition.
 #include <pagmo/algorithm.hpp>
 #include <pagmo/algorithms/nsga3.hpp>
+#include <pagmo/detail/reference_point.hpp>
 #include <stdexcept>
 
 namespace motsp {
-
-namespace {
-
-/**********************************************************************
- * Computes the number of reference points NSGA-III generates for the
- * given number of objectives and divisions per objective, that is,
- * the binomial coefficient C(num_objectives + divisions - 1,
- * divisions).
- *
- * pagmo declares n_choose_k in <pagmo/utils/reference_point.hpp> but
- * does not export it from libpagmo, hence this local definition.
- *
- * @param num_objectives the number of objectives.
- * @param divisions the number of divisions per objective.
- *
- * @return the number of reference points.
- **********************************************************************/
-std::size_t num_reference_points(std::size_t num_objectives,
-                                 std::size_t divisions) {
-    std::size_t n = num_objectives + divisions - 1,
-                k = std::min(divisions, num_objectives - 1),
-                result = 1;
-
-    for(std::size_t i = 1; i <= k; i++) {
-        result = (result * (n - k + i)) / i;
-    }
-
-    return result;
-}
-
-}
 
 NSGA3_Solver::NSGA3_Solver(const Instance & instance)
     : Solver::Solver(instance) {}
@@ -85,6 +53,15 @@ void NSGA3_Solver::solve() {
                 " was detected.");
     }
 
+    if(this->divisions_inner > this->divisions) {
+        throw std::invalid_argument(
+                "The number of divisions of the inner layer of reference "
+                "directions must not exceed that of the outer layer, while an "
+                "inner value of " + std::to_string(this->divisions_inner) +
+                " was detected for an outer value of " +
+                std::to_string(this->divisions) + ".");
+    }
+
     if(this->population_size < 8 || this->population_size % 4 != 0) {
         throw std::invalid_argument(
                 "NSGA-III requires a population size of at least 8 and "
@@ -101,17 +78,22 @@ void NSGA3_Solver::solve() {
                 " initial individuals were detected.");
     }
 
-    std::size_t num_ref_points = num_reference_points(
-            this->instance.num_objectives, this->divisions);
+    std::size_t num_ref_directions =
+        pagmo::detail::generate_reference_directions(
+                this->instance.num_objectives,
+                this->divisions,
+                this->divisions_inner).size();
 
-    if(this->population_size <= num_ref_points) {
+    if(this->population_size < num_ref_directions) {
         throw std::invalid_argument(
-                "NSGA-III requires a population larger than the reference "
-                "point set: " +
+                "NSGA-III requires a population at least as large as the "
+                "reference direction set: " +
                 std::to_string(this->instance.num_objectives) +
                 " objectives with " + std::to_string(this->divisions) +
-                " divisions generate " + std::to_string(num_ref_points) +
-                " reference points, while the population size is " +
+                " outer and " + std::to_string(this->divisions_inner) +
+                " inner divisions generate " +
+                std::to_string(num_ref_directions) +
+                " reference directions, while the population size is " +
                 std::to_string(this->population_size) + ".");
     }
 
@@ -125,6 +107,8 @@ void NSGA3_Solver::solve() {
                                        this->mutation_probability,
                                        this->mutation_distribution,
                                        this->divisions,
+                                       this->divisions_inner,
+                                       this->random_mating,
                                        this->seed,
                                        this->memory)};
 
@@ -222,6 +206,9 @@ std::ostream & operator <<(std::ostream & os, const NSGA3_Solver & solver) {
        << "Distribution index for mutation: " << solver.mutation_distribution
        << std::endl
        << "Reference point divisions: " << solver.divisions << std::endl
+       << "Reference direction inner divisions: " << solver.divisions_inner
+       << std::endl
+       << "Random mating: " << solver.random_mating << std::endl
        << "Memory: " << solver.memory << std::endl;
     return os;
 }

@@ -7,12 +7,14 @@ mutation_probability     "--mutation-probability "     r   (0.01, 0.99)
 mutation_distribution    "--mutation-distribution "    r   (1.00, 99.00)
 divisions                "--divisions "                i   (1, 10)
 
-# NSGA-III generates C(m + divisions - 1, divisions) reference points for an
-# m-objective instance and requires a population strictly larger than that set.
+# NSGA-III generates C(m + divisions - 1, divisions) reference directions for an
+# m-objective instance and requires a population at least as large as that set;
+# equality is permitted. divisions_inner is left at 0, so only the outer layer is
+# generated and the binomial coefficient below is the exact direction count.
 # The runner turns population_size_factor into population_size = factor * 4, and
 # the instance set reaches m = 4 (kroABCD*), so the worst case is evaluated here.
 [forbidden]
-population_size_factor * 4 <= choose(4 + divisions - 1, divisions)
+population_size_factor * 4 < choose(4 + divisions - 1, divisions)
 
 [global]
 digits = 2

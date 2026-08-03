@@ -41,6 +41,21 @@ class NSGA3_Solver : public Solver {
      **********************************************************/
     unsigned divisions = 6;
 
+    /**********************************************************
+     * Number of divisions per objective used to generate the
+     * inner layer of the reference direction set.
+     * Zero uses the outer layer alone.
+     **********************************************************/
+    unsigned divisions_inner = 0;
+
+    /**********************************************************
+     * Mating selection parameter.
+     * If true, mating parents are picked at random, as in the
+     * original NSGA-III paper. If false, they are picked by
+     * binary tournament, as in NSGA-II.
+     **********************************************************/
+    bool random_mating = true;
+
     /********************************************************************
      * Memory parameter.
      * If true, memory is activated in the algorithm for multiple calls.

@@ -96,6 +96,16 @@ int main (int argc, char * argv[]) {
                 std::stoul(arg_parser.option_value("--divisions"));
         }
 
+        if(arg_parser.option_exists("--divisions-inner")) {
+            solver.divisions_inner =
+                std::stoul(arg_parser.option_value("--divisions-inner"));
+        }
+
+        if(arg_parser.option_exists("--random-mating")) {
+            solver.random_mating =
+                (std::stoul(arg_parser.option_value("--random-mating")) != 0);
+        }
+
         solver.memory = arg_parser.option_exists("--memory");
 
         if(arg_parser.option_exists("--initial-individuals-method")) {
@@ -506,6 +516,8 @@ int main (int argc, char * argv[]) {
                   << "--mutation-probability <mutation_probability> "
                   << "--mutation-distribution <mutation_distribution> "
                   << "--divisions <divisions> "
+                  << "--divisions-inner <divisions_inner> "
+                  << "--random-mating <0|1> "
                   << "--memory "
                   << "--initial-individuals-method <initial_individuals_method> "
                   << "--initial-individuals-percentage <initial_individuals_percentage> "

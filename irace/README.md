@@ -96,13 +96,19 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 ### NSGA-III Parameters
 - Same five parameters as NSGA-II, plus **`divisions`** — the number of divisions per objective
   used to build the reference-point hyperplane.
-- NSGA-III generates `C(m + divisions - 1, divisions)` reference points for an `m`-objective
-  instance and requires **`population_size > that count`**, on top of the usual
-  **`population_size` divisible by 4** (which `population_size_factor × 4` guarantees).
+- NSGA-III generates `C(m + divisions - 1, divisions)` reference directions for an
+  `m`-objective instance and requires **`population_size >= that count`** — equality is
+  permitted — on top of the usual **`population_size` divisible by 4** (which
+  `population_size_factor × 4` guarantees).
 - The `[forbidden]` rule
-  `population_size_factor * 4 <= choose(4 + divisions - 1, divisions)`
+  `population_size_factor * 4 < choose(4 + divisions - 1, divisions)`
   evaluates that bound at `m = 4`, the largest objective count in the instance set
   (`kroABCD*`), so no sampled configuration can be rejected on any instance.
+- The solver's `divisions_inner` (inner reference-direction layer) and `random_mating`
+  are **not tuned**: they keep their defaults of `0` and `true`, so only the outer layer
+  is generated and mating follows the original NSGA-III paper. Both are configurable on
+  the executable via `--divisions-inner <unsigned>` and `--random-mating <0|1>` if a later
+  study needs them.
 - `nsga3-tunner.sh` always passes `--memory`, matching how `run.sh` invokes the solver, so
   tuning and the final experiments use the same algorithm configuration.
 - The solver validates all of the above itself and aborts with an explicit message rather than
