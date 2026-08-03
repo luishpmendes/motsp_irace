@@ -652,10 +652,6 @@ int main() {
     assert(pagmo::detail::generate_reference_directions(
                 instance.num_objectives, 7, 0).size() == 8);
 
-    // The optional inner layer contributes further directions
-    assert(pagmo::detail::generate_reference_directions(
-                instance.num_objectives, 7, 3).size() > 8);
-
     std::vector<std::vector<double>> equal_costs =
         solve_and_collect(7, 0, true, 8);
 
@@ -663,6 +659,47 @@ int main() {
 
     std::cout << "Population equal to the reference direction count: "
               << equal_costs.size() << " solutions" << std::endl;
+
+    /*  Adding an inner layer of three divisions contributes
+     *  C(2 + 3 - 1, 3) = 4 further directions, none of which coincides
+     *  with an outer one here, for a total of 12.
+     */
+    assert(pagmo::detail::generate_reference_directions(
+                instance.num_objectives, 7, 3).size() == 12);
+
+    /*  The two layers do not simply add up: pagmo drops an inner direction
+     *  which coincides with an outer one. With four outer divisions the
+     *  outer coordinates are 0, 1/4, 1/2, 3/4 and 1, onto which the single
+     *  inner division maps exactly, so both of its directions are dropped
+     *  and 5 + 2 gives 5 rather than 7. This is why the iRace forbidden
+     *  rule, which cannot express the test, uses the sum as an upper bound.
+     */
+    assert(pagmo::detail::generate_reference_directions(
+                instance.num_objectives, 4, 1).size() == 5);
+
+    // A positive inner layer solves, with the population sized for both layers
+    std::vector<std::vector<double>> two_layer_costs =
+        solve_and_collect(7, 3, true, 12);
+
+    assert(!two_layer_costs.empty());
+
+    std::cout << "Two layer reference directions: "
+              << two_layer_costs.size() << " solutions" << std::endl;
+
+    /*  A population which would have been large enough for the outer layer
+     *  alone is rejected once the inner layer is added. Eight individuals
+     *  satisfy both the minimum of 5 and the multiple of 4, so it is the
+     *  reference direction rule which rejects this, not the size rule.
+     */
+    bool combined_set_rejected = false;
+
+    try {
+        solve_and_collect(7, 3, true, 8);
+    } catch(const std::invalid_argument &) {
+        combined_set_rejected = true;
+    }
+
+    assert(combined_set_rejected);
 
     std::cout << std::endl << "NSGA3 Solver Test PASSED" << std::endl;
 

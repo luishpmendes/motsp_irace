@@ -94,21 +94,35 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 - Other params: `crossover_probability`, `crossover_distribution`, `mutation_probability`, `mutation_distribution`.
 
 ### NSGA-III Parameters
-- Same five parameters as NSGA-II, plus **`divisions`** — the number of divisions per objective
-  used to build the reference-point hyperplane.
-- NSGA-III generates `C(m + divisions - 1, divisions)` reference directions for an
-  `m`-objective instance and requires **`population_size >= that count`** — equality is
-  permitted — on top of the usual **`population_size` divisible by 4** (which
-  `population_size_factor × 4` guarantees).
+- Same five parameters as NSGA-II, plus **`divisions`** (range `1..10`) and
+  **`divisions_inner`** — the number of divisions per objective of the outer and of the
+  optional inner layer of reference directions.
+- NSGA-III builds its reference directions as an outer Das and Dennis layer of
+  `C(m + divisions - 1, divisions)` directions for an `m`-objective instance plus, when
+  `divisions_inner > 0`, an inner layer of `C(m + divisions_inner - 1, divisions_inner)`
+  directions. **`divisions_inner = 0` disables the inner layer entirely** and contributes
+  no direction, which is why it is excluded from the sum rather than counted as `C(m-1, 0) = 1`.
+- pagmo requires **`population_size >= the direction count`** — equality is permitted — on
+  top of the usual **`population_size` divisible by 4** (which `population_size_factor × 4`
+  guarantees), and **`divisions_inner <= divisions`**.
+- `divisions_inner` uses the dependent domain `i (0, "min(divisions, 5)")`. The
+  `divisions` cap is pagmo's own rule, expressed in the domain so no sample is ever wasted
+  on it; the cap of 5 follows Deb and Jain, who introduce the inner layer only for
+  many-objective problems and never use more than two divisions for it.
 - The `[forbidden]` rule
-  `population_size_factor * 4 < choose(4 + divisions - 1, divisions)`
+  `population_size_factor * 4 < choose(4 + divisions - 1, divisions) + ifelse(divisions_inner > 0, choose(4 + divisions_inner - 1, divisions_inner), 0)`
   evaluates that bound at `m = 4`, the largest objective count in the instance set
   (`kroABCD*`), so no sampled configuration can be rejected on any instance.
-- The solver's `divisions_inner` (inner reference-direction layer) and `random_mating`
-  are **not tuned**: they keep their defaults of `0` and `true`, so only the outer layer
-  is generated and mating follows the original NSGA-III paper. Both are configurable on
-  the executable via `--divisions-inner <unsigned>` and `--random-mating <0|1>` if a later
-  study needs them.
+  It is an **upper bound**: pagmo drops any inner direction which coincides with an outer
+  one, and iRace cannot express that test, so the rule is conservative. At `m = 4` the two
+  grids can only meet when `divisions` is 8, where the bound overshoots by 4 to 35
+  directions; for every other value of `divisions` it is exact.
+- `nsga3-tunner.sh` re-checks those rules before launching anything and prints `Inf 0` for
+  a configuration that would be rejected, so no solver time is wasted. iRace should never
+  produce one; the guard covers manual invocations.
+- `random_mating` remains **untuned** at its default `true`, the mating scheme of the
+  original NSGA-III paper. It is configurable on the executable via `--random-mating <0|1>`
+  if a later study needs it.
 - `nsga3-tunner.sh` always passes `--memory`, matching how `run.sh` invokes the solver, so
   tuning and the final experiments use the same algorithm configuration.
 - The solver validates all of the above itself and aborts with an explicit message rather than

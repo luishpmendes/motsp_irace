@@ -6,15 +6,23 @@ crossover_distribution   "--crossover-distribution "   r   (1.00, 99.00)
 mutation_probability     "--mutation-probability "     r   (0.01, 0.99)
 mutation_distribution    "--mutation-distribution "    r   (1.00, 99.00)
 divisions                "--divisions "                i   (1, 10)
+divisions_inner          "--divisions-inner "          i   (0, "min(divisions, 5)")
 
-# NSGA-III generates C(m + divisions - 1, divisions) reference directions for an
-# m-objective instance and requires a population at least as large as that set;
-# equality is permitted. divisions_inner is left at 0, so only the outer layer is
-# generated and the binomial coefficient below is the exact direction count.
+# NSGA-III builds its reference directions as an outer Das and Dennis layer of
+# C(m + divisions - 1, divisions) directions for an m-objective instance plus, when
+# divisions_inner > 0, an inner layer of C(m + divisions_inner - 1, divisions_inner);
+# divisions_inner = 0 disables the inner layer and contributes no direction at all.
+# pagmo requires divisions_inner <= divisions, which the dependent domain above
+# enforces; the further cap of 5 follows Deb & Jain, who use the inner layer only for
+# many-objective problems and never beyond two divisions.
+# pagmo drops any inner direction coinciding with an outer one, so the sum below is an
+# upper bound on the true direction count and this rule is conservative: at m = 4 the
+# two grids can only meet when divisions is 8. A population at least as large as the
+# direction set is required, equality permitted.
 # The runner turns population_size_factor into population_size = factor * 4, and
 # the instance set reaches m = 4 (kroABCD*), so the worst case is evaluated here.
 [forbidden]
-population_size_factor * 4 < choose(4 + divisions - 1, divisions)
+population_size_factor * 4 < choose(4 + divisions - 1, divisions) + ifelse(divisions_inner > 0, choose(4 + divisions_inner - 1, divisions_inner), 0)
 
 [global]
 digits = 2
