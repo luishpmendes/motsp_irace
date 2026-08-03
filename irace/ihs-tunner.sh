@@ -14,7 +14,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/ihs_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT="${TIME_LIMIT:-900}"
+TIME_LIMIT="${TIME_LIMIT:-300}"
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
@@ -49,7 +49,7 @@ SOLVER_EXIT=$?
 
 END_TIME=$(date +%s.%N)
 ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
-ELAPSED_INT=$(printf "%.0f" "$ELAPSED")
+ELAPSED_INT=$(printf "%.2f" "$ELAPSED")
 
 if [ $SOLVER_EXIT -ne 0 ] || [ ! -f "$PARETO_FILE" ]; then
     echo "Inf $ELAPSED_INT"

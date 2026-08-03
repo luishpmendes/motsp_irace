@@ -45,9 +45,9 @@ iRace invokes the target runner with:
 ```
 
 - **`<instance_path>`** is formed as `trainInstancesDir/instance_name` (e.g., `../instances/kroAB100.txt`)
-- Since `maxTime` is set, the runner **must** print two values: `cost time`
+- The runner prints two values: `cost time`
   - `cost`: Negative hypervolume (minimized by iRace → maximized HV)
-  - `time`: Elapsed seconds (integer)
+  - `time`: Elapsed seconds, strictly positive (iRace rejects a `time` of 0)
 
 On failure, runners print `Inf` as the cost to avoid crashing iRace.
 
@@ -79,6 +79,31 @@ Optional: redirect output to a log:
 ```bash
 Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga2-scenario.txt'))" 2>&1 | tee nsga2-tuning.log
 ```
+
+## Budget and Reproducibility
+
+| Setting | Value | Source |
+|---------|-------|--------|
+| Runner time limit | 300 s (override with `TIME_LIMIT`) | Tuning budget only |
+| iRace budget per scenario | `maxExperiments = 2500` | Fixed evaluation count, equal across scenarios |
+| Worst case per tuning | 750 000 s ≈ 8.68 days | 2500 × 300 s |
+| Concurrency | 12 tunings in parallel | `irace_runner.sh` on 16 cores |
+| Test elites | 5 | `testNbElites` in each scenario |
+
+The budget is an **experiment count**, not a time budget: iRace stops after
+2500 evaluations of the target runner. `maxTime` is deliberately absent —
+iRace 4.x treats `maxExperiments` and `maxTime` as mutually exclusive and
+aborts with "Two different tuning budgets provided" if both are set.
+
+The 300 s tuning limit **deliberately differs** from `run.sh`'s
+`time_limit=900` used for the final experiments: it buys 2500 evaluations per
+scenario within a predictable budget. Configurations are therefore selected
+under a shorter per-run budget than the one they are finally measured under.
+
+Expected duration: **≈ 8.68 days per repository**, with the 12 tunings running
+concurrently on 16 cores. Run one repository at a time — three repositories at
+once would put 36 solvers on 16 cores and each 300 s evaluation would get well
+under a full core.
 
 ## Notes on Parameter Files
 

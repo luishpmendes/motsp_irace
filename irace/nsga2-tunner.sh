@@ -22,7 +22,7 @@ SOLVER="${PROJECT_DIR}/bin/exec/nsga2_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Time limit per run (seconds)
-TIME_LIMIT="${TIME_LIMIT:-900}"
+TIME_LIMIT="${TIME_LIMIT:-300}"
 
 # Create temporary directory for this run
 TMPDIR=$(mktemp -d)
@@ -62,7 +62,7 @@ SOLVER_EXIT=$?
 
 END_TIME=$(date +%s.%N)
 ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
-ELAPSED_INT=$(printf "%.0f" "$ELAPSED")
+ELAPSED_INT=$(printf "%.2f" "$ELAPSED")
 
 # Check if solver succeeded
 if [ $SOLVER_EXIT -ne 0 ] || [ ! -f "$PARETO_FILE" ]; then
