@@ -1,10 +1,10 @@
 #!/bin/bash
-export LC_NUMERIC=C
+export LC_ALL=C
 ###############################################################################
 # NSGA-II Target Runner for iRace
 # 
 # Usage: ./nsga2-tunner.sh <config_id> <instance_id> <seed> <instance> [params...]
-# Output: cost time
+# Output: cost
 ###############################################################################
 
 CONFIG_ID="$1"
@@ -23,6 +23,13 @@ HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Time limit per run (seconds)
 TIME_LIMIT="${TIME_LIMIT:-300}"
+
+# Wall-clock backstops nested inside the scenario's targetRunnerTimeout of
+# 315 s: the solver is killed at TIME_LIMIT + 5 s and the hypervolume
+# calculator at HV_TIMEOUT, so this script always returns a cost on time.
+# If irace's own timeout ever fired it would abort the whole tuning.
+SOLVER_TIMEOUT=$((TIME_LIMIT + 15))
+HV_TIMEOUT=60
 
 # Create temporary directory for this run
 TMPDIR=$(mktemp -d)
@@ -49,9 +56,7 @@ while [ $i -lt ${#PARAMS[@]} ]; do
 done
 
 # Run solver
-START_TIME=$(date +%s.%N)
-
-{ "$SOLVER" \
+{ timeout -k 5 "$SOLVER_TIMEOUT" "$SOLVER" \
     --instance "$INSTANCE" \
     --seed "$SEED" \
     --time-limit "$TIME_LIMIT" \
@@ -60,29 +65,39 @@ START_TIME=$(date +%s.%N)
 
 SOLVER_EXIT=$?
 
-END_TIME=$(date +%s.%N)
-ELAPSED=$(echo "$END_TIME - $START_TIME" | bc)
-ELAPSED_INT=$(printf "%.2f" "$ELAPSED")
-
 # Check if solver succeeded
 if [ $SOLVER_EXIT -ne 0 ] || [ ! -f "$PARETO_FILE" ]; then
-    echo "Inf $ELAPSED_INT"
+    echo "Inf"
     exit 0
 fi
 
 # Calculate hypervolume
-{ "$HV_CALC" \
+{ timeout -k 2 "$HV_TIMEOUT" "$HV_CALC" \
     --instance "$INSTANCE" \
     --pareto-0 "$PARETO_FILE" \
     --hypervolume-0 "$HV_FILE" > /dev/null 2>&1; } 2>/dev/null
 
-if [ ! -f "$HV_FILE" ]; then
-    echo "Inf $ELAPSED_INT"
+HV_EXIT=$?
+
+if [ $HV_EXIT -ne 0 ] || [ ! -f "$HV_FILE" ]; then
+    echo "Inf"
     exit 0
 fi
 
-# Read hypervolume and negate (iRace minimizes, we want to maximize HV)
-HV=$(tr -d '[:space:]' < "$HV_FILE")
-COST=$(awk -v hv="$HV" 'BEGIN { printf "%.17g", -hv }')
+# Read the hypervolume and negate it (iRace minimizes, we want to maximize HV).
+# The value must be present, numeric and finite; anything else is a failed run.
+if ! COST=$(awk '
+    { for (i = 1; i <= NF; i++) { hv = $i; n++ } }
+    END {
+        if (n != 1) exit 1                  # empty file, or more than one value
+        if (hv !~ /^[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?$/) exit 1
+        v = hv + 0
+        if (v != v) exit 1                  # NaN
+        if (v != 0 && v == v * 2) exit 1    # +/-Inf
+        printf "%.17g", -v
+    }' "$HV_FILE"); then
+    echo "Inf"
+    exit 0
+fi
 
-echo "$COST $ELAPSED_INT"
+echo "$COST"
