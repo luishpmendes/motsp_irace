@@ -64,9 +64,9 @@ and the runner reports none.
 The runner prints `Inf` — the worst possible cost, which iRace accepts without
 aborting — whenever:
 
-- the solver exits non-zero or is killed by its `TIME_LIMIT + 5` s `timeout`;
+- the solver exits non-zero or is killed by its `TIME_LIMIT + 15` s `timeout`;
 - the solver writes no Pareto front file;
-- `hypervolume_calculator_exec` exits non-zero or is killed by its 8 s `timeout`;
+- `hypervolume_calculator_exec` exits non-zero or is killed by its 60 s `timeout`;
 - no hypervolume file is written, or its contents are empty, non-numeric or
   non-finite.
 
@@ -151,52 +151,79 @@ under a shorter per-run budget than the one they are finally measured under.
 
 ### Nested time limits
 
-Four limits are nested so that a slow or hung run costs a single `Inf` instead
-of the whole tuning:
+Four limits bound each evaluation. The intent is that a slow or hung run costs
+a single `Inf` rather than the whole tuning — see the caveat below:
 
 | Limit | Value | Enforced by | Effect when it fires |
 |-------|-------|-------------|----------------------|
 | Solver budget | `TIME_LIMIT` = 300 s | the solver's own `--time-limit` | normal termination, real cost |
-| Solver kill | `TIME_LIMIT + 5` = 315 s | `timeout` in the target runner | runner prints `Inf` |
-| Hypervolume kill | 8 s | `timeout` in the target runner | runner prints `Inf` |
+| Solver kill | `TIME_LIMIT + 15` = 315 s, SIGKILL at 320 s (`timeout -k 5`) | `timeout` in the target runner | runner prints `Inf` |
+| Hypervolume kill | `HV_TIMEOUT` = 60 s, SIGKILL at 62 s (`timeout -k 2`) | `timeout` in the target runner | runner prints `Inf` |
 | Hard cap | 330 s | `targetRunnerTimeout` in the scenario | **aborts that whole tuning** |
 
-The runner therefore always returns by ≈ 313 s. `targetRunnerTimeout` is a
-backstop that should never fire: iRace passes it to R's `system2(timeout=)` and
-turns an expiry into a fatal `targetRunner` error, which ends that scenario's
-entire run rather than scoring the evaluation as `Inf`.
+> **⚠ The nesting is currently incomplete — the hard cap is reachable.**
+>
+> The two runner timeouts run in sequence, not in parallel, so the cap has to
+> dominate their sum, and 330 s does not:
+>
+> - **Solver killed.** The runner gives up at 315 s, 320 s if the process
+>   ignores SIGTERM, and prints `Inf` without ever calling the hypervolume
+>   calculator. Inside the cap.
+> - **Solver finishes normally.** It self-stops at ≈ 300 s, and only then does
+>   the hypervolume calculator start, with up to 62 s of its own. The runner can
+>   return as late as **≈ 362 s** — past the 330 s cap.
+>
+> `targetRunnerTimeout` is not a per-evaluation `Inf`: iRace passes it to R's
+> `system2(timeout=)` and turns an expiry into a fatal `targetRunner` error,
+> which ends that scenario's **entire run**. One slow hypervolume call can
+> therefore throw away days of tuning.
+>
+> Restoring the invariant needs either `targetRunnerTimeout >= 382`
+> (= 320 s solver kill + 62 s hypervolume kill) in every `*-scenario*.txt`, or
+> an `HV_TIMEOUT` small enough that `300 + HV_TIMEOUT + 2 < 330`, i.e. at most
+> 27 s. Neither is applied here.
 
-### Worst-case wall clock
+### Wall clock
 
-Every figure below assumes the pathological case in which all 2500 evaluations
-of every scenario run the full 315 s hard cap.
+Two bounds, because they lead to different conclusions.
+
+**Worst case** — every evaluation runs to the 330 s hard cap. This is an upper
+bound on a run that *survives*: an evaluation that actually reached the cap
+would abort its scenario, so nothing slower can also finish.
 
 | Phase | Formula | Time |
 |-------|---------|------|
-| Tuning — 12 scenarios in parallel, `parallel = 1`, so 2500 serial evaluations each | 2500 × 315 s | 787 500 s = 9.115 d |
-| Validation — 12 jobs in parallel, 5 elites × 3 test instances each | 5 × 3 × 315 s | 4 725 s = 1.31 h |
-| **This repository** | | **792 225 s = 9.170 d** |
+| Tuning — 12 scenarios in parallel, `parallel = 1`, so 2500 serial evaluations each | 2500 × 330 s | 825 000 s = 9.549 d |
+| Validation — 12 jobs in parallel, 5 elites × 3 test instances each | 5 × 3 × 330 s | 4 950 s = 1.375 h |
+| **This repository** | | **829 950 s = 9.606 d** |
 
-Validation is 0.6 % of tuning, so it adds no meaningful time.
+**Realistic** — the solver stops itself at 300 s and the hypervolume call takes
+seconds, so ≈ 305 s per evaluation.
 
-Running the three repositories one after another:
+| Phase | Formula | Time |
+|-------|---------|------|
+| Tuning | 2500 × 305 s | 762 500 s = 8.825 d |
+| Validation | 5 × 3 × 305 s | 4 575 s = 1.271 h |
+| **This repository** | | **767 075 s = 8.878 d** |
 
-| Repository | Test instances | Tuning | Validation | Total |
-|------------|----------------|--------|------------|-------|
-| `motsp_irace` | 3 | 787 500 s | 4 725 s | 792 225 s (9.170 d) |
-| `mokp_irace` | 3 | 787 500 s | 4 725 s | 792 225 s (9.170 d) |
-| `mofjssp_irace` | 10 | 787 500 s | 15 750 s | 803 250 s (9.297 d) |
-| **Sequential total** | | | | **2 387 700 s = 27.635 d** |
+Validation is 0.6 % of tuning either way, so it adds no meaningful time.
 
-That is **below the 28-day (2 419 200 s) budget, with 31 500 s ≈ 8.75 h of
-margin**. The margin is thin because tuning alone accounts for
-3 × 2500 × 315 s = 27.34 days; neither `maxExperiments = 2500` nor the 315 s
-cap can be raised without exceeding 28 days. iRace's own per-iteration overhead
-(model update, I/O) is minutes per scenario and fits inside the margin.
+Running the three repositories one after another — all three use 5 training and
+3 test instances, so their totals are identical:
 
-The real duration is much lower: the solver stops itself at 300 s, rejected
-NSGA-III configurations return `Inf` immediately, and iRace eliminates weak
-configurations long before spending the full budget on them.
+| Bound | Per repository | Three repositories | vs. the 28 d (2 419 200 s) budget |
+|-------|----------------|--------------------|-----------------------------------|
+| Worst case, 330 s/eval | 829 950 s | 2 489 850 s = 28.818 d | **over by 70 650 s ≈ 19.6 h** |
+| Realistic, 305 s/eval | 767 075 s | 2 301 225 s = 26.634 d | under by 117 975 s ≈ 32.8 h |
+
+**The plan fits 28 days only if evaluations behave normally.** The worst case no
+longer does, and there is no headroom to buy back: tuning alone is
+3 × 2500 × 330 s = 28.65 d at the cap, so neither `maxExperiments = 2500` nor
+the 330 s cap can be raised. What makes the realistic figure hold is that the
+solver stops itself at 300 s, rejected NSGA-III configurations return `Inf`
+immediately, and iRace eliminates weak configurations long before spending the
+full budget on them. iRace's own per-iteration overhead (model update, I/O) is
+minutes per scenario and fits inside the realistic margin.
 
 Run one repository at a time — three at once would put 36 solvers on 16 cores
 and each evaluation would get well under a full core.
@@ -284,5 +311,5 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 | `instance not found` | Verify entries in `train-instances.txt` / `test-instances.txt` match files in `../instances/` |
 | `Tuning failed; the validation phase was not started.` | One or more tunings died. Read the named `<label>-tuning.log`, fix the cause and re-run; the script exits 1 and validates nothing. |
 | iRace reports non-numeric output | The runner must print exactly one number. Try it by hand: `TIME_LIMIT=1 ./nsga2-tunner.sh 1 1 1234 ../instances/kroAB100.txt` |
-| `terminated before completion` from `targetRunner` | An evaluation exceeded `targetRunnerTimeout = 315 s`. The runner's own 305 s / 8 s timeouts should make this unreachable; check for a solver ignoring `--time-limit`. |
+| `terminated before completion` from `targetRunner` | An evaluation exceeded `targetRunnerTimeout = 330 s`, and that scenario's whole tuning is over. This is **reachable** — see [Nested time limits](#nested-time-limits): a solver finishing near 300 s followed by a slow hypervolume call reaches ≈ 362 s. Check `hypervolume_calculator_exec` and `HV_TIMEOUT` first, then a solver ignoring `--time-limit`. |
 | `No such file or directory` | `irace_runner.sh` works from any directory, but the single-scenario commands above must be run from inside `irace/`. |

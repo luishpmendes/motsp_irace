@@ -16,10 +16,13 @@ SOLVER="${PROJECT_DIR}/bin/exec/ihs_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 TIME_LIMIT="${TIME_LIMIT:-300}"
 
-# Wall-clock backstops nested inside the scenario's targetRunnerTimeout of
-# 315 s: the solver is killed at TIME_LIMIT + 5 s and the hypervolume
-# calculator at HV_TIMEOUT, so this script always returns a cost on time.
-# If irace's own timeout ever fired it would abort the whole tuning.
+# Wall-clock backstops sitting under the scenario's targetRunnerTimeout of
+# 330 s: the solver is killed at TIME_LIMIT + 15 s and the hypervolume
+# calculator at HV_TIMEOUT. These two run in sequence, so a solver that
+# finishes normally at ~300 s followed by a full HV_TIMEOUT can return as late
+# as ~362 s -- past the cap. If irace's own timeout fires it aborts the whole
+# tuning, so see the "Nested time limits" section of README.md before raising
+# HV_TIMEOUT.
 SOLVER_TIMEOUT=$((TIME_LIMIT + 15))
 HV_TIMEOUT=60
 
