@@ -1,0 +1,24 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 334 373 243 367 230
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range
+334                     62  0.66 1.59 1.79 0.61    0.03                     97
+373                     81  0.75 1.65 2.01 0.59    0.03                     89
+243                     80  0.70 1.81 1.97 0.61    0.03                     89
+367                     81  0.73 1.57 1.98 0.60    0.03                     91
+230                     65  0.67 1.79 1.95 0.59    0.03                     99
+    diversity_mechanism
+334             max min
+373             max min
+243             max min
+367             max min
+230             max min
+# 2026-08-17 15:38:12 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          334          373          243          367          230
+1t 1793337040 -9.25426e+12 -9.61303e+12 -9.62278e+12 -9.62202e+12 -9.45948e+12
+2t  768152157 -8.24316e+25 -8.27844e+25 -8.41084e+25 -8.32479e+25 -8.53429e+25
+3t  777233261 -1.96490e+20 -1.95897e+20 -1.97439e+20 -2.01663e+20 -1.98316e+20
+# 2026-08-17 15:38:12 UTC: Finished testing
+[1] TRUE

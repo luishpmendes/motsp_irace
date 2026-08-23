@@ -1,0 +1,18 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 324 365
+    population_size_factor weight_generation decomposition neighbours   cr    f
+324                    112   low discrepancy      weighted         30 0.02 0.84
+365                    102   low discrepancy      weighted         27 0.21 0.95
+    eta_m realb limit
+324  1.39  0.92     7
+365  2.07  0.96    11
+# 2026-08-17 14:53:05 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          324          365
+1t 1408238834 -1.36954e+13 -1.38961e+13
+2t 1592437162 -1.15957e+26 -1.20984e+26
+3t  789179072 -2.91304e+20 -3.00867e+20
+# 2026-08-17 14:53:05 UTC: Finished testing
+[1] TRUE

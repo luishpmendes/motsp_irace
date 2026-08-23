@@ -1,0 +1,539 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.4.3.dd8d85f
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /usr/local/lib/R/site-library/irace
+# called with: --scenario ihs-scenario.txt
+# 2026-08-08 20:09:35 UTC: Reading parameter file '/home/luishpmendes/motsp_irace/irace/ihs-parameters.txt'.
+# 2026-08-08 20:09:35 UTC: 2 expression(s) specifying forbidden configurations read.
+# 2026-08-08 20:09:35 UTC: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 4
+# minNbSurvival: 4
+# nbParameters: 6
+# seed: 332056744
+# confidence level: 0.95
+# budget: 2500
+# mu: 5
+# deterministic: FALSE
+
+# 2026-08-08 20:09:35 UTC: Iteration 1 of 4
+# experimentsUsed: 0
+# remainingBudget: 2500
+# currentBudget: 625
+# nbConfigurations: 104
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          1|         81|          7|-7.456680000e+26|         81|06:49:00|   NA|  NA|    NA|
+|x|          2|         81|         35|-3.719560001e+26|        162|06:45:05|+0.10|0.55|0.8659|
+|x|          3|         81|         42|-2.474113334e+26|        243|06:45:04|+0.17|0.45|0.6571|
+|x|          4|         81|         55|-1.858789475e+26|        324|06:45:18|+0.19|0.39|0.7119|
+|-|          5|         20|         55|-1.487031584e+26|        405|06:45:14|+0.02|0.21|0.8233|
+|=|          6|         20|         55|-1.239192987e+26|        425|01:40:01|+0.08|0.23|0.7271|
+|-|          7|          5|         55|-1.062165418e+26|        445|01:40:01|+0.17|0.29|0.6313|
+|-|          8|          2|         10|-1.855139028e+26|        450|00:25:13|-0.07|0.06|0.5357|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          10    mean value: -1.855139028e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+10   10                     26 0.920185 0.442434 0.639699 0.075311 0.555355       NA
+
+# 2026-08-10 09:44:35 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+10                     26 0.920185 0.442434 0.639699 0.075311 0.555355
+55                     39 0.824481 0.040480 0.588019 0.032772 0.406058
+# 2026-08-10 09:44:35 UTC: Iteration 2 of 4
+# experimentsUsed: 450
+# remainingBudget: 2050
+# currentBudget: 683
+# nbConfigurations: 77
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          9|         77|         97|-2.237920000e+18|         77|06:25:14|   NA|  NA|    NA|
+|x|          3|         77|        144|-1.098500045e+18|        152|06:15:04|+0.27|0.64|0.4605|
+|x|          4|         77|         97|-9.173807460e+23|        227|06:15:17|+0.28|0.52|0.4972|
+|x|          7|         77|         97|-6.880356044e+23|        302|06:15:05|+0.33|0.50|0.4017|
+|-|          1|         11|        144|-1.490693545e+26|        377|06:18:40|+0.19|0.35|0.6498|
+|-|          6|          7|        144|-1.242244621e+26|        386|00:45:00|+0.31|0.43|0.5598|
+|-|          8|          6|        144|-2.122376818e+26|        391|00:25:14|+0.28|0.38|0.6177|
+|-|          2|          5|        144|-1.857079716e+26|        395|00:20:00|+0.39|0.46|0.5078|
+|-|          5|          3|        144|-1.650737528e+26|        398|00:15:00|-0.07|0.05|0.6892|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         144    mean value: -1.650737528e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+144  144                     33 0.916254 0.020339 0.574043 0.006562 0.266323       55
+
+# 2026-08-11 18:59:13 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+144                     33 0.916254 0.020339 0.574043 0.006562 0.266323
+97                      38 0.985810 0.304930 0.516493 0.030370 0.581842
+124                     37 0.981671 0.123798 0.688824 0.043404 0.793069
+# 2026-08-11 18:59:13 UTC: Iteration 3 of 4
+# experimentsUsed: 848
+# remainingBudget: 1652
+# currentBudget: 826
+# nbConfigurations: 85
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         10|         85|        183|-3.544200000e+24|         85|07:05:21|   NA|  NA|    NA|
+|x|          6|         85|        183|-1.772100000e+24|        167|06:50:04|+0.35|0.67|0.3308|
+|x|          5|         85|        183|-1.181400996e+24|        249|06:50:15|+0.49|0.66|0.2190|
+|x|          7|         85|        183|-8.860508049e+23|        331|06:50:06|+0.55|0.66|0.2095|
+|-|          9|         15|        183|-7.088412206e+23|        413|06:50:16|+0.79|0.83|0.1222|
+|-|          4|          5|        183|-1.230049351e+24|        425|01:00:02|+0.81|0.84|0.0449|
+|!|          8|          5|        183|-1.072584709e+26|        427|00:10:05|+0.77|0.80|0.1165|
+|!|          2|          5|        183|-9.385116204e+25|        429|00:10:00|+0.75|0.78|0.1019|
+|!|          3|          5|        183|-8.342325515e+25|        431|00:10:00|+0.77|0.80|0.1005|
+|-|          1|          2|        183|-1.501085296e+26|        433|00:10:05|+0.29|0.36|0.3556|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         183    mean value: -1.501085296e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+183  183                     57 0.983138 0.208253 0.501075 0.001792 0.565644       97
+
+# 2026-08-13 07:05:33 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+# 2026-08-13 07:05:33 UTC: Iteration 4 of 4
+# experimentsUsed: 1281
+# remainingBudget: 1219
+# currentBudget: 1219
+# nbConfigurations: 112
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         11|        112|        296|-2.475260000e+17|        112|09:20:08|   NA|  NA|    NA|
+|x|          7|        112|        296|-2.380830000e+17|        222|09:10:08|+0.92|0.96|0.0623|
+|x|         10|        112|        183|-1.181400150e+24|        332|09:10:26|+0.86|0.91|0.2040|
+|x|          3|        112|        245|-8.766526140e+23|        442|09:10:06|+0.81|0.86|0.2197|
+|-|          5|         17|        245|-7.013226894e+23|        552|09:10:21|+0.68|0.75|0.2427|
+|-|          8|          5|        245|-1.248394356e+26|        567|01:15:47|+0.29|0.41|0.6119|
+|=|          2|          5|        245|-1.070052305e+26|        570|00:15:00|+0.22|0.33|0.5865|
+|-|          1|          4|        183|-1.871561505e+26|        573|00:15:09|+0.04|0.16|0.7176|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         183    mean value: -1.364622997e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+183  183                     57 0.983138 0.208253 0.501075 0.001792 0.565644       97
+
+# 2026-08-15 06:52:40 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+245                     58 0.973328 0.211766 0.502745 0.001576 0.518411
+296                     32 0.979596 0.068262 0.555261 0.004423 0.464563
+# 2026-08-15 06:52:40 UTC: Iteration 5 of 5
+# experimentsUsed: 1854
+# remainingBudget: 646
+# currentBudget: 646
+# nbConfigurations: 57
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         12|         57|        352|-3.832800000e+24|         57|04:45:14|   NA|  NA|    NA|
+|x|          5|         57|        352|-1.916401505e+24|        110|04:25:09|+0.90|0.95|0.0558|
+|x|          1|         57|        352|-2.529356010e+26|        163|04:27:45|+0.68|0.79|0.2451|
+|x|          2|         57|        352|-1.897017008e+26|        216|04:25:04|+0.72|0.79|0.2635|
+|-|         11|         12|        352|-1.517613607e+26|        269|04:25:04|+0.17|0.33|0.7425|
+|-|          4|          6|        352|-1.270918956e+26|        279|00:50:02|+0.09|0.24|0.7665|
+|=|          9|          6|        352|-1.089359109e+26|        283|00:20:00|+0.17|0.29|0.6980|
+|-|         10|          5|        352|-9.579915582e+25|        285|00:10:00|+0.33|0.42|0.5185|
+|!|          8|          5|        352|-1.694311385e+26|        286|00:05:02|+0.37|0.44|0.4798|
+|!|          7|          5|        352|-1.524880247e+26|        287|00:05:00|+0.27|0.35|0.5726|
+|-|          3|          3|        352|-1.386254770e+26|        288|00:05:00|+0.48|0.53|0.3088|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best configuration for the instances in this race: 352
+Best-so-far configuration:         183    mean value: -1.254002322e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+183  183                     57 0.983138 0.208253 0.501075 0.001792 0.565644       97
+
+# 2026-08-16 06:56:05 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+# 2026-08-16 06:56:05 UTC: Iteration 6 of 6
+# experimentsUsed: 2142
+# remainingBudget: 358
+# currentBudget: 358
+# nbConfigurations: 30
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         13|         30|        412|-3.369530000e+18|         30|02:30:05|   NA|  NA|    NA|
+|x|         11|         30|        412|-1.807104500e+18|         57|02:15:01|+0.86|0.93|0.2386|
+|x|          6|         30|        412|-1.204736370e+18|         85|02:20:01|+0.87|0.92|0.1740|
+|x|         10|         30|        412|-1.074663404e+24|        112|02:15:06|+0.87|0.90|0.1766|
+|-|          4|          6|        412|-1.716110723e+24|        139|02:15:06|+0.61|0.69|0.3339|
+|-|          2|          5|        412|-1.430092309e+24|        142|00:15:00|+0.67|0.73|0.2563|
+|-|         12|          4|        412|-1.810883408e+24|        144|00:10:00|+0.70|0.74|0.1674|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best configuration for the instances in this race: 412
+Best-so-far configuration:         352    mean value: -1.172984808e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+352  352                     38 0.982176 0.019037 0.568508 0.001925 0.466606      232
+
+# 2026-08-16 18:56:28 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+# 2026-08-16 18:56:28 UTC: Iteration 7 of 7
+# experimentsUsed: 2286
+# remainingBudget: 214
+# currentBudget: 214
+# nbConfigurations: 19
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         14|         19|        412|-1.108460000e+11|         19|01:35:01|   NA|  NA|    NA|
+|x|         11|         19|        412|-1.223395554e+17|         34|01:15:01|+0.90|0.95|0.0716|
+|x|          1|         19|        412|-2.667813334e+26|         50|01:20:49|+0.71|0.81|0.2997|
+|x|          3|         19|        412|-2.000860001e+26|         66|01:20:00|+0.77|0.83|0.2385|
+|-|          6|          6|        412|-1.600688000e+26|         81|01:15:00|+0.71|0.77|0.3733|
+|-|          5|          4|        412|-1.333906673e+26|         84|00:15:00|+0.72|0.77|0.2505|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best configuration for the instances in this race: 412
+Best-so-far configuration:         352    mean value: -1.089200178e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+352  352                     38 0.982176 0.019037 0.568508 0.001925 0.466606      232
+
+# 2026-08-17 01:57:21 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+# 2026-08-17 01:57:21 UTC: Iteration 8 of 8
+# experimentsUsed: 2370
+# remainingBudget: 130
+# currentBudget: 130
+# nbConfigurations: 12
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         15|         12|        412|-8.072130000e+26|         12|01:00:36|   NA|  NA|    NA|
+|x|         12|         12|        412|-4.056543150e+26|         20|00:40:01|+0.88|0.94|0.2248|
+|x|          4|         12|        412|-2.718635100e+26|         28|00:40:01|+0.87|0.92|0.1502|
+|x|          2|         12|        412|-2.038976326e+26|         36|00:40:00|+0.85|0.89|0.1813|
+|-|          8|          4|        412|-3.245443060e+26|         45|00:45:27|+0.76|0.81|0.0427|
+|.|          6|          4|        412|-2.704535884e+26|         45|00:00:00|+0.72|0.77|0.1236|
+|.|         10|          4|        412|-2.324314543e+26|         45|00:00:00|+0.76|0.80|0.1044|
+|.|         11|          4|        412|-2.033775226e+26|         45|00:00:00|+0.76|0.79|0.1495|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best configuration for the instances in this race: 412
+Best-so-far configuration:         352    mean value: -1.521008833e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+352  352                     38 0.982176 0.019037 0.568508 0.001925 0.466606      232
+
+# 2026-08-17 05:43:29 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+# 2026-08-17 05:43:29 UTC: Iteration 9 of 9
+# experimentsUsed: 2415
+# remainingBudget: 85
+# currentBudget: 85
+# nbConfigurations: 9
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         16|          9|        454|-4.330690000e+24|          9|00:45:02|   NA|  NA|    NA|
+|x|          8|          9|        412|-4.057025200e+26|         14|00:25:14|+0.92|0.96|0.2288|
+|x|          9|          9|        412|-2.704683478e+26|         20|00:30:01|+0.92|0.95|0.1884|
+|x|         11|          9|        412|-2.028512609e+26|         25|00:25:00|+0.86|0.90|0.1844|
+|-|         10|          5|        412|-1.631407387e+26|         30|00:25:01|+0.75|0.80|0.1875|
+|!|          7|          5|        412|-1.359506156e+26|         32|00:10:00|+0.75|0.79|0.1895|
+|!|          6|          5|        412|-1.165290991e+26|         33|00:05:00|+0.69|0.73|0.2188|
+|!|         13|          5|        412|-1.019629622e+26|         34|00:05:00|+0.70|0.73|0.2024|
+|!|          3|          5|        412|-9.063374413e+25|         35|00:05:00|+0.71|0.74|0.1882|
+|!|          1|          5|        412|-1.616047697e+26|         36|00:05:03|+0.72|0.74|0.1985|
+|!|          4|          5|        412|-1.473026907e+26|         37|00:05:00|+0.73|0.75|0.1899|
+|!|         14|          5|        412|-1.350274664e+26|         38|00:05:00|+0.73|0.75|0.2098|
+|-|          2|          4|        412|-1.246407383e+26|         39|00:05:00|+0.71|0.73|0.1604|
+|.|         15|          4|        412|-1.733958998e+26|         39|00:00:00|+0.71|0.73|0.1525|
+|.|         12|          4|        412|-1.621092152e+26|         39|00:00:00|+0.73|0.74|0.1431|
+|.|          5|          4|        412|-1.519773894e+26|         39|00:00:00|+0.74|0.76|0.1357|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         412    mean value: -1.519773894e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max  bw_min   bw_max .PARENT.
+412  412                     37 0.969174 0.032725  0.55546 4.5e-05 0.447559      352
+
+# 2026-08-17 08:58:53 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+# 2026-08-17 08:58:53 UTC: Iteration 10 of 10
+# experimentsUsed: 2454
+# remainingBudget: 46
+# currentBudget: 46
+# nbConfigurations: 6
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         17|          6|        412|-1.109910000e+11|          6|00:30:00|   NA|  NA|    NA|
+|x|          9|          6|        412|-1.671000055e+18|          8|00:10:00|+0.94|0.97|0.1138|
+|x|         10|          6|        412|-1.432884447e+24|         10|00:10:00|+0.90|0.94|0.0889|
+|x|          4|          6|        412|-2.145138336e+24|         12|00:10:00|+0.88|0.91|0.0810|
+|-|         16|          4|        412|-2.570918668e+24|         14|00:10:00|+0.58|0.66|0.0810|
+|.|         14|          4|        412|-2.142432224e+24|         14|00:00:00|+0.61|0.68|0.1572|
+|.|         13|          4|        412|-1.836370959e+24|         14|00:00:00|+0.62|0.67|0.1471|
+|.|         12|          4|        412|-2.118778339e+24|         14|00:00:00|+0.66|0.70|0.1302|
+|.|          3|          4|        412|-1.883358524e+24|         14|00:00:00|+0.67|0.70|0.1251|
+|.|         15|          4|        412|-8.241632267e+25|         14|00:00:00|+0.67|0.70|0.1158|
+|.|         11|          4|        412|-7.492392972e+25|         14|00:00:00|+0.67|0.70|0.1500|
+|.|          1|          4|        412|-1.353756022e+26|         14|00:00:00|+0.69|0.72|0.1388|
+|.|          6|          4|        412|-1.249620944e+26|         14|00:00:00|+0.67|0.69|0.1631|
+|.|          8|          4|        412|-1.736884448e+26|         14|00:00:00|+0.69|0.71|0.1521|
+|.|          5|          4|        412|-1.621092153e+26|         14|00:00:00|+0.71|0.73|0.1438|
+|.|          7|          4|        412|-1.519773894e+26|         14|00:00:00|+0.70|0.72|0.1441|
+|.|          2|          4|        412|-1.430375430e+26|         14|00:00:00|+0.71|0.72|0.1359|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         412    mean value: -1.430375430e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max  bw_min   bw_max .PARENT.
+412  412                     37 0.969174 0.032725  0.55546 4.5e-05 0.447559      352
+
+# 2026-08-17 10:08:55 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+352                     38 0.982176 0.019037 0.568508 0.001925 0.466606
+183                     57 0.983138 0.208253 0.501075 0.001792 0.565644
+232                     33 0.980416 0.019999 0.579600 0.002968 0.463442
+# 2026-08-17 10:08:55 UTC: Iteration 11 of 11
+# experimentsUsed: 2468
+# remainingBudget: 32
+# currentBudget: 32
+# nbConfigurations: 5
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         18|          5|        459|-7.949690000e+26|          5|00:25:15|   NA|  NA|    NA|
+|x|          3|          5|        459|-3.974845000e+26|          6|00:05:00|+1.00|1.00|0.0580|
+|x|          2|          5|        459|-2.649896667e+26|          7|00:05:00|+0.80|0.87|0.0625|
+|x|          6|          5|        459|-1.987422501e+26|          8|00:05:00|+0.77|0.82|0.1500|
+|!|          4|          5|        459|-1.598823640e+26|          9|00:05:00|+0.80|0.84|0.1227|
+|!|         10|          5|        459|-1.340231067e+26|         10|00:05:00|+0.83|0.86|0.1025|
+|!|         13|          5|        459|-1.148769491e+26|         11|00:05:00|+0.85|0.87|0.0886|
+|!|          1|          5|        459|-1.984097055e+26|         12|00:05:03|+0.84|0.86|0.0969|
+|!|          5|          5|        459|-1.763641830e+26|         13|00:05:00|+0.85|0.87|0.0892|
+|!|          7|          5|        459|-1.587277647e+26|         14|00:05:00|+0.86|0.87|0.0857|
+|!|         16|          5|        459|-1.447289861e+26|         15|00:05:00|+0.87|0.88|0.0809|
+|!|          9|          5|        459|-1.326682376e+26|         16|00:05:00|+0.84|0.85|0.0811|
+|!|         14|          5|        459|-1.224629885e+26|         17|00:05:00|+0.83|0.84|0.1054|
+|!|         12|          5|        459|-1.140650908e+26|         18|00:05:00|+0.84|0.85|0.1074|
+|!|          8|          5|        459|-1.584545514e+26|         19|00:05:03|+0.84|0.85|0.1146|
+|!|         17|          5|        459|-1.485511419e+26|         20|00:05:00|+0.81|0.82|0.1154|
+|!|         15|          5|        459|-1.867912512e+26|         21|00:05:02|+0.80|0.82|0.1118|
+|-|         11|          1|        459|-1.764139595e+26|         22|00:05:00|   NA|  NA|    NA|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         459    mean value: -1.764139595e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+459  459                     38 0.986341 0.021004 0.567895 0.000501 0.464386      352
+
+# 2026-08-17 11:59:23 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+459                     38 0.986341 0.021004 0.567895 0.000501 0.464386
+# 2026-08-17 11:59:23 UTC: Stopped because there is not enough budget left to race more than the minimum (4).
+# You may either increase the budget or set 'minNbSurvival' to a lower value.
+# Iteration: 12
+# nbIterations: 12
+# experimentsUsed: 2490
+# timeUsed: 0
+# remainingBudget: 10
+# currentBudget: 10
+# number of elites: 1
+# nbConfigurations: 1
+# Total CPU user time: 747812.4, CPU sys time: 363.126, Wall-clock time: 748187.1
+# 2026-08-17 11:59:23 UTC: Starting post-selection:
+# Configurations selected: 459, 412, 352, 183, 232.
+# Pending instances: 1, 1, 1, 1, 1.
+# 2026-08-17 11:59:23 UTC: seed: 332056744
+# Configurations: 5
+# Available experiments: 10
+# minSurvival: 1
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|.|          8|          5|        412|-8.071310000e+26|          0|00:00:00|   NA|  NA|    NA|
+|.|         15|          5|        412|-8.071720000e+26|          0|00:00:00|+0.90|0.95|0.0346|
+|.|         17|          5|        412|-5.381146667e+26|          0|00:00:00|+0.83|0.89|0.0370|
+|.|         14|          5|        412|-4.035860000e+26|          0|00:00:00|+0.83|0.88|0.1205|
+|.|         18|          5|        412|-4.813206000e+26|          0|00:00:00|+0.76|0.81|0.1075|
+|.|         12|          5|        412|-4.017831050e+26|          0|00:00:00|+0.78|0.82|0.1440|
+|.|          5|          5|        412|-3.443855190e+26|          0|00:00:00|+0.80|0.83|0.1291|
+|.|          9|          5|        412|-3.013373296e+26|          0|00:00:00|+0.81|0.83|0.1133|
+|.|         13|          5|        412|-2.678554044e+26|          0|00:00:00|+0.80|0.82|0.1107|
+|.|          1|          5|        412|-3.211042640e+26|          0|00:00:00|+0.81|0.83|0.1075|
+|.|         11|          5|        412|-2.919129673e+26|          0|00:00:00|+0.81|0.83|0.1263|
+|.|         16|          5|        412|-2.679430567e+26|          0|00:00:00|+0.81|0.82|0.1252|
+|.|          4|          5|        412|-2.476614292e+26|          0|00:00:00|+0.81|0.82|0.1237|
+|.|          2|          5|        412|-2.299713272e+26|          0|00:00:00|+0.81|0.82|0.1178|
+|.|         10|          5|        412|-2.149264820e+26|          0|00:00:00|+0.82|0.83|0.1124|
+|.|          3|          5|        412|-2.014935769e+26|          0|00:00:00|+0.82|0.83|0.1117|
+|.|          6|          5|        412|-1.896410136e+26|          0|00:00:00|+0.81|0.82|0.1279|
+|.|          7|          5|        412|-1.791054017e+26|          0|00:00:00|+0.81|0.82|0.1253|
+|-|         19|          2|        459|-1.671290144e+26|          5|00:25:00|+0.09|0.14|0.4561|
+|=|         20|          2|        459|-1.587725637e+26|          7|00:10:00|+0.12|0.16|0.4421|
+|=|         21|          2|        459|-1.512119655e+26|          9|00:10:00|+0.14|0.18|0.4286|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         459    mean value: -1.512119655e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max .PARENT.
+459  459                     38 0.986341 0.021004 0.567895 0.000501 0.464386      352
+
+# 2026-08-17 12:44:24 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+459                     38 0.986341 0.021004 0.567895 0.000501 0.464386
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+# Total CPU user time: 750513.4, CPU sys time: 363.626, Wall-clock time: 750888.6
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor    phmcr ppar_min ppar_max   bw_min   bw_max
+459                     38 0.986341 0.021004 0.567895 0.000501 0.464386
+412                     37 0.969174 0.032725 0.555460 0.000045 0.447559
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+459 --population-size-factor 38 --phmcr 0.986341 --ppar-min 0.021004 --ppar-max 0.567895 --bw-min 0.000501 --bw-max 0.464386
+412 --population-size-factor 37 --phmcr 0.969174 --ppar-min 0.032725 --ppar-max 0.55546 --bw-min 0.000045 --bw-max 0.447559
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-08-17 12:44:24 UTC: No test instances, skip testing

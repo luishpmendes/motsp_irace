@@ -1,0 +1,36 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 363 438 441 424 316
+    population_size_factor elites_percentage mutation_probability
+363                    108              0.35                 0.01
+438                    106              0.40                 0.01
+441                    107              0.34                 0.01
+424                     94              0.41                 0.01
+316                     96              0.39                 0.01
+    mutation_distribution num_total_parents num_elite_parents bias_type
+363                 28.39                 2                 1         0
+438                 30.47                 2                 1         0
+441                 26.71                 2                 1         0
+424                 35.19                 2                 1         0
+316                 32.07                 2                 1         0
+    crossover_type diversity_type num_populations exchange_interval
+363              0              0               1                 0
+438              0              0               1                 0
+441              0              0               1                 0
+424              0              0               1                 0
+316              0              0               1                 0
+    num_exchange_individuals pr_interval shake_interval reset_interval
+363                        1           0              0              0
+438                        1           0              0              0
+441                        1           0              0              0
+424                        1           0              0              0
+316                        1           0              0              0
+# 2026-08-17 15:38:12 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          363          438          441          424          316
+1t 1884783081 -1.02415e+13 -1.00874e+13 -1.00959e+13 -1.01624e+13 -1.01259e+13
+2t  573733457 -6.75744e+25 -6.95844e+25 -6.91434e+25 -6.69441e+25 -6.58491e+25
+3t   24705842 -2.01583e+20 -1.99630e+20 -2.02550e+20 -2.00121e+20 -2.03269e+20
+# 2026-08-17 15:38:12 UTC: Finished testing
+[1] TRUE

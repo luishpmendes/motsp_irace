@@ -1,0 +1,42 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 422 340 22 368
+    population_size_factor min_elites_percentage max_elites_percentage
+422                    123                  0.05                  0.33
+340                     80                  0.08                  0.13
+22                      92                  0.13                  0.16
+368                     58                  0.12                  0.34
+    mutation_probability mutation_distribution num_total_parents
+422                 0.01                  1.88                 3
+340                 0.01                 18.14                 5
+22                  0.01                 15.89                 3
+368                 0.02                 46.80                 3
+    num_elite_parents bias_type diversity_type crossover_type num_populations
+422                 3         6              2              0               3
+340                 1         6              2              0               2
+22                  2         6              2              0               2
+368                 2         6              2              0               2
+    exchange_interval num_exchange_individuals pr_type pr_dist_func
+422               206                       70       0            0
+340               308                       38       0            2
+22                139                       84       0            0
+368               457                       99       0            0
+    pr_percentage pr_interval shake_interval shake_intensity shake_distribution
+422          0.64         631             42            0.69              76.41
+340          0.75         843             84            0.91              80.23
+22           0.41         878             42            0.75              63.20
+368          0.35         908             73            0.69               9.32
+    reset_interval reset_intensity
+422            458            0.94
+340            426            0.97
+22             484            0.94
+368            416            0.95
+# 2026-08-17 15:23:18 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          422          340           22          368
+1t 1477284482 -9.41817e+12 -1.00430e+13 -9.95348e+12 -9.80847e+12
+2t 1829455093 -7.16576e+25 -6.64934e+25 -6.17846e+25 -6.28876e+25
+3t 1764348113 -1.77684e+20 -1.96340e+20 -1.95121e+20 -1.80331e+20
+# 2026-08-17 15:23:18 UTC: Finished testing
+[1] TRUE

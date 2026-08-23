@@ -1,0 +1,42 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 404 432 434 436 349
+    population_size_factor min_elites_percentage max_elites_percentage
+404                    124                  0.33                  0.52
+432                    124                  0.31                  0.53
+434                    124                  0.32                  0.50
+436                    123                  0.31                  0.53
+349                    122                  0.29                  0.56
+    mutation_probability mutation_distribution num_total_parents
+404                 0.01                 20.03                 4
+432                 0.01                 13.06                 4
+434                 0.01                 19.04                 4
+436                 0.01                 18.50                 4
+349                 0.01                 17.99                 4
+    num_elite_parents bias_type diversity_type crossover_type num_populations
+404                 4         0              1              0               1
+432                 4         0              1              0               1
+434                 4         0              1              0               1
+436                 4         0              1              0               1
+349                 4         0              1              0               1
+    exchange_interval num_exchange_individuals pr_interval shake_interval
+404                 0                        1           0              0
+432                 0                        1           0              0
+434                 0                        1           0              0
+436                 0                        1           0              0
+349                 0                        1           0              0
+    reset_interval
+404              0
+432              0
+434              0
+436              0
+349              0
+# 2026-08-17 15:38:12 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          404          432          434          436          349
+1t  965851443 -1.07680e+13 -1.07917e+13 -1.08396e+13 -1.07588e+13 -1.07752e+13
+2t 1073262089 -8.15837e+25 -8.08923e+25 -8.16961e+25 -8.19704e+25 -8.02314e+25
+3t 1397947853 -2.09609e+20 -2.11779e+20 -2.12665e+20 -2.11538e+20 -2.05781e+20
+# 2026-08-17 15:38:12 UTC: Finished testing
+[1] TRUE

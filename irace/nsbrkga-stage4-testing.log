@@ -1,0 +1,27 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 414 381
+    population_size_factor min_elites_percentage max_elites_percentage
+414                    121                  0.31                  0.93
+381                    121                  0.26                  0.86
+    mutation_probability mutation_distribution num_total_parents
+414                 0.68                 13.89                 2
+381                 0.68                  8.63                 2
+    num_elite_parents bias_type diversity_type crossover_type num_populations
+414                 2         4              1              1               2
+381                 2         4              1              1               2
+    exchange_interval num_exchange_individuals pr_type pr_dist_func
+414               487                       55       1            2
+381               412                       52       1            2
+    pr_percentage pr_interval shake_interval reset_interval
+414          0.39          32              0              0
+381          0.34          23              0              0
+# 2026-08-17 14:53:19 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          414          381
+1t 1427836005 -1.00135e+13 -9.95218e+12
+2t   41584883 -7.20872e+25 -7.26089e+25
+3t 1863952583 -1.95058e+20 -1.82289e+20
+# 2026-08-17 14:53:19 UTC: Finished testing
+[1] TRUE

@@ -1,0 +1,474 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.4.3.dd8d85f
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /usr/local/lib/R/site-library/irace
+# called with: --scenario nspso-scenario.txt
+# 2026-08-08 20:09:35 UTC: Reading parameter file '/home/luishpmendes/motsp_irace/irace/nspso-parameters.txt'.
+# 2026-08-08 20:09:35 UTC: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 5
+# minNbSurvival: 5
+# nbParameters: 8
+# seed: 1423344216
+# confidence level: 0.95
+# budget: 2500
+# mu: 5
+# deterministic: FALSE
+
+# 2026-08-08 20:09:35 UTC: Iteration 1 of 5
+# experimentsUsed: 0
+# remainingBudget: 2500
+# currentBudget: 500
+# nbConfigurations: 83
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          1|         83|          4|-9.817260000e+26|         83|06:59:14|   NA|  NA|    NA|
+|x|          2|         83|         20|-4.639860001e+26|        166|06:55:06|+0.66|0.83|0.5478|
+|x|          3|         83|         20|-3.093240013e+26|        249|06:55:15|+0.78|0.85|0.3530|
+|x|          4|         83|         20|-2.332545610e+26|        332|06:55:22|+0.83|0.87|0.2621|
+|-|          5|         12|         20|-1.866036488e+26|        415|06:55:04|+0.32|0.45|0.5979|
+|-|          6|          6|         20|-1.555030407e+26|        427|01:00:00|+0.08|0.23|0.7795|
+|=|          7|          6|         20|-1.332883212e+26|        433|00:30:01|+0.15|0.27|0.7115|
+|=|          8|          6|         20|-2.294631560e+26|        439|00:30:18|+0.09|0.21|0.7421|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          20    mean value: -2.294631560e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor omega   c1  c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+20   20                     56  0.31 3.22 3.6 0.18    0.16                     81         niche count       NA
+
+# 2026-08-10 08:50:01 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+20                     56  0.31 3.22 3.60 0.18    0.16                     81         niche count
+50                    121  0.86 0.16 2.42 0.09    0.12                     95             max min
+6                      78  0.53 1.59 1.48 0.14    0.20                     84   crowding distance
+4                     116  0.90 3.09 2.98 0.59    0.07                     72             max min
+1                      91  0.15 0.10 1.98 0.29    0.32                     47         niche count
+# 2026-08-10 08:50:01 UTC: Iteration 2 of 5
+# experimentsUsed: 439
+# remainingBudget: 2061
+# currentBudget: 515
+# nbConfigurations: 61
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          9|         61|         93|-1.111580000e+11|         61|05:05:03|   NA|  NA|    NA|
+|x|          7|         61|         93|-1.892030056e+18|        117|04:40:10|+0.81|0.91|0.1846|
+|x|          6|         61|         88|-1.372420703e+18|        173|04:40:04|+0.87|0.92|0.1170|
+|x|          1|         61|         20|-2.319930010e+26|        229|04:42:58|+0.63|0.72|0.3675|
+|-|          8|         16|         95|-4.005422008e+26|        285|04:42:46|+0.16|0.33|0.7955|
+|-|          4|         11|         93|-3.060448257e+26|        296|00:55:02|+0.22|0.35|0.7327|
+|-|          5|         10|         93|-2.623241363e+26|        302|00:30:00|+0.24|0.35|0.6873|
+|!|          2|         10|         93|-2.295336193e+26|        307|00:25:00|+0.25|0.35|0.6893|
+|-|          3|          7|         88|-1.776820398e+26|        312|00:25:01|-0.04|0.08|0.8818|
+|=|         10|          7|         93|-1.841438858e+26|        319|00:35:01|-0.01|0.09|0.8668|
+|=|         11|          7|         93|-1.678739862e+26|        326|00:35:01|+0.02|0.11|0.8471|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          93    mean value: -1.678739862e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor omega   c1  c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+93   93                     96   0.9 3.09 1.7 0.37    0.06                     57             max min        4
+
+# 2026-08-11 12:06:14 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+93                      96  0.90 3.09 1.70 0.37    0.06                     57             max min
+95                      78  0.90 0.85 3.27 0.43    0.06                     96             max min
+114                    125  0.71 3.43 1.79 0.30    0.10                     83             max min
+20                      56  0.31 3.22 3.60 0.18    0.16                     81         niche count
+88                     121  0.94 1.30 3.91 0.08    0.15                     93             max min
+# 2026-08-11 12:06:14 UTC: Iteration 3 of 5
+# experimentsUsed: 765
+# remainingBudget: 1735
+# currentBudget: 578
+# nbConfigurations: 52
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         12|         52|         20|-3.943950000e+18|         52|04:20:10|   NA|  NA|    NA|
+|x|          5|         52|        171|-1.965670054e+18|         99|03:55:02|+0.91|0.95|0.0852|
+|x|          8|         52|        148|-3.331870013e+26|        146|03:57:34|+0.50|0.67|0.4405|
+|x|          9|         52|         95|-2.484252509e+26|        193|03:55:02|+0.57|0.68|0.3631|
+|-|          7|         14|        158|-1.975932016e+26|        240|03:55:09|-0.01|0.19|0.7551|
+|=|         10|         14|        171|-1.482615980e+26|        249|00:45:02|+0.09|0.24|0.6872|
+|-|          2|         10|        171|-1.270813697e+26|        258|00:45:00|-0.07|0.08|0.9666|
+|=|          1|         10|        171|-2.331431985e+26|        263|00:25:14|-0.03|0.10|0.9266|
+|=|          4|         10|        171|-2.078446998e+26|        268|00:25:01|+0.02|0.13|0.8736|
+|=|          6|         10|        171|-1.870602298e+26|        273|00:25:00|+0.02|0.12|0.8746|
+|=|         11|         10|        171|-1.705411008e+26|        278|00:25:01|+0.07|0.16|0.8357|
+|-|          3|          4|        171|-1.563293427e+26|        283|00:25:01|-0.02|0.06|0.7495|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         171    mean value: -1.563293427e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2 chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+171  171                     61  0.83 1.01 2.54 0.3    0.04                     88             max min       95
+
+# 2026-08-12 11:44:36 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+171                     61  0.83 1.01 2.54 0.30    0.04                     88             max min
+148                     60  0.73 1.56 2.52 0.51    0.04                     89             max min
+158                     57  0.46 2.20 2.90 0.29    0.08                     64             max min
+160                     82  0.86 1.48 3.31 0.22    0.05                     68             max min
+# 2026-08-12 11:44:36 UTC: Iteration 4 of 5
+# experimentsUsed: 1048
+# remainingBudget: 1452
+# currentBudget: 726
+# nbConfigurations: 59
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         13|         59|        194|-1.036790000e+27|         59|04:58:08|   NA|  NA|    NA|
+|x|         11|         59|        148|-5.139945500e+26|        114|04:35:15|+0.38|0.69|0.5629|
+|x|          9|         59|        230|-3.339689900e+26|        169|04:35:03|+0.47|0.65|0.4777|
+|x|         10|         59|        193|-2.572298825e+26|        224|04:35:15|+0.59|0.69|0.3650|
+|-|          4|         14|        230|-2.025329900e+26|        279|04:35:14|+0.18|0.34|0.7304|
+|-|          7|          9|        230|-1.687774923e+26|        289|00:50:01|+0.07|0.23|0.7454|
+|=|          1|          9|        220|-2.861959706e+26|        294|00:25:14|+0.14|0.26|0.6785|
+|!|          5|          9|        220|-2.504214743e+26|        299|00:25:00|+0.14|0.25|0.6972|
+|=|          6|          9|        220|-2.225968660e+26|        304|00:25:00|+0.08|0.18|0.7569|
+|-|         12|          8|        220|-2.003371798e+26|        309|00:25:01|+0.16|0.24|0.6839|
+|-|          2|          7|        220|-1.821247090e+26|        313|00:20:00|+0.16|0.24|0.6732|
+|!|          3|          7|        220|-1.669476502e+26|        316|00:15:00|+0.17|0.23|0.6786|
+|-|          8|          4|        220|-2.286353694e+26|        319|00:15:09|+0.05|0.12|0.6918|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         220    mean value: -2.286353694e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+220  220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min      148
+
+# 2026-08-13 14:24:03 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min
+230                     65  0.67 1.79 1.95 0.59    0.03                     99             max min
+199                     49  0.62 1.76 3.01 0.48    0.03                     89             max min
+171                     61  0.83 1.01 2.54 0.30    0.04                     88             max min
+# 2026-08-13 14:24:03 UTC: Iteration 5 of 5
+# experimentsUsed: 1367
+# remainingBudget: 1133
+# currentBudget: 1133
+# nbConfigurations: 84
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         14|         84|        277|-1.111810000e+11|         84|07:00:04|   NA|  NA|    NA|
+|x|          7|         84|        220|-2.005730055e+18|        164|06:40:16|+0.55|0.78|0.3515|
+|x|          3|         84|        270|-2.664653369e+18|        244|06:40:15|+0.67|0.78|0.2567|
+|x|         10|         84|        220|-1.378999477e+24|        324|06:40:22|+0.74|0.80|0.1934|
+|-|          8|         30|        220|-1.948807996e+26|        404|06:44:13|-0.07|0.14|1.0145|
+|=|          4|         30|        220|-1.633186830e+26|        430|02:10:07|-0.01|0.16|0.9487|
+|=|          5|         30|        220|-1.399874426e+26|        456|02:10:01|+0.02|0.16|0.9269|
+|=|         13|         30|        220|-2.442127622e+26|        482|02:11:21|+0.03|0.15|0.9206|
+|-|         11|         18|        243|-2.317293320e+26|        508|02:10:06|+0.02|0.13|0.9035|
+|=|          1|         18|        220|-2.972259798e+26|        522|01:10:42|+0.04|0.14|0.8848|
+|=|         12|         18|        220|-2.702054365e+26|        536|01:10:02|+0.03|0.12|0.8945|
+|=|          6|         18|        220|-2.476883168e+26|        550|01:10:01|+0.04|0.12|0.8909|
+|-|          2|         11|        220|-2.286353694e+26|        564|01:10:01|-0.01|0.07|0.8932|
+|=|          9|         11|        220|-2.123042716e+26|        571|00:35:00|-0.03|0.05|0.9145|
+|=|         15|         11|        220|-1.981506535e+26|        582|00:55:00|-0.04|0.03|0.9289|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         220    mean value: -1.981506535e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+220  220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min      148
+
+# 2026-08-15 15:01:42 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min
+230                     65  0.67 1.79 1.95 0.59    0.03                     99             max min
+245                     58  0.61 1.49 2.44 0.44    0.03                     98             max min
+267                     55  0.73 1.08 2.63 0.40    0.03                     88             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+# 2026-08-15 15:01:42 UTC: Iteration 6 of 6
+# experimentsUsed: 1949
+# remainingBudget: 551
+# currentBudget: 551
+# nbConfigurations: 39
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         16|         39|        322|-1.089970000e+11|         39|03:15:02|   NA|  NA|    NA|
+|x|         12|         39|        340|-2.009710054e+18|         73|02:50:06|+0.52|0.76|0.5014|
+|x|          4|         39|        334|-1.849854646e+24|        107|02:50:09|+0.67|0.78|0.2998|
+|x|          2|         39|        334|-1.387391050e+24|        141|02:50:02|+0.68|0.76|0.2930|
+|-|          8|         13|        334|-2.047719128e+26|        175|02:51:47|-0.05|0.16|0.9663|
+|=|          5|         13|        334|-1.706432607e+26|        183|00:40:00|-0.05|0.12|0.9501|
+|=|         14|         13|        343|-1.467587235e+26|        191|00:40:00|+0.04|0.18|0.8642|
+|=|          7|         13|        220|-1.217995135e+26|        199|00:40:01|+0.06|0.18|0.8518|
+|=|         15|         13|        220|-1.082662343e+26|        207|00:40:00|+0.03|0.14|0.8902|
+|=|         13|         13|        343|-2.027581068e+26|        215|00:40:23|+0.03|0.12|0.8905|
+|=|          6|         13|        343|-1.843255517e+26|        223|00:40:00|+0.05|0.14|0.8762|
+|=|          3|         13|        322|-1.646570994e+26|        231|00:40:01|+0.07|0.14|0.8601|
+|=|          9|         13|        322|-1.519911687e+26|        239|00:40:00|+0.05|0.12|0.8720|
+|-|         10|         10|        334|-1.461958923e+26|        247|00:40:02|-0.03|0.05|0.9331|
+|=|          1|         10|        334|-2.031688328e+26|        252|00:25:15|-0.03|0.03|0.9323|
+|=|         11|         10|        334|-1.908168958e+26|        257|00:25:01|-0.03|0.04|0.9327|
+|=|         17|         10|        334|-1.799077278e+26|        267|00:50:02|-0.02|0.04|0.9219|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         334    mean value: -1.799077278e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+334  334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min      230
+
+# 2026-08-16 13:19:42 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min
+343                     64  0.60 1.96 1.86 0.67    0.03                     96             max min
+322                     64  0.65 1.95 1.80 0.50    0.03                     99             max min
+# 2026-08-16 13:19:42 UTC: Iteration 7 of 7
+# experimentsUsed: 2216
+# remainingBudget: 284
+# currentBudget: 284
+# nbConfigurations: 20
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         18|         20|        361|-3.996520000e+18|         20|01:40:03|   NA|  NA|    NA|
+|x|          3|         20|        361|-4.020190000e+18|         35|01:15:02|+0.86|0.93|0.0628|
+|x|         15|         20|        361|-2.768578333e+18|         50|01:15:01|+0.79|0.86|0.1319|
+|x|         13|         20|        367|-2.463242521e+26|         65|01:15:45|+0.29|0.46|0.6205|
+|-|          7|         12|        367|-1.970594024e+26|         80|01:15:03|+0.02|0.22|0.8973|
+|=|          9|         12|        367|-1.642161687e+26|         87|00:35:00|+0.05|0.21|0.8888|
+|=|         14|         12|        367|-1.407567160e+26|         94|00:35:00|-0.00|0.14|0.9082|
+|=|          6|         12|        367|-1.231621266e+26|        101|00:35:00|+0.03|0.15|0.8661|
+|=|         17|         12|        367|-1.100860636e+26|        108|00:35:01|+0.04|0.15|0.8629|
+|=|          1|         12|        367|-1.974058572e+26|        115|00:35:24|+0.01|0.11|0.8791|
+|=|          4|         12|        367|-1.799554039e+26|        122|00:35:01|+0.02|0.11|0.8669|
+|=|         12|         12|        367|-1.649591205e+26|        129|00:35:01|+0.04|0.12|0.8476|
+|=|          2|         12|        367|-1.522699574e+26|        136|00:35:00|+0.05|0.13|0.8280|
+|-|          8|          9|        367|-2.125821748e+26|        143|00:35:22|-0.04|0.04|0.9179|
+|=|         11|          9|        367|-1.987736678e+26|        147|00:20:01|-0.03|0.04|0.9150|
+|=|         16|          9|        367|-1.863503135e+26|        151|00:20:00|-0.04|0.03|0.9276|
+|=|         10|          9|        367|-1.757111980e+26|        155|00:20:01|-0.03|0.03|0.9215|
+|=|          5|          9|        367|-1.659494648e+26|        159|00:20:00|-0.03|0.02|0.9201|
+|=|         19|          9|        367|-2.069189667e+26|        168|00:45:26|-0.04|0.02|0.9222|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         367    mean value: -2.069189667e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2 chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+367  367                     81  0.73 1.57 1.98 0.6    0.03                     91             max min      243
+
+# 2026-08-17 03:22:02 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+367                     81  0.73 1.57 1.98 0.60    0.03                     91             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min
+322                     64  0.65 1.95 1.80 0.50    0.03                     99             max min
+220                     61  0.64 1.45 2.47 0.43    0.04                     84             max min
+# 2026-08-17 03:22:02 UTC: Iteration 8 of 8
+# experimentsUsed: 2384
+# remainingBudget: 116
+# currentBudget: 116
+# nbConfigurations: 10
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         20|         10|        375|-2.715050000e+17|         10|00:50:00|   NA|  NA|    NA|
+|x|         17|         10|        220|-2.762085132e+24|         15|00:25:01|+0.42|0.71|0.4175|
+|x|         18|         10|        375|-1.784664753e+24|         20|00:25:01|+0.52|0.68|0.2413|
+|x|         19|         10|        243|-2.579680060e+26|         25|00:25:16|+0.38|0.54|0.3776|
+|-|         14|          8|        220|-1.991764348e+26|         30|00:25:00|-0.17|0.06|0.9049|
+|=|         16|          8|        322|-1.611201824e+26|         33|00:15:00|-0.11|0.07|0.8892|
+|=|          8|          8|        243|-2.965360035e+26|         36|00:15:08|-0.08|0.07|0.8703|
+|=|          4|          8|        334|-2.551875755e+26|         39|00:15:00|-0.02|0.11|0.8000|
+|=|          2|          8|        334|-2.268334005e+26|         42|00:15:00|+0.01|0.12|0.7894|
+|=|          3|          8|        334|-2.041500608e+26|         45|00:15:00|+0.03|0.13|0.7619|
+|=|          5|          8|        334|-1.855909644e+26|         48|00:15:00|+0.04|0.12|0.7532|
+|=|         13|          8|        334|-2.549050507e+26|         51|00:15:08|+0.01|0.09|0.8037|
+|=|          1|          8|        334|-3.122808160e+26|         54|00:15:08|+0.01|0.09|0.8066|
+|=|         12|          8|        334|-2.899750437e+26|         57|00:15:00|+0.03|0.10|0.7987|
+|=|          6|          8|        334|-2.706433742e+26|         60|00:15:00|+0.01|0.08|0.8139|
+|=|         15|          8|        367|-2.450325277e+26|         63|00:15:00|+0.02|0.08|0.8259|
+|=|          9|          8|        373|-2.320526025e+26|         66|00:15:00|+0.03|0.09|0.8166|
+|=|         10|          8|        373|-2.194678652e+26|         69|00:15:00|+0.03|0.09|0.7995|
+|=|          7|          8|        373|-2.079169251e+26|         72|00:15:00|+0.03|0.08|0.7973|
+|=|         11|          8|        373|-1.977922543e+26|         75|00:15:00|+0.04|0.09|0.7827|
+|-|         21|          6|        334|-1.941089256e+26|         83|00:40:02|-0.02|0.03|0.8537|
+|=|         22|          6|        373|-1.800544085e+26|         89|00:30:00|-0.03|0.02|0.8601|
+|=|         23|          6|        334|-1.772298886e+26|         95|00:30:00|-0.02|0.02|0.8560|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         334    mean value: -1.772298886e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+334  334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min      230
+
+# 2026-08-17 11:17:58 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min
+373                     81  0.75 1.65 2.01 0.59    0.03                     89             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+367                     81  0.73 1.57 1.98 0.60    0.03                     91             max min
+322                     64  0.65 1.95 1.80 0.50    0.03                     99             max min
+# 2026-08-17 11:17:58 UTC: Stopped because there is not enough budget left to race more than the minimum (5).
+# You may either increase the budget or set 'minNbSurvival' to a lower value.
+# Iteration: 9
+# nbIterations: 9
+# experimentsUsed: 2479
+# timeUsed: 0
+# remainingBudget: 21
+# currentBudget: 21
+# number of elites: 5
+# nbConfigurations: 5
+# Total CPU user time: 740996.1, CPU sys time: 4691.938, Wall-clock time: 745702.3
+# 2026-08-17 11:17:58 UTC: Starting post-selection:
+# Configurations selected: 334, 373, 243, 367, 322, 220, 343, 230.
+# Pending instances: 1, 1, 1, 1, 1, 1, 5, 7.
+# 2026-08-17 11:17:58 UTC: seed: 1423344216
+# Configurations: 8
+# Available experiments: 21
+# minSurvival: 1
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|.|          7|          8|        220|-4.011460000e+18|          0|00:00:00|   NA|  NA|    NA|
+|.|          1|          8|        220|-5.065950020e+26|          0|00:00:00|+0.10|0.55|0.7801|
+|.|          4|          8|        220|-3.395660347e+26|          0|00:00:00|+0.22|0.48|0.7313|
+|x|         21|          8|        220|-2.559911360e+26|          2|00:10:00|+0.07|0.30|0.8028|
+|.|          3|          8|        220|-2.047929096e+26|          2|00:00:00|+0.02|0.22|0.8170|
+|x|         20|          8|        334|-1.686526047e+26|          4|00:10:00|+0.01|0.18|0.8742|
+|.|         14|          8|        334|-1.445593754e+26|          4|00:00:00|+0.05|0.19|0.8527|
+|.|          8|          8|        334|-2.537782035e+26|          4|00:00:00|+0.06|0.18|0.8228|
+|.|         16|          8|        334|-2.255806253e+26|          4|00:00:00|-0.00|0.11|0.8794|
+|.|         12|          8|        334|-2.030225632e+26|          4|00:00:00|-0.01|0.09|0.8941|
+|.|         13|          8|        334|-2.770532393e+26|          4|00:00:00|-0.01|0.08|0.9001|
+|.|          2|          8|        334|-2.539654694e+26|          4|00:00:00|-0.01|0.07|0.9008|
+|x|         22|          8|        334|-2.344296640e+26|          6|00:10:00|-0.01|0.07|0.9069|
+|.|         10|          8|        334|-2.180791823e+26|          6|00:00:00|+0.00|0.07|0.8943|
+|.|          6|          8|        334|-2.035405702e+26|          6|00:00:00|+0.01|0.07|0.8969|
+|.|          5|          8|        334|-1.908192845e+26|          6|00:00:00|-0.01|0.05|0.8993|
+|.|         17|          8|        334|-1.799099760e+26|          6|00:00:00|-0.03|0.03|0.9114|
+|.|         15|          8|        334|-1.699149774e+26|          6|00:00:00|-0.04|0.02|0.9133|
+|x|         23|          8|        334|-1.609720838e+26|          8|00:10:00|-0.04|0.02|0.9165|
+|x|         19|          8|        334|-2.035374797e+26|          9|00:05:02|-0.04|0.01|0.9157|
+|.|         11|          8|        334|-1.941089254e+26|          9|00:00:00|-0.03|0.02|0.9109|
+|x|         18|          8|        334|-1.852857926e+26|         10|00:05:00|-0.03|0.02|0.9067|
+|.|          9|          8|        334|-1.772298886e+26|         10|00:00:00|-0.02|0.02|0.9030|
+|=|         24|          8|        334|-2.112432265e+26|         18|00:40:25|-0.02|0.02|0.9006|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         334    mean value: -2.112432265e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism .PARENT.
+334  334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min      230
+
+# 2026-08-17 12:48:27 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min
+373                     81  0.75 1.65 2.01 0.59    0.03                     89             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+367                     81  0.73 1.57 1.98 0.60    0.03                     91             max min
+230                     65  0.67 1.79 1.95 0.59    0.03                     99             max min
+# Total CPU user time: 746401.9, CPU sys time: 4715.702, Wall-clock time: 751132
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range diversity_mechanism
+334                     62  0.66 1.59 1.79 0.61    0.03                     97             max min
+373                     81  0.75 1.65 2.01 0.59    0.03                     89             max min
+243                     80  0.70 1.81 1.97 0.61    0.03                     89             max min
+367                     81  0.73 1.57 1.98 0.60    0.03                     91             max min
+230                     65  0.67 1.79 1.95 0.59    0.03                     99             max min
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+334 --population-size-factor 62 --omega 0.66 --c1 1.59 --c2 1.79 --chi 0.61 --v-coeff 0.03 --leader-selection-range 97 --diversity-mechanism max min
+373 --population-size-factor 81 --omega 0.75 --c1 1.65 --c2 2.01 --chi 0.59 --v-coeff 0.03 --leader-selection-range 89 --diversity-mechanism max min
+243 --population-size-factor 80 --omega 0.7 --c1 1.81 --c2 1.97 --chi 0.61 --v-coeff 0.03 --leader-selection-range 89 --diversity-mechanism max min
+367 --population-size-factor 81 --omega 0.73 --c1 1.57 --c2 1.98 --chi 0.6 --v-coeff 0.03 --leader-selection-range 91 --diversity-mechanism max min
+230 --population-size-factor 65 --omega 0.67 --c1 1.79 --c2 1.95 --chi 0.59 --v-coeff 0.03 --leader-selection-range 99 --diversity-mechanism max min
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-08-17 12:48:27 UTC: No test instances, skip testing

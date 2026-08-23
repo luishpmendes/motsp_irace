@@ -1,0 +1,20 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-08-17 14:22:57 UTC: Testing configurations (in no particular order): 424 229 459
+    population_size_factor crossover_probability crossover_distribution
+424                     96                  0.98                  45.35
+229                     93                  0.99                  48.31
+459                     95                  0.99                  45.21
+    mutation_probability mutation_distribution divisions divisions_inner
+424                 0.01                 26.81         4               4
+229                 0.01                 31.92         4               4
+459                 0.01                 26.93         4               4
+# 2026-08-17 15:08:07 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          424          229          459
+1t 1083479584 -1.06710e+13 -1.07102e+13 -1.02784e+13
+2t 1686612960 -6.56839e+25 -6.99032e+25 -7.09408e+25
+3t  552977338 -1.78501e+20 -1.84544e+20 -1.77682e+20
+# 2026-08-17 15:08:07 UTC: Finished testing
+[1] TRUE

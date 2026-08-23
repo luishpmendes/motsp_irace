@@ -1,0 +1,475 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.4.3.dd8d85f
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /usr/local/lib/R/site-library/irace
+# called with: --scenario nsbrkga-scenario-stage1.txt
+# 2026-08-08 20:09:35 UTC: Reading parameter file '/home/luishpmendes/motsp_irace/irace/nsbrkga-parameters-stage1.txt'.
+# 2026-08-08 20:09:35 UTC: 2 expression(s) specifying forbidden configurations read.
+# 2026-08-08 20:09:35 UTC: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 5
+# minNbSurvival: 5
+# nbParameters: 8
+# seed: 2088232511
+# confidence level: 0.95
+# budget: 2500
+# mu: 5
+# deterministic: FALSE
+
+# 2026-08-08 20:09:35 UTC: Iteration 1 of 5
+# experimentsUsed: 0
+# remainingBudget: 2500
+# currentBudget: 500
+# nbConfigurations: 83
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          1|         82|         46|-7.921670000e+26|         82|06:54:01|   NA|  NA|    NA|
+|x|          2|         82|         46|-3.976053600e+26|        164|06:50:20|+0.56|0.78|0.1536|
+|x|          3|         82|         46|-2.650702401e+26|        246|06:50:05|+0.60|0.73|0.2056|
+|x|          4|         82|         46|-1.988026801e+26|        328|06:50:03|+0.65|0.74|0.2609|
+|-|          5|         15|         46|-1.590421447e+26|        410|06:50:13|+0.64|0.71|0.2682|
+|-|          6|          2|         46|-1.325351206e+26|        425|01:15:00|+1.00|1.00|0.0000|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          46    mean value: -1.325351206e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+46   46                    109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0       NA
+
+# 2026-08-10 07:39:21 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+46                    109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0
+2                      76              0.19                 0.04                 82.08                 2                 1         4              0              0               1                 0                        1           0              0              0
+# 2026-08-10 07:39:21 UTC: Iteration 2 of 5
+# experimentsUsed: 425
+# remainingBudget: 2075
+# currentBudget: 518
+# nbConfigurations: 75
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          7|         75|        104|-4.260300000e+24|         75|06:15:22|   NA|  NA|    NA|
+|x|          4|         75|        104|-2.130150000e+24|        148|06:05:03|+0.74|0.87|0.4334|
+|x|          3|         75|        104|-1.420100081e+24|        221|06:05:04|+0.79|0.86|0.3146|
+|x|          1|         75|        104|-2.304800751e+26|        294|06:08:41|+0.79|0.85|0.2755|
+|-|          5|         10|        104|-1.843840608e+26|        367|06:05:13|+0.42|0.54|0.4841|
+|-|          6|          3|        104|-1.536533840e+26|        375|00:40:00|+0.73|0.78|0.1799|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best configuration for the instances in this race: 104
+Best-so-far configuration:          46    mean value: -1.140348705e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+46   46                    109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0       NA
+
+# 2026-08-11 14:58:47 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+46                     109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0
+2                       76              0.19                 0.04                 82.08                 2                 1         4              0              0               1                 0                        1           0              0              0
+104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-11 14:58:47 UTC: Iteration 3 of 5
+# experimentsUsed: 800
+# remainingBudget: 1700
+# currentBudget: 566
+# nbConfigurations: 73
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          8|         73|        104|-3.707310000e+18|         73|06:05:13|   NA|  NA|    NA|
+|x|          2|         73|        104|-2.494706854e+24|        144|05:55:23|+0.91|0.95|0.1560|
+|x|          1|         73|        104|-3.075498046e+26|        214|05:53:45|+0.87|0.91|0.1232|
+|x|          5|         73|        104|-2.306623543e+26|        284|05:50:13|+0.89|0.92|0.1207|
+|-|          4|         12|        104|-1.845298835e+26|        354|05:50:03|+0.47|0.58|0.3901|
+|-|          6|          5|        104|-1.537749029e+26|        363|00:45:00|+0.65|0.71|0.2518|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         104    mean value: -1.158637147e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+104  104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0       46
+
+# 2026-08-12 21:18:28 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0
+46                     109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0
+2                       76              0.19                 0.04                 82.08                 2                 1         4              0              0               1                 0                        1           0              0              0
+213                     91              0.36                 0.01                 36.84                 2                 2         3              0              0               1                 0                        1           0              0              0
+200                    108              0.41                 0.02                 21.84                 2                 2         1              0              0               1                 0                        1           0              0              0
+# 2026-08-12 21:18:28 UTC: Iteration 4 of 5
+# experimentsUsed: 1163
+# remainingBudget: 1337
+# currentBudget: 668
+# nbConfigurations: 78
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          9|         78|        292|-9.856620000e+26|         78|06:34:18|   NA|  NA|    NA|
+|x|          6|         78|        104|-4.577910001e+26|        151|06:05:05|+0.63|0.82|0.5228|
+|x|          1|         78|        104|-6.110806667e+26|        224|06:09:00|+0.74|0.83|0.3601|
+|x|          7|         78|        104|-4.593755751e+26|        299|06:15:24|+0.79|0.84|0.3008|
+|-|          3|         14|        104|-3.675004601e+26|        374|06:15:05|+0.35|0.48|0.6678|
+|-|          8|          6|        104|-3.062503840e+26|        383|00:45:02|+0.65|0.71|0.2428|
+|-|          5|          5|        104|-2.625003297e+26|        384|00:05:00|+0.76|0.80|0.1770|
+|.|          4|          5|        104|-2.296877885e+26|        384|00:00:00|+0.65|0.69|0.2285|
+|.|          2|          5|        104|-2.047213020e+26|        384|00:00:00|+0.67|0.70|0.2259|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         104    mean value: -2.047213020e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+104  104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0       46
+
+# 2026-08-14 05:27:25 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0
+213                     91              0.36                 0.01                 36.84                 2                 2         3              0              0               1                 0                        1           0              0              0
+46                     109              0.42                 0.02                 21.76                 2                 2         1              0              0               1                 0                        1           0              0              0
+200                    108              0.41                 0.02                 21.84                 2                 2         1              0              0               1                 0                        1           0              0              0
+2                       76              0.19                 0.04                 82.08                 2                 1         4              0              0               1                 0                        1           0              0              0
+# 2026-08-14 05:27:25 UTC: Iteration 5 of 5
+# experimentsUsed: 1547
+# remainingBudget: 953
+# currentBudget: 953
+# nbConfigurations: 99
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         10|         99|        357|-1.115780000e+11|         99|08:15:04|   NA|  NA|    NA|
+|x|          9|         99|        363|-4.678440000e+26|        193|07:55:16|+0.29|0.64|1.2610|
+|x|          3|         99|        363|-3.118960001e+26|        287|07:50:06|+0.33|0.55|0.9115|
+|x|          2|         99|        363|-2.351382651e+26|        381|07:50:31|+0.40|0.55|0.7579|
+|-|          4|         31|        104|-1.841142820e+26|        475|07:50:04|+0.08|0.27|0.7911|
+|-|          1|         17|        363|-3.124170100e+26|        501|02:11:24|+0.20|0.34|0.6137|
+|-|          7|         10|        363|-2.685063000e+26|        513|01:00:03|+0.40|0.49|0.3978|
+|-|          6|          9|        363|-2.349430126e+26|        518|00:25:00|+0.40|0.47|0.3787|
+|!|          8|          9|        363|-2.088382338e+26|        522|00:20:00|+0.42|0.49|0.3493|
+|-|          5|          5|        363|-1.879544108e+26|        526|00:20:00|+0.01|0.11|0.7203|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -1.879544108e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-16 01:24:59 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+104                     98              0.38                 0.01                 28.76                 2                 1         0              0              0               1                 0                        1           0              0              0
+344                     96              0.39                 0.01                 36.97                 2                 1         0              0              0               1                 0                        1           0              0              0
+338                     98              0.39                 0.01                 34.06                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-16 01:24:59 UTC: Iteration 6 of 6
+# experimentsUsed: 2073
+# remainingBudget: 427
+# currentBudget: 427
+# nbConfigurations: 43
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         11|         43|        394|-1.102240000e+11|         43|03:35:01|   NA|  NA|    NA|
+|x|          6|         43|        408|-1.268855531e+17|         81|03:10:04|+0.46|0.73|0.3345|
+|x|          4|         43|        395|-8.286873755e+16|        119|03:10:01|+0.49|0.66|0.2895|
+|x|          1|         43|        316|-2.300940001e+26|        157|03:12:01|+0.23|0.42|0.9291|
+|-|          7|         21|        316|-1.850367101e+26|        195|03:10:13|-0.12|0.10|1.0400|
+|=|         10|         21|        104|-1.536533834e+26|        211|01:20:00|-0.05|0.13|0.9877|
+|=|          9|         21|        104|-2.625003286e+26|        227|01:20:50|+0.02|0.16|0.9360|
+|=|          3|         21|        316|-2.311023188e+26|        243|01:20:01|+0.05|0.17|0.9037|
+|-|          2|         13|        104|-2.047213012e+26|        259|01:20:04|+0.03|0.14|0.8632|
+|=|          8|         13|        363|-1.879544104e+26|        267|00:40:01|+0.07|0.17|0.8186|
+|-|          5|          9|        363|-1.708676462e+26|        275|00:40:01|-0.02|0.07|0.8793|
+|=|         12|          9|        363|-1.566286760e+26|        284|00:45:01|-0.03|0.05|0.8842|
+|=|         13|          9|        363|-2.145006240e+26|        293|00:45:27|-0.02|0.06|0.8779|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -2.145006240e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-17 01:53:50 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+398                    101              0.39                 0.01                 32.98                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+344                     96              0.39                 0.01                 36.97                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-17 01:53:50 UTC: Iteration 7 of 7
+# experimentsUsed: 2366
+# remainingBudget: 134
+# currentBudget: 134
+# nbConfigurations: 14
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         14|         14|        437|-2.489430000e+17|         14|01:10:00|   NA|  NA|    NA|
+|x|          4|         14|        437|-1.244715523e+17|         23|00:45:00|-0.48|0.26|1.4141|
+|x|          5|         14|        424|-1.333665035e+18|         32|00:45:01|-0.23|0.18|1.0215|
+|x|          6|         14|        316|-1.056392026e+18|         41|00:45:00|-0.00|0.25|0.8082|
+|=|          2|         14|        398|-8.781228401e+23|         50|00:45:02|+0.07|0.25|0.7471|
+|=|         11|         14|        316|-7.136007043e+23|         59|00:45:00|+0.08|0.23|0.7821|
+|-|          1|          9|        316|-1.320939435e+26|         68|00:45:27|-0.06|0.09|0.8699|
+|=|         12|          9|        316|-1.155822010e+26|         72|00:20:00|+0.01|0.13|0.8159|
+|=|          3|          9|        316|-1.027397343e+26|         76|00:20:00|+0.02|0.13|0.8186|
+|=|          9|          9|        316|-1.848292608e+26|         80|00:20:13|+0.05|0.15|0.7848|
+|=|          8|          9|        363|-1.704092793e+26|         84|00:20:00|+0.08|0.17|0.7478|
+|-|         10|          7|        363|-1.562085060e+26|         88|00:20:00|-0.04|0.05|0.8640|
+|=|          7|          7|        363|-1.445803163e+26|         90|00:10:00|-0.01|0.07|0.8449|
+|=|         13|          7|        363|-1.991791509e+26|         92|00:10:06|+0.00|0.07|0.8382|
+|=|         15|          7|        363|-1.862023368e+26|         99|00:35:01|-0.01|0.06|0.8510|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -1.862023368e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-17 10:09:48 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+438                    106              0.40                 0.01                 30.47                 2                 1         0              0              0               1                 0                        1           0              0              0
+398                    101              0.39                 0.01                 32.98                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-17 10:09:48 UTC: Iteration 8 of 8
+# experimentsUsed: 2465
+# remainingBudget: 35
+# currentBudget: 35
+# nbConfigurations: 6
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         16|          6|        424|-9.499710000e+26|          6|00:30:18|   NA|  NA|    NA|
+|x|          4|          6|        424|-4.749855000e+26|          7|00:05:00|+0.43|0.71|0.1653|
+|x|         15|          6|        424|-3.181922800e+26|          8|00:05:00|+0.62|0.75|0.1897|
+|x|         14|          6|        424|-2.386442101e+26|          9|00:05:00|+0.07|0.30|0.7277|
+|=|          6|          6|        424|-1.909153681e+26|         10|00:05:00|+0.05|0.24|0.7324|
+|=|          8|          6|        424|-1.590961407e+26|         11|00:05:00|+0.03|0.19|0.6599|
+|=|          1|          6|        424|-2.665975492e+26|         12|00:05:03|+0.06|0.20|0.6091|
+|=|          9|          6|        363|-3.482617430e+26|         13|00:05:03|+0.12|0.23|0.5537|
+|-|          3|          5|        363|-3.095659938e+26|         14|00:05:00|-0.04|0.07|0.8600|
+|.|          5|          5|        363|-2.786093948e+26|         14|00:00:00|-0.02|0.08|0.8328|
+|.|          2|          5|        363|-2.537235462e+26|         14|00:00:00|-0.00|0.09|0.8115|
+|.|         13|          5|        363|-3.083269174e+26|         14|00:00:00|-0.01|0.08|0.7950|
+|.|         11|          5|        363|-2.846094622e+26|         14|00:00:00|-0.01|0.07|0.8088|
+|.|          7|          5|        363|-2.646403606e+26|         14|00:00:00|-0.00|0.07|0.8122|
+|.|         12|          5|        363|-2.469976701e+26|         14|00:00:00|-0.03|0.04|0.8308|
+|.|         10|          5|        363|-2.315603157e+26|         14|00:00:00|-0.00|0.06|0.8123|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -2.315603157e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-17 11:20:14 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+438                    106              0.40                 0.01                 30.47                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+398                    101              0.39                 0.01                 32.98                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-17 11:20:14 UTC: Iteration 9 of 9
+# experimentsUsed: 2479
+# remainingBudget: 21
+# currentBudget: 21
+# nbConfigurations: 6
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         14|          6|        441|-2.476000000e+17|          1|00:05:00|   NA|  NA|    NA|
+|x|          5|          6|        441|-2.001635000e+18|          2|00:05:00|-0.49|0.26|1.1485|
+|x|          9|          6|        441|-3.167180013e+26|          3|00:05:02|+0.12|0.42|0.6990|
+|x|         13|          6|        438|-4.697417510e+26|          4|00:05:03|-0.10|0.17|0.8698|
+|=|          7|          6|        363|-3.699388088e+26|          5|00:05:00|-0.12|0.10|0.9525|
+|=|         16|          6|        438|-4.692472007e+26|          6|00:05:03|-0.05|0.13|0.8932|
+|=|          1|          6|        438|-5.401296006e+26|          7|00:05:02|+0.04|0.18|0.8216|
+|=|          6|          6|        438|-4.726134005e+26|          8|00:05:00|-0.04|0.09|0.8595|
+|=|          4|          6|        438|-4.201008005e+26|          9|00:05:00|-0.09|0.03|0.8878|
+|=|          3|          6|        363|-3.695573044e+26|         10|00:05:00|-0.07|0.04|0.8841|
+|=|          2|          6|        363|-3.364034640e+26|         11|00:05:00|-0.05|0.04|0.8629|
+|=|         11|          6|        363|-3.083698420e+26|         12|00:05:00|-0.05|0.04|0.8674|
+|=|         10|          6|        363|-2.846490850e+26|         13|00:05:00|-0.03|0.05|0.8557|
+|=|         12|          6|        363|-2.643170077e+26|         14|00:05:00|-0.05|0.03|0.8699|
+|=|          8|          6|        363|-2.466958741e+26|         15|00:05:00|-0.04|0.03|0.8559|
+|=|         15|          6|        363|-2.315603157e+26|         16|00:05:00|-0.03|0.03|0.8592|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -2.315603157e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-17 12:40:29 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+438                    106              0.40                 0.01                 30.47                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+441                    107              0.34                 0.01                 26.71                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+# 2026-08-17 12:40:29 UTC: Stopped because there is not enough budget left to race more than the minimum (5).
+# You may either increase the budget or set 'minNbSurvival' to a lower value.
+# Iteration: 10
+# nbIterations: 10
+# experimentsUsed: 2495
+# timeUsed: 0
+# remainingBudget: 5
+# currentBudget: 5
+# number of elites: 5
+# nbConfigurations: 5
+# Total CPU user time: 749870.3, CPU sys time: 769.058, Wall-clock time: 750653.6
+# 2026-08-17 12:40:29 UTC: Starting post-selection:
+# Configurations selected: 363, 438, 424, 441, 316.
+# Pending instances: 0, 0, 0, 0, 0.
+# 2026-08-17 12:40:29 UTC: seed: 2088232511
+# Configurations: 5
+# Available experiments: 5
+# minSurvival: 1
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|.|          7|          5|        363|-5.042040000e+24|          0|00:00:00|   NA|  NA|    NA|
+|.|         15|          5|        363|-4.784490000e+24|          0|00:00:00|-0.60|0.20|1.2121|
+|.|          5|          5|        363|-3.189661243e+24|          0|00:00:00|-0.13|0.24|0.9485|
+|.|         13|          5|        363|-2.296332459e+26|          0|00:00:00|+0.00|0.25|0.8434|
+|.|          1|          5|        363|-3.704963967e+26|          0|00:00:00|+0.10|0.28|0.7443|
+|.|          3|          5|        363|-3.087469973e+26|          0|00:00:00|-0.03|0.14|0.8182|
+|.|         16|          5|        363|-3.949159977e+26|          0|00:00:00|+0.05|0.18|0.7681|
+|.|          6|          5|        363|-3.455514980e+26|          0|00:00:00|-0.03|0.10|0.8213|
+|.|          4|          5|        363|-3.071568871e+26|          0|00:00:00|-0.07|0.05|0.8625|
+|.|          8|          5|        363|-2.764411988e+26|          0|00:00:00|-0.04|0.07|0.8336|
+|.|         12|          5|        363|-2.513101811e+26|          0|00:00:00|-0.07|0.03|0.8567|
+|.|         10|          5|        363|-2.303676660e+26|          0|00:00:00|-0.03|0.05|0.8331|
+|.|          2|          5|        363|-2.130213117e+26|          0|00:00:00|-0.02|0.05|0.8169|
+|.|         14|          5|        363|-1.978055037e+26|          0|00:00:00|-0.05|0.03|0.8338|
+|.|         11|          5|        363|-1.846184701e+26|          0|00:00:00|-0.05|0.02|0.8380|
+|.|          9|          5|        363|-2.315603157e+26|          0|00:00:00|-0.04|0.02|0.8341|
+|=|         17|          5|        363|-2.179391209e+26|          5|00:25:00|-0.05|0.01|0.8381|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         363    mean value: -2.179391209e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval .PARENT.
+363  363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0      104
+
+# 2026-08-17 13:05:30 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+438                    106              0.40                 0.01                 30.47                 2                 1         0              0              0               1                 0                        1           0              0              0
+441                    107              0.34                 0.01                 26.71                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+# Total CPU user time: 751370.9, CPU sys time: 769.265, Wall-clock time: 752154.5
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor elites_percentage mutation_probability mutation_distribution num_total_parents num_elite_parents bias_type crossover_type diversity_type num_populations exchange_interval num_exchange_individuals pr_interval shake_interval reset_interval
+363                    108              0.35                 0.01                 28.39                 2                 1         0              0              0               1                 0                        1           0              0              0
+438                    106              0.40                 0.01                 30.47                 2                 1         0              0              0               1                 0                        1           0              0              0
+441                    107              0.34                 0.01                 26.71                 2                 1         0              0              0               1                 0                        1           0              0              0
+424                     94              0.41                 0.01                 35.19                 2                 1         0              0              0               1                 0                        1           0              0              0
+316                     96              0.39                 0.01                 32.07                 2                 1         0              0              0               1                 0                        1           0              0              0
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+363 --population-size-factor 108 --elites-percentage 0.35 --mutation-probability 0.01 --mutation-distribution 28.39 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+438 --population-size-factor 106 --elites-percentage 0.4 --mutation-probability 0.01 --mutation-distribution 30.47 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+441 --population-size-factor 107 --elites-percentage 0.34 --mutation-probability 0.01 --mutation-distribution 26.71 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+424 --population-size-factor 94 --elites-percentage 0.41 --mutation-probability 0.01 --mutation-distribution 35.19 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+316 --population-size-factor 96 --elites-percentage 0.39 --mutation-probability 0.01 --mutation-distribution 32.07 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --crossover-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-08-17 13:05:30 UTC: No test instances, skip testing

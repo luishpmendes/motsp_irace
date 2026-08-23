@@ -1,0 +1,525 @@
+#------------------------------------------------------------------------------
+# irace: An implementation in R of (Elitist) Iterated Racing
+# Version: 4.4.3.dd8d85f
+# Copyright (C) 2010-2025
+# Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+# Jeremie Dubois-Lacoste
+# Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+#
+# This is free software, and you are welcome to redistribute it under certain
+# conditions.  See the GNU General Public License for details. There is NO
+# WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# irace builds upon previous code from the race package:
+#     race: Racing methods for the selection of the best
+#     Copyright (C) 2003 Mauro Birattari
+#------------------------------------------------------------------------------
+# installed at: /usr/local/lib/R/site-library/irace
+# called with: --scenario moead-scenario.txt
+# 2026-08-08 20:09:35 UTC: Reading parameter file '/home/luishpmendes/motsp_irace/irace/moead-parameters.txt'.
+# 2026-08-08 20:09:35 UTC: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 5
+# minNbSurvival: 5
+# nbParameters: 9
+# seed: 941220571
+# confidence level: 0.95
+# budget: 2500
+# mu: 5
+# deterministic: FALSE
+
+# 2026-08-08 20:09:35 UTC: Iteration 1 of 5
+# experimentsUsed: 0
+# remainingBudget: 2500
+# currentBudget: 500
+# nbConfigurations: 83
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          1|         83|         25|-5.084380000e+18|         83|06:55:19|   NA|  NA|    NA|
+|x|          2|         83|         51|-3.482652405e+24|        166|06:55:38|+0.80|0.90|0.1605|
+|x|          3|         83|         51|-5.755084349e+26|        249|06:59:35|+0.80|0.87|0.1742|
+|x|          4|         83|         51|-4.316313263e+26|        332|06:55:08|+0.69|0.77|0.2455|
+|-|          5|         17|         25|-3.245843011e+26|        415|06:55:04|+0.40|0.52|0.5371|
+|-|          6|          5|         25|-2.704869176e+26|        432|01:25:00|+0.11|0.26|0.6799|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          25    mean value: -2.704869176e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor weight_generation decomposition neighbours   cr   f eta_m realb limit .PARENT.
+25   25                     80   low discrepancy      weighted         36 0.17 0.9  5.58  0.63     8       NA
+
+# 2026-08-10 08:15:23 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+25                     80   low discrepancy      weighted         36 0.17 0.90  5.58  0.63     8
+51                     85   low discrepancy      weighted         29 0.27 0.94 31.61  0.83    18
+36                     44            random      weighted         40 0.12 0.85 22.42  0.49    19
+73                     75            random      weighted          9 0.02 0.14  3.28  0.52     5
+56                     47   low discrepancy      weighted         11 0.89 0.08 43.86  0.95    16
+# 2026-08-10 08:15:23 UTC: Iteration 2 of 5
+# experimentsUsed: 432
+# remainingBudget: 2068
+# currentBudget: 517
+# nbConfigurations: 78
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          7|         78|        140|-1.695220000e+27|         78|06:34:27|   NA|  NA|    NA|
+|x|          6|         78|         25|-8.048450000e+26|        151|06:05:04|+0.41|0.71|0.6320|
+|x|          5|         78|         25|-5.365633333e+26|        224|06:05:04|+0.58|0.72|0.4360|
+|x|          2|         78|        126|-4.198385825e+26|        297|06:05:36|+0.62|0.72|0.4115|
+|-|          3|         20|        126|-6.579468660e+26|        370|06:09:05|+0.18|0.35|0.8275|
+|-|          4|         13|         25|-5.387685834e+26|        385|01:15:02|+0.03|0.19|0.8955|
+|=|          1|         13|         25|-4.618016436e+26|        393|00:40:02|+0.06|0.20|0.8300|
+|-|          8|          7|         25|-4.050034007e+26|        406|01:05:06|+0.07|0.18|0.8174|
+|=|          9|          7|         25|-3.600030229e+26|        413|00:35:00|+0.09|0.19|0.7942|
+|=|         10|          7|         25|-3.240027211e+26|        420|00:35:01|+0.10|0.19|0.7664|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:          25    mean value: -3.240027211e+26
+Description of the best-so-far configuration:
+   .ID. population_size_factor weight_generation decomposition neighbours   cr   f eta_m realb limit .PARENT.
+25   25                     80   low discrepancy      weighted         36 0.17 0.9  5.58  0.63     8       NA
+
+# 2026-08-11 19:24:54 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+25                      80   low discrepancy      weighted         36 0.17 0.90  5.58  0.63     8
+126                     54   low discrepancy      weighted         18 0.18 0.82 27.16  0.91    11
+98                     122   low discrepancy      weighted         16 0.38 0.99 26.10  0.87     9
+118                     44            random      weighted         44 0.36 0.86  4.81  0.87    18
+125                     69            random      weighted         37 0.13 0.70  1.94  0.58    18
+# 2026-08-11 19:24:54 UTC: Iteration 3 of 5
+# experimentsUsed: 852
+# remainingBudget: 1648
+# currentBudget: 549
+# nbConfigurations: 54
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         11|         54|        165|-1.271580000e+11|         54|04:30:03|   NA|  NA|    NA|
+|x|          7|         54|         25|-8.048450000e+26|        103|04:07:55|+0.24|0.62|0.7226|
+|x|          3|         54|         25|-1.075326667e+27|        152|04:07:53|+0.51|0.67|0.4716|
+|x|          5|         54|         25|-8.064950000e+26|        201|04:05:03|+0.51|0.63|0.4713|
+|-|          6|         14|         25|-6.451960000e+26|        250|04:05:03|+0.02|0.21|0.9090|
+|=|          2|         14|        165|-5.101865717e+26|        259|00:45:03|+0.03|0.19|0.9209|
+|=|          1|         14|        165|-4.373027765e+26|        268|00:45:02|+0.09|0.22|0.8978|
+|-|          8|          7|        165|-3.835508069e+26|        277|00:45:03|+0.23|0.32|0.6758|
+|!|          4|          7|        165|-3.409340506e+26|        279|00:10:00|+0.28|0.36|0.6325|
+|!|          9|          7|        165|-3.068406456e+26|        281|00:10:00|+0.31|0.38|0.6184|
+|-|         10|          3|        165|-2.789460419e+26|        283|00:10:00|-0.04|0.06|0.6960|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         165    mean value: -2.789460419e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+165  165                     85   low discrepancy      weighted         30 0.15 0.92  1.43  0.48     8       25
+
+# 2026-08-12 19:06:05 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+165                     85   low discrepancy      weighted         30 0.15 0.92  1.43  0.48     8
+196                    113   low discrepancy      weighted         25 0.23 0.88  8.95  0.89     7
+25                      80   low discrepancy      weighted         36 0.17 0.90  5.58  0.63     8
+# 2026-08-12 19:06:05 UTC: Iteration 4 of 5
+# experimentsUsed: 1135
+# remainingBudget: 1365
+# currentBudget: 682
+# nbConfigurations: 59
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         12|         59|        228|-7.697520000e+24|         59|04:55:29|   NA|  NA|    NA|
+|x|          2|         59|        228|-7.579480000e+24|        115|04:40:26|+0.86|0.93|0.0514|
+|x|          6|         59|        228|-5.052986667e+24|        171|04:40:03|+0.70|0.80|0.2743|
+|x|         10|         59|        228|-3.789741306e+24|        227|04:40:15|+0.76|0.82|0.2045|
+|-|          3|         17|        211|-3.468297990e+26|        283|04:43:19|+0.01|0.21|0.9131|
+|=|         11|         17|        211|-2.890248325e+26|        297|01:10:00|+0.06|0.22|0.8635|
+|-|          9|         12|        228|-2.207741379e+26|        311|01:10:01|+0.10|0.23|0.7918|
+|=|          8|         12|        228|-1.941315932e+26|        320|00:45:04|+0.07|0.18|0.8304|
+|=|          7|         12|        228|-3.340347495e+26|        329|00:45:31|+0.07|0.17|0.8493|
+|=|          5|         12|        228|-3.006312746e+26|        338|00:45:00|+0.06|0.16|0.8522|
+|-|          4|          9|        228|-2.733011587e+26|        347|00:45:01|+0.09|0.18|0.7990|
+|-|          1|          6|        228|-2.505260626e+26|        353|00:30:01|-0.02|0.07|0.8098|
+|=|         13|          6|        228|-3.458902116e+26|        359|00:30:19|-0.04|0.04|0.8488|
+|=|         14|          6|        228|-3.211837683e+26|        365|00:30:01|-0.03|0.04|0.8358|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         228    mean value: -3.211837683e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+228  228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5       25
+
+# 2026-08-14 01:36:42 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5
+234                     66   low discrepancy      weighted         31 0.04 0.84  1.73  0.53     8
+211                    118   low discrepancy      weighted         24 0.20 0.95  8.44  0.88    10
+243                    123   low discrepancy      weighted         29 0.08 0.89  4.74  0.96     7
+165                     85   low discrepancy      weighted         30 0.15 0.92  1.43  0.48     8
+# 2026-08-14 01:36:42 UTC: Iteration 5 of 5
+# experimentsUsed: 1500
+# remainingBudget: 1000
+# currentBudget: 1000
+# nbConfigurations: 71
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         15|         71|        324|-3.452330000e+17|         71|05:55:09|   NA|  NA|    NA|
+|x|          2|         71|        308|-3.820495170e+24|        137|05:30:30|+0.56|0.78|0.2012|
+|x|         11|         71|        308|-2.546996780e+24|        203|05:30:04|+0.60|0.74|0.2573|
+|x|          6|         71|        308|-1.910247585e+24|        269|05:30:04|+0.65|0.74|0.2439|
+|-|         13|         24|        308|-3.288581981e+26|        335|05:33:48|-0.00|0.20|0.9475|
+|=|          5|         24|        327|-2.812237401e+26|        354|01:35:01|+0.05|0.21|0.8805|
+|=|          3|         24|        327|-4.678203486e+26|        373|01:36:05|+0.01|0.15|0.9197|
+|=|          1|         24|        277|-4.334953807e+26|        392|01:35:05|+0.00|0.13|0.9295|
+|=|         12|         24|        277|-3.861751417e+26|        411|01:35:08|+0.02|0.12|0.9245|
+|=|         14|         24|        277|-3.475576281e+26|        430|01:35:05|+0.04|0.14|0.9003|
+|-|          7|         17|        277|-4.720496619e+26|        449|01:36:04|-0.02|0.07|0.9506|
+|=|          9|         17|        277|-4.327121901e+26|        461|01:00:01|+0.00|0.09|0.9264|
+|=|         10|         17|        277|-3.994266374e+26|        473|01:00:03|+0.03|0.10|0.9064|
+|=|          4|         17|        277|-3.708961633e+26|        485|01:00:01|+0.05|0.12|0.8904|
+|-|          8|         13|        277|-3.466471431e+26|        497|01:00:07|-0.00|0.06|0.9301|
+|=|         16|         13|        324|-3.026494748e+26|        510|01:05:06|-0.01|0.05|0.9330|
+|=|         17|         13|        324|-2.848465648e+26|        523|01:05:03|-0.00|0.06|0.9269|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         324    mean value: -2.848465648e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+324  324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7      243
+
+# 2026-08-15 21:19:16 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12
+228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5
+307                    119   low discrepancy      weighted         32 0.10 0.92  2.81  0.90     7
+308                     66   low discrepancy      weighted         31 0.01 0.84  4.28  0.52    10
+# 2026-08-15 21:19:16 UTC: Iteration 6 of 6
+# experimentsUsed: 2023
+# remainingBudget: 477
+# currentBudget: 477
+# nbConfigurations: 31
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         18|         31|        345|-1.275450000e+11|         31|02:35:02|   NA|  NA|    NA|
+|x|         10|         31|        324|-2.643870063e+18|         57|02:10:07|+0.44|0.72|0.2439|
+|x|         13|         31|        277|-5.740000018e+26|         83|02:11:31|+0.21|0.47|0.3616|
+|x|          8|         31|        345|-4.247323288e+26|        109|02:10:14|+0.22|0.42|0.3078|
+|-|          1|         17|        324|-3.216275821e+26|        135|02:10:07|-0.08|0.13|0.9869|
+|=|          3|         17|        277|-5.779334784e+26|        147|01:00:40|-0.01|0.16|0.9230|
+|=|          7|         17|        277|-7.406529815e+26|        159|01:00:40|+0.06|0.20|0.8645|
+|=|          4|         17|        277|-6.480713589e+26|        171|01:00:01|+0.09|0.20|0.8479|
+|-|          2|         11|        277|-5.768993234e+26|        183|01:00:06|-0.01|0.10|0.9255|
+|=|         16|         11|        324|-4.834723321e+26|        189|00:30:02|-0.02|0.08|0.9242|
+|=|         15|         11|        324|-4.395203019e+26|        195|00:30:00|-0.03|0.07|0.9260|
+|=|          9|         11|        324|-4.028936101e+26|        201|00:30:00|-0.04|0.05|0.9452|
+|=|          5|         11|        324|-3.719017940e+26|        207|00:30:00|-0.05|0.03|0.9487|
+|=|         17|         11|        277|-3.713806991e+26|        213|00:30:01|-0.05|0.02|0.9513|
+|=|         11|         11|        277|-3.466219858e+26|        219|00:30:00|-0.05|0.02|0.9425|
+|=|         12|         11|        277|-3.254339386e+26|        225|00:30:03|-0.04|0.02|0.9395|
+|=|          6|         11|        277|-3.062907657e+26|        231|00:30:00|-0.04|0.02|0.9348|
+|=|         14|         11|        277|-2.892746123e+26|        237|00:30:02|-0.02|0.03|0.9207|
+|=|         19|         11|        277|-3.564775275e+26|        248|00:55:39|-0.03|0.02|0.9285|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         277    mean value: -3.564775275e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+277  277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12      211
+
+# 2026-08-16 18:03:41 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12
+350                    105   low discrepancy      weighted         30 0.04 0.86  2.39  0.92     7
+228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+345                    107   low discrepancy      weighted         25 0.24 0.96  2.42  0.93    10
+# 2026-08-16 18:03:41 UTC: Iteration 7 of 7
+# experimentsUsed: 2271
+# remainingBudget: 229
+# currentBudget: 229
+# nbConfigurations: 16
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         20|         16|        350|-3.411510000e+17|         16|01:20:02|   NA|  NA|    NA|
+|x|          9|         16|        228|-3.411900000e+17|         27|00:55:01|+0.54|0.77|0.3741|
+|x|         14|         16|        228|-1.989043333e+18|         38|00:55:02|+0.58|0.72|0.4186|
+|x|         10|         16|        354|-2.818095000e+18|         49|00:55:03|+0.57|0.68|0.3826|
+|-|          4|          6|        324|-2.334147400e+18|         60|00:55:01|+0.17|0.33|0.6577|
+|=|         16|          6|        324|-1.246071945e+24|         61|00:05:00|+0.05|0.21|0.8145|
+|=|          3|          6|        324|-2.230623474e+26|         62|00:05:03|-0.06|0.09|0.8829|
+|=|         12|          6|        324|-1.961380877e+26|         63|00:05:00|-0.04|0.09|0.8571|
+|=|         11|          6|        324|-1.743449669e+26|         64|00:05:00|-0.06|0.06|0.8844|
+|=|          1|          6|        324|-1.569104707e+26|         65|00:05:00|-0.02|0.08|0.8480|
+|=|          2|          6|        324|-1.433266997e+26|         66|00:05:00|+0.00|0.09|0.8283|
+|=|         19|          6|        324|-2.585386414e+26|         67|00:05:03|-0.01|0.08|0.8241|
+|=|         15|          6|        324|-2.386510536e+26|         68|00:05:00|-0.00|0.08|0.8275|
+|=|          6|          6|        324|-2.216045498e+26|         69|00:05:00|-0.04|0.04|0.8595|
+|=|         13|          6|        324|-3.135455798e+26|         70|00:05:03|-0.03|0.04|0.8569|
+|=|          7|          6|        324|-3.975527311e+26|         71|00:05:03|-0.02|0.04|0.8444|
+|=|          8|          6|        324|-3.746036234e+26|         72|00:05:00|-0.02|0.04|0.8450|
+|=|          5|          6|        324|-3.537923110e+26|         73|00:05:00|-0.04|0.02|0.8534|
+|=|         17|          6|        324|-3.351716633e+26|         74|00:05:00|-0.04|0.02|0.8555|
+|=|         18|          6|        324|-3.184130801e+26|         75|00:05:00|-0.04|0.01|0.8592|
+|=|         21|          6|        324|-3.036166016e+26|         81|00:30:02|-0.03|0.02|0.8553|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         324    mean value: -3.036166016e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+324  324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7      243
+
+# 2026-08-17 00:49:12 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+350                    105   low discrepancy      weighted         30 0.04 0.86  2.39  0.92     7
+277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12
+345                    107   low discrepancy      weighted         25 0.24 0.96  2.42  0.93    10
+228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5
+# 2026-08-17 00:49:12 UTC: Iteration 8 of 8
+# experimentsUsed: 2352
+# remainingBudget: 148
+# currentBudget: 148
+# nbConfigurations: 11
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         22|         11|        324|-5.400290000e+18|         11|00:55:02|   NA|  NA|    NA|
+|x|          9|         11|        228|-2.859474000e+18|         17|00:30:01|+0.24|0.62|0.6621|
+|x|          7|         11|        324|-5.525533352e+26|         23|00:30:19|+0.06|0.38|0.9970|
+|x|         21|         11|        324|-4.163367589e+26|         29|00:30:02|+0.16|0.37|0.8338|
+|=|         18|         11|        324|-3.330694071e+26|         35|00:30:00|+0.19|0.35|0.8062|
+|=|          8|         11|        324|-2.787941560e+26|         41|00:30:02|+0.10|0.25|0.8663|
+|-|          5|          9|        228|-2.097649737e+26|         47|00:30:00|-0.02|0.13|0.8840|
+|=|         13|          9|        365|-4.276613769e+26|         51|00:20:12|-0.02|0.11|0.9091|
+|=|         19|          9|        365|-5.692856684e+26|         55|00:20:14|-0.03|0.08|0.9059|
+|=|         10|          9|        365|-5.123571021e+26|         59|00:20:01|-0.02|0.08|0.8924|
+|=|         12|          9|        365|-4.664543183e+26|         63|00:20:02|+0.01|0.10|0.8832|
+|=|          6|          9|        365|-4.275831251e+26|         67|00:20:00|+0.01|0.09|0.8735|
+|=|         20|          9|        365|-3.946921155e+26|         71|00:20:00|+0.02|0.10|0.8491|
+|=|         11|          9|        365|-3.664998215e+26|         75|00:20:00|+0.04|0.11|0.8342|
+|=|          4|          9|        365|-3.420665001e+26|         79|00:20:00|+0.04|0.10|0.8401|
+|=|         15|          9|        324|-3.004389508e+26|         83|00:20:00|+0.06|0.12|0.8295|
+|=|          3|          9|        365|-4.020545589e+26|         87|00:20:13|+0.05|0.11|0.8394|
+|-|         14|          8|        365|-3.797181948e+26|         91|00:20:01|-0.02|0.04|0.8942|
+|=|          1|          8|        324|-3.347885907e+26|         94|00:15:00|-0.01|0.05|0.8824|
+|=|         16|          8|        324|-3.184229821e+26|         97|00:15:01|-0.01|0.04|0.8859|
+|=|          2|          8|        324|-3.036166016e+26|        100|00:15:01|+0.00|0.05|0.8784|
+|=|         17|          8|        324|-2.898158472e+26|        103|00:15:00|+0.00|0.05|0.8748|
+|=|         23|          8|        365|-3.743742538e+26|        111|00:40:27|+0.00|0.04|0.8746|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         365    mean value: -3.743742538e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+365  365                    102   low discrepancy      weighted         27 0.21 0.95  2.07  0.96    11      345
+
+# 2026-08-17 10:06:01 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+365                    102   low discrepancy      weighted         27 0.21 0.95  2.07  0.96    11
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+350                    105   low discrepancy      weighted         30 0.04 0.86  2.39  0.92     7
+277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12
+228                     97   low discrepancy      weighted         39 0.03 0.99  3.71  0.79     5
+# 2026-08-17 10:06:01 UTC: Iteration 9 of 9
+# experimentsUsed: 2463
+# remainingBudget: 37
+# currentBudget: 37
+# nbConfigurations: 6
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         24|          6|        324|-3.466510000e+17|          6|00:30:00|   NA|  NA|    NA|
+|x|          8|          6|        324|-3.708950173e+24|          7|00:05:00|+0.03|0.51|0.9878|
+|x|         16|          6|        324|-4.964773449e+24|          8|00:05:00|-0.26|0.16|0.9477|
+|x|         17|          6|        324|-3.723581392e+24|          9|00:05:00|-0.19|0.11|1.0150|
+|=|          7|          6|        365|-3.526277991e+26|         10|00:05:03|-0.17|0.06|0.9466|
+|=|         11|          6|        365|-2.938564993e+26|         11|00:05:00|-0.05|0.12|0.8651|
+|=|         18|          6|        365|-2.518769994e+26|         12|00:05:00|-0.06|0.09|0.8669|
+|=|         15|          6|        324|-2.090692907e+26|         13|00:05:00|-0.05|0.08|0.8679|
+|=|         12|          6|        324|-1.866913995e+26|         14|00:05:00|-0.04|0.08|0.8744|
+|=|          6|          6|        324|-1.680222596e+26|         15|00:05:00|-0.08|0.03|0.9038|
+|=|          2|          6|        324|-1.534283260e+26|         16|00:05:00|-0.09|0.01|0.9003|
+|=|         23|          6|        324|-2.777501322e+26|         17|00:05:03|-0.08|0.01|0.8860|
+|=|         19|          6|        365|-4.031498151e+26|         18|00:05:03|-0.07|0.01|0.8804|
+|=|         10|          6|        365|-3.743534001e+26|         19|00:05:00|-0.05|0.02|0.8613|
+|=|          3|          6|        365|-4.629918401e+26|         20|00:05:04|-0.04|0.03|0.8519|
+|=|          9|          6|        365|-4.340548501e+26|         21|00:05:00|-0.05|0.01|0.8713|
+|=|          5|          6|        365|-4.085222119e+26|         22|00:05:00|-0.04|0.02|0.8675|
+|=|         13|          6|        365|-4.779470890e+26|         23|00:05:03|-0.03|0.02|0.8539|
+|=|         21|          6|        365|-4.531898853e+26|         24|00:05:00|-0.03|0.03|0.8470|
+|=|          4|          6|        365|-4.305303911e+26|         25|00:05:00|-0.04|0.01|0.8538|
+|=|         20|          6|        365|-4.100289439e+26|         26|00:05:00|-0.04|0.01|0.8568|
+|=|         14|          6|        365|-3.913912649e+26|         27|00:05:00|-0.03|0.01|0.8500|
+|=|         22|          6|        324|-3.487495058e+26|         28|00:05:00|-0.03|0.01|0.8519|
+|=|          1|          6|        324|-3.342182766e+26|         29|00:05:00|-0.03|0.02|0.8484|
+|=|         25|          6|        324|-3.208495455e+26|         35|00:30:00|-0.02|0.02|0.8419|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         324    mean value: -3.208495455e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+324  324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7      243
+
+# 2026-08-17 13:01:25 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+365                    102   low discrepancy      weighted         27 0.21 0.95  2.07  0.96    11
+277                    110   low discrepancy      weighted         22 0.23 0.93  1.79  0.89    12
+371                    112   low discrepancy      weighted         21 0.12 0.97  4.75  0.84    12
+350                    105   low discrepancy      weighted         30 0.04 0.86  2.39  0.92     7
+# 2026-08-17 13:01:25 UTC: Stopped because there is not enough budget left to race more than the minimum (5).
+# You may either increase the budget or set 'minNbSurvival' to a lower value.
+# Iteration: 10
+# nbIterations: 10
+# experimentsUsed: 2498
+# timeUsed: 0
+# remainingBudget: 2
+# currentBudget: 2
+# number of elites: 5
+# nbConfigurations: 5
+# Total CPU user time: 746309, CPU sys time: 5584.825, Wall-clock time: 751910
+# 2026-08-17 13:01:25 UTC: Starting post-selection:
+# Configurations selected: 324, 365.
+# Pending instances: 0, 0.
+# 2026-08-17 13:01:25 UTC: seed: 941220571
+# Configurations: 2
+# Available experiments: 2
+# minSurvival: 1
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . Alive configurations were already evaluated on this instance and nothing is discarded.
+     : All alive configurations are elite, but some need to be evaluated on this instance.
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|.|         16|          2|        365|-7.578200000e+24|          0|00:00:00|   NA|  NA|    NA|
+|.|          1|          2|        365|-3.789102602e+24|          0|00:00:00|-1.00|0.00|1.0000|
+|.|         24|          2|        365|-2.526068512e+24|          0|00:00:00|-0.33|0.11|0.6667|
+|.|         12|          2|        365|-3.751171384e+24|          0|00:00:00|+0.00|0.25|0.5000|
+|.|          7|          2|        365|-3.525889371e+26|          0|00:00:00|-0.20|0.04|0.6000|
+|.|         13|          2|        365|-5.701857809e+26|          0|00:00:00|-0.20|0.00|0.6000|
+|.|          5|          2|        365|-4.887306694e+26|          0|00:00:00|-0.14|0.02|0.5714|
+|.|          3|          2|        365|-6.406305857e+26|          0|00:00:00|-0.07|0.06|0.5357|
+|.|         21|          2|        365|-5.702894339e+26|          0|00:00:00|-0.11|0.01|0.5556|
+|.|          6|          2|        365|-5.132604906e+26|          0|00:00:00|-0.07|0.04|0.5333|
+|.|          8|          2|        365|-4.672932450e+26|          0|00:00:00|-0.02|0.07|0.5091|
+|.|          9|          2|        365|-4.283521413e+26|          0|00:00:00|-0.06|0.03|0.5303|
+|.|         25|          2|        365|-3.954019766e+26|          0|00:00:00|-0.08|0.01|0.5385|
+|.|         15|          2|        365|-3.671589783e+26|          0|00:00:00|-0.08|0.00|0.5385|
+|.|         18|          2|        365|-3.426817131e+26|          0|00:00:00|-0.07|0.00|0.5333|
+|.|         10|          2|        365|-3.212641063e+26|          0|00:00:00|-0.07|0.00|0.5333|
+|.|         11|          2|        365|-3.023662177e+26|          0|00:00:00|-0.06|0.00|0.5294|
+|.|          2|          2|        365|-2.859837679e+26|          0|00:00:00|-0.06|0.00|0.5294|
+|.|         20|          2|        365|-2.709319906e+26|          0|00:00:00|-0.05|0.00|0.5263|
+|.|         17|          2|        365|-2.573853914e+26|          0|00:00:00|-0.05|0.00|0.5263|
+|.|          4|          2|        365|-2.451289442e+26|          0|00:00:00|-0.05|0.00|0.5238|
+|.|         23|          2|        365|-3.140149012e+26|          0|00:00:00|-0.05|0.00|0.5238|
+|.|         19|          2|        365|-3.743742534e+26|          0|00:00:00|-0.04|0.00|0.5217|
+|.|         22|          2|        365|-3.587753264e+26|          0|00:00:00|-0.04|0.00|0.5217|
+|.|         14|          2|        365|-3.444243135e+26|          0|00:00:00|-0.04|0.00|0.5200|
+|=|         26|          2|        324|-3.085091784e+26|          2|00:10:00|-0.04|0.00|0.5200|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         324    mean value: -3.085091784e+26
+Description of the best-so-far configuration:
+    .ID. population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit .PARENT.
+324  324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7      243
+
+# 2026-08-17 13:11:26 UTC: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+365                    102   low discrepancy      weighted         27 0.21 0.95  2.07  0.96    11
+# Total CPU user time: 746893.5, CPU sys time: 5600.412, Wall-clock time: 752510.2
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    population_size_factor weight_generation decomposition neighbours   cr    f eta_m realb limit
+324                    112   low discrepancy      weighted         30 0.02 0.84  1.39  0.92     7
+365                    102   low discrepancy      weighted         27 0.21 0.95  2.07  0.96    11
+# Best configurations as commandlines (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+324 --population-size-factor 112 --weight-generation low discrepancy --decomposition weighted --neighbours 30 --cr 0.02 --f 0.84 --eta-m 1.39 --realb 0.92 --limit 7
+365 --population-size-factor 102 --weight-generation low discrepancy --decomposition weighted --neighbours 27 --cr 0.21 --f 0.95 --eta-m 2.07 --realb 0.96 --limit 11
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2026-08-17 13:11:26 UTC: No test instances, skip testing
