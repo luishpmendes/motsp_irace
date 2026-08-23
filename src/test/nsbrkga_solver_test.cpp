@@ -19,7 +19,7 @@ int main() {
     solver.time_limit = 5.0;
     solver.iterations_limit = 1000;
     solver.max_num_solutions = 64;
-    solver.population_size = 32;
+    solver.population_size = 80;
     solver.max_num_snapshots = 16;
     solver.exchange_interval = 20;
     solver.num_exchange_individuals = 3;
@@ -32,37 +32,37 @@ int main() {
             std::numeric_limits<double>::epsilon());
     assert(solver.iterations_limit == 1000);
     assert(solver.max_num_solutions == 64);
-    assert(solver.population_size == 32);
+    assert(solver.population_size == 80);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.min_elites_percentage - 0.10) <
+    assert(fabs(solver.min_elites_percentage - 0.05) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.max_elites_percentage - 0.30) <
+    assert(fabs(solver.max_elites_percentage - 0.33) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.0) <
+    assert(fabs(solver.mutation_distribution - 1.88) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_total_parents == 3);
-    assert(solver.num_elite_parents == 2);
+    assert(solver.num_elite_parents == 3);
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
-            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_BETWEEN_ALL_PAIRS);
     assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);
-    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::BINARY_SEARCH);
-    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::EuclideanDistance));
-    assert(fabs(solver.pr_percentage - 0.20) <
+    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::ALLOCATION);
+    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::HammingDistance));
+    assert(fabs(solver.pr_percentage - 0.64) <
             std::numeric_limits<double>::epsilon());
     assert(solver.pr_interval == 50);
     assert(solver.shake_interval == 20);
-    assert(fabs(solver.shake_intensity - 0.33) < 
+    assert(fabs(solver.shake_intensity - 0.69) < 
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.shake_distribution - 20.0) < 
+    assert(fabs(solver.shake_distribution - 76.41) < 
             std::numeric_limits<double>::epsilon());
     assert(solver.reset_interval == 50);
-    assert(fabs(solver.reset_intensity - 0.20) <
+    assert(fabs(solver.reset_intensity - 0.94) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_threads == 1);
 
@@ -263,7 +263,7 @@ int main() {
     solver.time_limit = 5.0;
     solver.iterations_limit = 1000;
     solver.max_num_solutions = 64;
-    solver.population_size = 32;
+    solver.population_size = 80;
     solver.max_num_snapshots = 16;
     solver.exchange_interval = 20;
     solver.num_exchange_individuals = 3;
@@ -276,37 +276,37 @@ int main() {
             std::numeric_limits<double>::epsilon());
     assert(solver.iterations_limit == 1000);
     assert(solver.max_num_solutions == 64);
-    assert(solver.population_size == 32);
+    assert(solver.population_size == 80);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.min_elites_percentage - 0.10) <
+    assert(fabs(solver.min_elites_percentage - 0.05) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.max_elites_percentage - 0.30) <
+    assert(fabs(solver.max_elites_percentage - 0.33) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.0) <
+    assert(fabs(solver.mutation_distribution - 1.88) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_total_parents == 3);
-    assert(solver.num_elite_parents == 2);
+    assert(solver.num_elite_parents == 3);
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
-            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_BETWEEN_ALL_PAIRS);
     assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);
-    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::BINARY_SEARCH);
-    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::EuclideanDistance));
-    assert(fabs(solver.pr_percentage - 0.20) <
+    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::ALLOCATION);
+    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::HammingDistance));
+    assert(fabs(solver.pr_percentage - 0.64) <
             std::numeric_limits<double>::epsilon());
     assert(solver.pr_interval == 50);
     assert(solver.shake_interval == 20);
-    assert(fabs(solver.shake_intensity - 0.33) < 
+    assert(fabs(solver.shake_intensity - 0.69) < 
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.shake_distribution - 20.0) < 
+    assert(fabs(solver.shake_distribution - 76.41) < 
             std::numeric_limits<double>::epsilon());
     assert(solver.reset_interval == 50);
-    assert(fabs(solver.reset_intensity - 0.20) <
+    assert(fabs(solver.reset_intensity - 0.94) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_threads == 1);
 
@@ -507,7 +507,7 @@ int main() {
     solver.time_limit = 5.0;
     solver.iterations_limit = 1000;
     solver.max_num_solutions = 64;
-    solver.population_size = 32;
+    solver.population_size = 80;
     solver.max_num_snapshots = 16;
     solver.exchange_interval = 20;
     solver.num_exchange_individuals = 3;
@@ -520,37 +520,37 @@ int main() {
             std::numeric_limits<double>::epsilon());
     assert(solver.iterations_limit == 1000);
     assert(solver.max_num_solutions == 64);
-    assert(solver.population_size == 32);
+    assert(solver.population_size == 80);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.min_elites_percentage - 0.10) <
+    assert(fabs(solver.min_elites_percentage - 0.05) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.max_elites_percentage - 0.30) <
+    assert(fabs(solver.max_elites_percentage - 0.33) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.0) <
+    assert(fabs(solver.mutation_distribution - 1.88) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_total_parents == 3);
-    assert(solver.num_elite_parents == 2);
+    assert(solver.num_elite_parents == 3);
     assert(solver.bias_type == NSBRKGA::BiasFunctionType::SQRT);
     assert(solver.diversity_type ==
-            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID);
+            NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_BETWEEN_ALL_PAIRS);
     assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
     assert(solver.num_populations == 3);
     assert(solver.exchange_interval == 20);
     assert(solver.num_exchange_individuals == 3);
-    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::BINARY_SEARCH);
-    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::EuclideanDistance));
-    assert(fabs(solver.pr_percentage - 0.20) <
+    assert(solver.pr_type == NSBRKGA::PathRelinking::Type::ALLOCATION);
+    assert(typeid(*solver.pr_dist_func) == typeid(NSBRKGA::HammingDistance));
+    assert(fabs(solver.pr_percentage - 0.64) <
             std::numeric_limits<double>::epsilon());
     assert(solver.pr_interval == 50);
     assert(solver.shake_interval == 20);
-    assert(fabs(solver.shake_intensity - 0.33) < 
+    assert(fabs(solver.shake_intensity - 0.69) < 
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.shake_distribution - 20.0) < 
+    assert(fabs(solver.shake_distribution - 76.41) < 
             std::numeric_limits<double>::epsilon());
     assert(solver.reset_interval == 50);
-    assert(fabs(solver.reset_intensity - 0.20) <
+    assert(fabs(solver.reset_intensity - 0.94) <
             std::numeric_limits<double>::epsilon());
     assert(solver.num_threads == 1);
 

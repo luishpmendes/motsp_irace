@@ -13,13 +13,13 @@ class MHACO_Solver : public Solver {
     /********************************
      * Size of the population.
      ********************************/
-    unsigned population_size = 300;
+    unsigned population_size = 176;
 
     /***********************************************************
      * Number of solutions stored in the solution archive
      * (which is maintained independently from the population).
      ***********************************************************/
-    unsigned ker = 63;
+    unsigned ker = 6;
 
     /*************************************************************************
      * This parameter is called convergence speed parameter, and it is useful
@@ -28,20 +28,20 @@ class MHACO_Solver : public Solver {
      * The smaller the parameter, the faster the convergence
      * and the higher the chance to get stuck to local minima.
      *************************************************************************/
-    double q = 1.0;
+    double q = 1.16;
 
     /**********************************************************
      * When the generations reach the threshold, then q is
      * set to 0.01 automatically, thus increasing consistently
      * the convergence speed towards the best found value.
      **********************************************************/
-    unsigned threshold = 1;
+    unsigned threshold = 23;
 
     /*******************************************
      * This parameter regulates the convergence
      * speed of the standard deviation values.
      *******************************************/
-    unsigned n_gen_mark = 7;
+    unsigned n_gen_mark = 48;
 
     /********************************************************************
      * If a positive integer is assigned here, the algorithm will count
@@ -57,7 +57,7 @@ class MHACO_Solver : public Solver {
      * If the value is very high, the search is more focused around
      * the currently found best solutions.
      ****************************************************************/
-    double focus = 0.0;
+    double focus = 6.55;
 
     /*************************************************
      * Memory parameter. If true, memory is activated

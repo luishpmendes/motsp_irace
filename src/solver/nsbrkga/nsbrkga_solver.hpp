@@ -14,17 +14,17 @@ class NSBRKGA_Solver : public Solver {
     /********************************************
      * Number of individuals in each population.
      ********************************************/
-    unsigned population_size = 300;
+    unsigned population_size = 492;
 
     /********************************************************************
      * Minimum percentage of individuals to become the elite set (0, 1].
      ********************************************************************/
-    double min_elites_percentage = 0.10;
+    double min_elites_percentage = 0.05;
 
     /********************************************************************
      * Maximum percentage of individuals to become the elite set (0, 1].
      ********************************************************************/
-    double max_elites_percentage = 0.30;
+    double max_elites_percentage = 0.33;
 
     /***********************************
      * Mutation probability.
@@ -34,7 +34,7 @@ class NSBRKGA_Solver : public Solver {
     /************************************
      * Mutation distribution.
      ************************************/
-    double mutation_distribution = 50.0;
+    double mutation_distribution = 1.88;
 
     /**************************************
      * Number of total parents for mating.
@@ -44,7 +44,7 @@ class NSBRKGA_Solver : public Solver {
     /**************************************
      * Number of elite parents for mating.
      **************************************/
-    unsigned num_elite_parents = 2;
+    unsigned num_elite_parents = 3;
 
     /**********************************************************************
      * Type of bias that will be used.
@@ -55,7 +55,7 @@ class NSBRKGA_Solver : public Solver {
      * Type of diversity that will be used.
      *****************************************************************/
     NSBRKGA::DiversityFunctionType diversity_type =
-        NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID;
+        NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_BETWEEN_ALL_PAIRS;
 
     /**********************************************************************
      * Type of crossover that will be used.
@@ -72,67 +72,67 @@ class NSBRKGA_Solver : public Solver {
      * Interval at which the elite solutions are exchanged between populations
      * (0 means no exchange).
      **************************************************************************/
-    unsigned exchange_interval = 200;
+    unsigned exchange_interval = 206;
 
     /*******************************************************************
      * Number of elite individuals to be exchanged between populations.
      *******************************************************************/
-    unsigned num_exchange_individuals = 30;
+    unsigned num_exchange_individuals = 70;
 
     /************************************************
      * Type of path relinking that will be used.
      ************************************************/
     NSBRKGA::PathRelinking::Type pr_type =
-        NSBRKGA::PathRelinking::Type::BINARY_SEARCH;
+        NSBRKGA::PathRelinking::Type::ALLOCATION;
 
     /*************************************************************
      * Distance function that will be used in the path relinking.
      *************************************************************/
     std::shared_ptr<NSBRKGA::DistanceFunctionBase> pr_dist_func =
-        std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-            new NSBRKGA::EuclideanDistance());
+        NSBRKGA::make_distance_function(
+            NSBRKGA::DistanceFunctionType::HAMMING);
 
     /******************************************************************
      * Type of distance function used in path relinking.
      ******************************************************************/
     NSBRKGA::DistanceFunctionType pr_dist_func_type =
-        NSBRKGA::DistanceFunctionType::EUCLIDEAN;
+        NSBRKGA::DistanceFunctionType::HAMMING;
 
     /*****************************************
      * Percentage of the path to be computed.
      *****************************************/
-    double pr_percentage = 0.20;
+    double pr_percentage = 0.64;
 
     /***********************************************
      * Interval at which the path relink is applied
      * (0 means no path relinking).
      ***********************************************/
-    unsigned pr_interval = 500;
+    unsigned pr_interval = 631;
 
     /*********************************************************************
      * Interval at which the populations are shaken (0 means no shaking).
      *********************************************************************/
-    unsigned shake_interval = 200;
+    unsigned shake_interval = 42;
 
     /********************************
      * The intensity of the shaking.
      ********************************/
-    double shake_intensity = 0.33;
+    double shake_intensity = 0.69;
 
     /************************************
      * Shaking distribution.
      ************************************/
-    double shake_distribution = 20.0;
+    double shake_distribution = 76.41;
 
     /******************************************************************
      * Interval at which the populations are reset (0 means no reset).
      ******************************************************************/
-    unsigned reset_interval = 500;
+    unsigned reset_interval = 458;
 
     /******************************
      * The intensity of the reset.
      ******************************/
-    double reset_intensity = 0.20;
+    double reset_intensity = 0.94;
 
     /*********************************************************
      * Number of threads to be used during parallel decoding.

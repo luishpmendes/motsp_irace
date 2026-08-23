@@ -28,13 +28,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.crossover_probability - 0.95) <
+    assert(fabs(solver.crossover_probability - 0.16) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.crossover_distribution - 10.00) <
+    assert(fabs(solver.crossover_distribution - 13.47) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.00) <
+    assert(fabs(solver.mutation_distribution - 82.91) <
             std::numeric_limits<double>::epsilon());
 
     solver.solve();
@@ -203,13 +203,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.crossover_probability - 0.95) <
+    assert(fabs(solver.crossover_probability - 0.16) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.crossover_distribution - 10.00) <
+    assert(fabs(solver.crossover_distribution - 13.47) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.00) <
+    assert(fabs(solver.mutation_distribution - 82.91) <
             std::numeric_limits<double>::epsilon());
 
     solver.solve();
@@ -378,13 +378,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.crossover_probability - 0.95) <
+    assert(fabs(solver.crossover_probability - 0.16) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.crossover_distribution - 10.00) <
+    assert(fabs(solver.crossover_distribution - 13.47) <
             std::numeric_limits<double>::epsilon());
     assert(fabs(solver.mutation_probability - 0.01) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.mutation_distribution - 50.00) <
+    assert(fabs(solver.mutation_distribution - 82.91) <
             std::numeric_limits<double>::epsilon());
 
     solver.solve();

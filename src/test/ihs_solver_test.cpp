@@ -28,13 +28,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.phmcr - 0.85) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_min - 0.35) <
+    assert(fabs(solver.phmcr - 0.986341) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.ppar_min - 0.021004) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_max - 0.99) <
+    assert(fabs(solver.ppar_max - 0.567895) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_min - 1E-5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_max - 1.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_min - 0.000501) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_max - 0.464386) < std::numeric_limits<double>::epsilon());
 
     solver.solve();
 
@@ -204,13 +204,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.phmcr - 0.85) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_min - 0.35) <
+    assert(fabs(solver.phmcr - 0.986341) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.ppar_min - 0.021004) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_max - 0.99) <
+    assert(fabs(solver.ppar_max - 0.567895) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_min - 1E-5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_max - 1.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_min - 0.000501) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_max - 0.464386) < std::numeric_limits<double>::epsilon());
 
     solver.solve();
 
@@ -380,13 +380,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.phmcr - 0.85) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_min - 0.35) <
+    assert(fabs(solver.phmcr - 0.986341) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.ppar_min - 0.021004) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.ppar_max - 0.99) <
+    assert(fabs(solver.ppar_max - 0.567895) <
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_min - 1E-5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.bw_max - 1.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_min - 0.000501) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.bw_max - 0.464386) < std::numeric_limits<double>::epsilon());
 
     solver.solve();
 

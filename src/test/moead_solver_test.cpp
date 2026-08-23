@@ -28,14 +28,14 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 36);
     assert(solver.max_num_snapshots == 16);
-    assert(solver.weight_generation == "random");
-    assert(solver.decomposition == "tchebycheff");
-    assert(solver.neighbours == 20);
-    assert(fabs(solver.cr - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.f - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.eta_m - 20.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.realb - 0.9) < std::numeric_limits<double>::epsilon());
-    assert(solver.limit == 2);
+    assert(solver.weight_generation == "low discrepancy");
+    assert(solver.decomposition == "weighted");
+    assert(solver.neighbours == 30);
+    assert(fabs(solver.cr - 0.02) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.f - 0.84) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.eta_m - 1.39) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.realb - 0.92) < std::numeric_limits<double>::epsilon());
+    assert(solver.limit == 7);
     assert(solver.preserve_diversity);
 
     solver.solve();
@@ -204,14 +204,14 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 36);
     assert(solver.max_num_snapshots == 16);
-    assert(solver.weight_generation == "random");
-    assert(solver.decomposition == "tchebycheff");
-    assert(solver.neighbours == 20);
-    assert(fabs(solver.cr - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.f - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.eta_m - 20.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.realb - 0.9) < std::numeric_limits<double>::epsilon());
-    assert(solver.limit == 2);
+    assert(solver.weight_generation == "low discrepancy");
+    assert(solver.decomposition == "weighted");
+    assert(solver.neighbours == 30);
+    assert(fabs(solver.cr - 0.02) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.f - 0.84) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.eta_m - 1.39) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.realb - 0.92) < std::numeric_limits<double>::epsilon());
+    assert(solver.limit == 7);
     assert(solver.preserve_diversity);
 
     solver.solve();
@@ -380,14 +380,14 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 36);
     assert(solver.max_num_snapshots == 16);
-    assert(solver.weight_generation == "random");
-    assert(solver.decomposition == "tchebycheff");
-    assert(solver.neighbours == 20);
-    assert(fabs(solver.cr - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.f - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.eta_m - 20.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.realb - 0.9) < std::numeric_limits<double>::epsilon());
-    assert(solver.limit == 2);
+    assert(solver.weight_generation == "low discrepancy");
+    assert(solver.decomposition == "weighted");
+    assert(solver.neighbours == 30);
+    assert(fabs(solver.cr - 0.02) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.f - 0.84) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.eta_m - 1.39) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.realb - 0.92) < std::numeric_limits<double>::epsilon());
+    assert(solver.limit == 7);
     assert(solver.preserve_diversity);
 
     solver.solve();

@@ -30,11 +30,11 @@ int main() {
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
     assert(solver.ker == 16);
-    assert(fabs(solver.q - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(solver.threshold == 1);
-    assert(solver.n_gen_mark == 7);
+    assert(fabs(solver.q - 1.16) < std::numeric_limits<double>::epsilon());
+    assert(solver.threshold == 23);
+    assert(solver.n_gen_mark == 48);
     assert(solver.eval_stop == 0);
-    assert(fabs(solver.focus - 0.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.focus - 6.55) < std::numeric_limits<double>::epsilon());
     assert(solver.memory);
 
     solver.solve();
@@ -205,11 +205,11 @@ int main() {
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
     assert(solver.ker == 16);
-    assert(fabs(solver.q - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(solver.threshold == 1);
-    assert(solver.n_gen_mark == 7);
+    assert(fabs(solver.q - 1.16) < std::numeric_limits<double>::epsilon());
+    assert(solver.threshold == 23);
+    assert(solver.n_gen_mark == 48);
     assert(solver.eval_stop == 0);
-    assert(fabs(solver.focus - 0.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.focus - 6.55) < std::numeric_limits<double>::epsilon());
     assert(solver.memory);
 
     solver.solve();
@@ -380,11 +380,11 @@ int main() {
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
     assert(solver.ker == 16);
-    assert(fabs(solver.q - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(solver.threshold == 1);
-    assert(solver.n_gen_mark == 7);
+    assert(fabs(solver.q - 1.16) < std::numeric_limits<double>::epsilon());
+    assert(solver.threshold == 23);
+    assert(solver.n_gen_mark == 48);
     assert(solver.eval_stop == 0);
-    assert(fabs(solver.focus - 0.0) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.focus - 6.55) < std::numeric_limits<double>::epsilon());
     assert(solver.memory);
 
     solver.solve();

@@ -28,13 +28,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.omega - 0.6) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c1 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c2 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.chi - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.v_coeff - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(solver.leader_selection_range == 60);
-    assert(solver.diversity_mechanism == "crowding distance");
+    assert(fabs(solver.omega - 0.66) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c1 - 1.59) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c2 - 1.79) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.chi - 0.61) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.v_coeff - 0.03) < std::numeric_limits<double>::epsilon());
+    assert(solver.leader_selection_range == 97);
+    assert(solver.diversity_mechanism == "max min");
     assert(solver.memory);
 
     solver.solve();
@@ -203,13 +203,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.omega - 0.6) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c1 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c2 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.chi - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.v_coeff - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(solver.leader_selection_range == 60);
-    assert(solver.diversity_mechanism == "crowding distance");
+    assert(fabs(solver.omega - 0.66) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c1 - 1.59) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c2 - 1.79) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.chi - 0.61) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.v_coeff - 0.03) < std::numeric_limits<double>::epsilon());
+    assert(solver.leader_selection_range == 97);
+    assert(solver.diversity_mechanism == "max min");
     assert(solver.memory);
 
     solver.solve();
@@ -378,13 +378,13 @@ int main() {
     assert(solver.max_num_solutions == 64);
     assert(solver.population_size == 32);
     assert(solver.max_num_snapshots == 16);
-    assert(fabs(solver.omega - 0.6) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c1 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.c2 - 2.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.chi - 1.0) < std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.v_coeff - 0.5) < std::numeric_limits<double>::epsilon());
-    assert(solver.leader_selection_range == 60);
-    assert(solver.diversity_mechanism == "crowding distance");
+    assert(fabs(solver.omega - 0.66) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c1 - 1.59) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.c2 - 1.79) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.chi - 0.61) < std::numeric_limits<double>::epsilon());
+    assert(fabs(solver.v_coeff - 0.03) < std::numeric_limits<double>::epsilon());
+    assert(solver.leader_selection_range == 97);
+    assert(solver.diversity_mechanism == "max min");
     assert(solver.memory);
 
     solver.solve();

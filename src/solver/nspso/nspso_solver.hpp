@@ -13,47 +13,47 @@ class NSPSO_Solver : public Solver {
     /********************************
      * Size of the population.
      ********************************/
-    unsigned population_size = 300;
+    unsigned population_size = 248;
 
     /*****************************
      * Particles' inertia weight.
      *****************************/
-    double omega = 0.6;
+    double omega = 0.66;
 
     /**************************************************************
      * Magnitude of the force, applied to the particle’s velocity,
      * in the direction of its previous best position.
      **************************************************************/
-    double c1 = 2.0;
+    double c1 = 1.59;
 
     /**************************************************************
      * Magnitude of the force, applied to the particle’s velocity,
      * in the direction of its global best (i.e., leader).
      **************************************************************/
-    double c2 = 2.0;
+    double c2 = 1.79;
 
     /***************************
      * Velocity scaling factor.
      ***************************/
-    double chi = 1.0;
+    double chi = 0.61;
 
     /*******************************************************
      * Velocity coefficient
      * (determining the maximum allowed particle velocity).
      *******************************************************/
-    double v_coeff = 0.5;
+    double v_coeff = 0.03;
 
     /****************************************************************
      * Leader selection range parameter
      * (i.e., the leader of each particle is selected among the best
      * leader_selection_range % individuals).
      ****************************************************************/
-    unsigned leader_selection_range = 60;
+    unsigned leader_selection_range = 97;
 
     /**************************************************************************
      * The diversity mechanism used to maintain diversity on the Pareto front.
      **************************************************************************/
-    std::string diversity_mechanism = "crowding distance";
+    std::string diversity_mechanism = "max min";
 
     /********************************************************************
      * Memory parameter.
