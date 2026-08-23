@@ -1,9 +1,49 @@
 #!/bin/bash
 
 instances=(kroAB100 kroAB200 kroAB500 kroAB1000 kroAB2000 kroABC100 kroABC200 kroABC500 kroABC1000 kroABC2000 kroABCD100 kroABCD200 kroABCD500 kroABCD1000 kroABCD2000)
-solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga)
+solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga1 nsbrkga2 nsbrkga3 nsbrkga4 nsbrkga5 nsbrkga6)
 seeds=(305089489 511812191 608055156 467424509 944441939 414977408 819312498 562386085 287613914 755772793)
 versions=(best median)
+
+# Executable each variant runs. A variant absent from this map runs the
+# executable of its own name; the six nsbrkga* variants are the iRace ablation
+# stages and all share the one NS-BRKGA binary.
+declare -A solver_exec=(
+    [nsbrkga1]=nsbrkga
+    [nsbrkga2]=nsbrkga
+    [nsbrkga3]=nsbrkga
+    [nsbrkga4]=nsbrkga
+    [nsbrkga5]=nsbrkga
+    [nsbrkga6]=nsbrkga
+)
+
+# Extra flags per variant. Every solver's iRace-tuned configuration is already
+# its compiled-in default, so no tuned parameter is repeated here. Two things
+# still have to be passed explicitly:
+#
+#   * --memory and --preserve-diversity are ASSIGNED from the flag's presence
+#     (solver.memory = arg_parser.option_exists("--memory")), not merely
+#     defaulted, so dropping them would silently switch the feature off.
+#   * nsbrkga1..nsbrkga5 are the earlier ablation stages, while the defaults
+#     are stage 6, so they carry the best configuration found by iRace for
+#     their stage -- restricted to the parameters that actually differ from
+#     the stage 6 defaults. Population sizes are the tuned
+#     population_size_factor times four, as the target runners compute them,
+#     and stage 1's single tuned elite percentage maps to both the minimum and
+#     the maximum. A feature a stage switches off needs only its interval set
+#     to zero: the solver guards each of them on being positive.
+declare -A solver_params=(
+    [nsga3]="--memory"
+    [nspso]="--memory"
+    [moead]="--preserve-diversity"
+    [mhaco]="--memory"
+    [nsbrkga1]="--population-size 432 --min-elites-percentage 0.35 --max-elites-percentage 0.35 --mutation-distribution 28.39 --num-total-parents 2 --num-elite-parents 1 --bias-type 0 --diversity-type 0 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0"
+    [nsbrkga2]="--population-size 496 --min-elites-percentage 0.33 --max-elites-percentage 0.52 --mutation-distribution 20.03 --num-total-parents 4 --num-elite-parents 4 --bias-type 0 --diversity-type 1 --num-populations 1 --exchange-interval 0 --num-exchange-individuals 1 --pr-interval 0 --shake-interval 0 --reset-interval 0"
+    [nsbrkga3]="--population-size 424 --min-elites-percentage 0.21 --max-elites-percentage 0.58 --mutation-distribution 9.28 --num-total-parents 2 --num-elite-parents 2 --bias-type 0 --diversity-type 1 --num-populations 2 --exchange-interval 268 --pr-interval 0 --shake-interval 0 --reset-interval 0"
+    [nsbrkga4]="--population-size 484 --min-elites-percentage 0.31 --max-elites-percentage 0.93 --mutation-probability 0.68 --mutation-distribution 13.89 --num-total-parents 2 --num-elite-parents 2 --bias-type 4 --diversity-type 1 --crossover-type 1 --num-populations 2 --exchange-interval 487 --num-exchange-individuals 55 --pr-type 1 --pr-dist-func 2 --pr-percentage 0.39 --pr-interval 32 --shake-interval 0 --reset-interval 0"
+    [nsbrkga5]="--population-size 180 --min-elites-percentage 0.33 --max-elites-percentage 0.49 --mutation-probability 0.89 --mutation-distribution 86.39 --num-total-parents 2 --num-elite-parents 2 --diversity-type 0 --crossover-type 1 --num-populations 4 --exchange-interval 401 --num-exchange-individuals 2 --pr-type 1 --pr-dist-func 2 --pr-percentage 0.26 --pr-interval 133 --shake-interval 28 --shake-intensity 0.77 --shake-distribution 41.3 --reset-interval 0"
+    [nsbrkga6]=""
+)
 
 num_processes=6
 
@@ -44,7 +84,7 @@ do
     do
         for seed in ${seeds[@]}
         do
-            command="${path}/bin/exec/${solver}_solver_exec "
+            command="${path}/bin/exec/${solver_exec[$solver]:-$solver}_solver_exec "
             command+="--instance ${path}/instances/${instance}.txt "
             command+="--seed ${seed} "
             command+="--time-limit ${time_limit} "
@@ -57,23 +97,8 @@ do
             command+="--num-non-dominated-snapshots ${path}/num_non_dominated_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--num-fronts-snapshots ${path}/num_fronts_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--populations-snapshots ${path}/populations_snapshots/${instance}_${solver}_${seed}_ "
-            if [ $solver = "nsga3" ]
-            then
-                command+="--memory "
-            fi
-            if [ $solver = "nspso" ]
-            then
-                command+="--memory "
-            fi
-            if [ $solver = "moead" ]
-            then
-                command+="--preserve-diversity "
-            fi
-            if [ $solver = "mhaco" ]
-            then
-                command+="--memory "
-            fi
-            if [ $solver = "nsbrkga" ]
+            command+="${solver_params[$solver]} "
+            if [[ $solver == nsbrkga* ]]
             then
                 command+="--num-elites-snapshots ${path}/num_elites_snapshots/${instance}_${solver}_${seed}.txt "
             fi
@@ -104,8 +129,6 @@ done
 eval $final_command
 
 wait
-
-solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga)
 
 commands=()
 
@@ -295,7 +318,7 @@ do
         command+="--populations-snapshots-median ${path}/populations_snapshots/${instance}_${solver}_median_ "
         command+="--num-fronts-snapshots-best ${path}/num_fronts_snapshots/${instance}_${solver}_best.txt "
         command+="--num-fronts-snapshots-median ${path}/num_fronts_snapshots/${instance}_${solver}_median.txt "
-        if [ $solver = "nsbrkga" ]
+        if [[ $solver == nsbrkga* ]]
         then
             command+="--num-elites-snapshots-best ${path}/num_elites_snapshots/${instance}_${solver}_best.txt "
             command+="--num-elites-snapshots-median ${path}/num_elites_snapshots/${instance}_${solver}_median.txt "
@@ -313,7 +336,7 @@ do
             command+="--num-non-dominated-snapshots-${j} ${path}/num_non_dominated_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--populations-snapshots-${j} ${path}/populations_snapshots/${instance}_${solver}_${seed}_ "
             command+="--num-fronts-snapshots-${j} ${path}/num_fronts_snapshots/${instance}_${solver}_${seed}.txt "
-            if [ $solver = "nsbrkga" ]
+            if [[ $solver == nsbrkga* ]]
             then
                 command+="--num-elites-snapshots-${j} ${path}/num_elites_snapshots/${instance}_${solver}_${seed}.txt "
             fi

@@ -1,14 +1,20 @@
 instances = ["kroAB100",   "kroAB200",   "kroAB500",   "kroAB1000",   "kroAB2000",
              "kroABC100",  "kroABC200",  "kroABC500",  "kroABC1000",  "kroABC2000",
              "kroABCD100", "kroABCD200", "kroABCD500", "kroABCD1000", "kroABCD2000"]
-solvers = ["nsga2", "nsga3", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
+solvers = ["nsga2", "nsga3", "nspso", "moead", "mhaco", "ihs",
+           "nsbrkga1", "nsbrkga2", "nsbrkga3", "nsbrkga4", "nsbrkga5", "nsbrkga6"]
 solver_labels = {"nsga2": "NSGA-II",
                  "nsga3": "NSGA-III",
                  "nspso": "NSPSO",
                  "moead": "MOEA/D-DE",
                  "mhaco": "MHACO",
                  "ihs": "IHS",
-                 "nsbrkga": "NS-BRKGA"}
+                 "nsbrkga1": "NS-BRKGA S1",
+                 "nsbrkga2": "NS-BRKGA S2",
+                 "nsbrkga3": "NS-BRKGA S3",
+                 "nsbrkga4": "NS-BRKGA S4",
+                 "nsbrkga5": "NS-BRKGA S5",
+                 "nsbrkga6": "NS-BRKGA S6"}
 seeds = [305089489, 511812191, 608055156, 467424509, 944441939, 414977408, 819312498, 562386085, 287613914, 755772793]
 versions = ["best", "median"]
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#8c7e6e", "#738191"]
