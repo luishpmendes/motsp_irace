@@ -122,6 +122,8 @@ std::ostream & operator <<(std::ostream & os, const MOEAD_Solver & solver) {
        << solver.cr << std::endl
        << "Parameter for the Differential Evolution operator: " << solver.f
        << std::endl
+       << "Distribution index used by the polynomial mutation: " << solver.eta_m
+       << std::endl
        << "Chance that the neighbourhood is considered at each generation, "
        << "rather than the whole population: " << solver.realb << std::endl
        << "Maximum number of copies reinserted in the population: "
