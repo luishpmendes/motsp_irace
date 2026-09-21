@@ -84,7 +84,7 @@ int main (int argc, char * argv[]) {
                 std::stoul(arg_parser.option_value("--threshold"));
         }
 
-        if(arg_parser.option_exists("--n-men-mark")) {
+        if(arg_parser.option_exists("--n-gen-mark")) {
             solver.n_gen_mark =
                 std::stoul(arg_parser.option_value("--n-gen-mark"));
         }
