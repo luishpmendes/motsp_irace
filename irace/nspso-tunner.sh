@@ -70,6 +70,7 @@ PARAMS=("${TRANSFORMED_PARAMS[@]}")
     --seed "$SEED" \
     --time-limit "$TIME_LIMIT" \
     --pareto "$PARETO_FILE" \
+    --memory \
     "${TRANSFORMED_PARAMS[@]}" > /dev/null 2>&1; } 2>/dev/null
 
 SOLVER_EXIT=$?
