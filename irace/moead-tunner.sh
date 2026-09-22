@@ -68,6 +68,7 @@ done
     --instance "$INSTANCE" \
     --seed "$SEED" \
     --time-limit "$TIME_LIMIT" \
+    --max-num-solutions 500 \
     --pareto "$PARETO_FILE" \
     --preserve-diversity \
     "${TRANSFORMED_PARAMS[@]}" > /dev/null 2>&1; } 2>/dev/null
