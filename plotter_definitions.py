@@ -15,6 +15,8 @@ solver_labels = {"nsga2": "NSGA-II",
                  "nsbrkga4": "NS-BRKGA S4",
                  "nsbrkga5": "NS-BRKGA S5",
                  "nsbrkga6": "NS-BRKGA S6"}
+solver_groups = {"baselines": ["nsga2", "nsga3", "nspso", "moead", "mhaco", "ihs", "nsbrkga1"],
+                 "ablation": ["nsbrkga1", "nsbrkga2", "nsbrkga3", "nsbrkga4", "nsbrkga5", "nsbrkga6"]}
 seeds = [829249666, 948391020, 437349832, 224971284, 318762008, 248020142, 145603336, 842216060, 795652969, 290822624, 527829361, 406480597, 524127926, 802682008, 761754044, 684835752, 330881998, 525728155, 864672239, 510218942, 636182588, 199650424, 724231466, 623485821, 553462928, 321870976, 470702405, 874358826, 872284682, 348372676, 942314095]
 versions = ["best", "median"]
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#8c7e6e", "#738191"]

@@ -54,6 +54,16 @@ max_ref_solutions=800
 
 path=$(dirname $(realpath $0))
 
+# The plotting scripts at the end need the packages in requirements.txt. They are
+# installed into ${path}/.venv before the experiments, so a missing package stops
+# the run now instead of after the experiments.
+if [ ! -f ${path}/.venv/bin/activate ]
+then
+    python3 -m venv ${path}/.venv || exit 1
+fi
+source ${path}/.venv/bin/activate || exit 1
+python3 -m pip install --upgrade -r ${path}/requirements.txt || exit 1
+
 mkdir -p ${path}/statistics
 # mkdir -p ${path}/solutions
 mkdir -p ${path}/pareto
@@ -400,8 +410,10 @@ do
     done
 done
 
-ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr.mp4 &
-ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus.mp4 &
+ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_baselines_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_baselines.mp4 &
+ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_ablation_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_ablation.mp4 &
+ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_baselines_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_baselines.mp4 &
+ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_ablation_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_ablation.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4
 
