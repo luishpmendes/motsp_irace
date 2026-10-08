@@ -394,35 +394,27 @@ python3 ${path}/plotter_populations_snapshots.py
 
 wait
 
+# Every encode is limited to four threads and a 20-frame lookahead. With the
+# defaults, libx264 keeps dozens of frames in memory at once, which for the
+# 6000x4500 and 8000x6000 populations snapshots is enough to bring the VM down.
+# The frames of a video are deleted only once that video has been encoded.
 for instance in ${instances[@]}
 do
     for version in ${versions[@]}
     do
-        ffmpeg -y -r 5 -i ${path}/best_solutions_snapshots/${instance}_${version}_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/best_solutions_snapshots/${instance}_${version}.mp4 &
-        ffmpeg -y -r 5 -i ${path}/populations_snapshots/${instance}_${version}_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/populations_snapshots/${instance}_${version}.mp4
-
-        wait
-
-        rm ${path}/best_solutions_snapshots/${instance}_${version}_*.png &
-        rm ${path}/populations_snapshots/${instance}_${version}_*.png
+        (ffmpeg -y -threads 4 -r 5 -i ${path}/best_solutions_snapshots/${instance}_${version}_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/best_solutions_snapshots/${instance}_${version}.mp4 && rm ${path}/best_solutions_snapshots/${instance}_${version}_*.png) &
+        ffmpeg -y -threads 4 -r 5 -i ${path}/populations_snapshots/${instance}_${version}_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/populations_snapshots/${instance}_${version}.mp4 && rm ${path}/populations_snapshots/${instance}_${version}_*.png
 
         wait
     done
 done
 
-ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_baselines_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_baselines.mp4 &
-ffmpeg -y -r 5 -i ${path}/hvr_snapshots/snapshot_ablation_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_ablation.mp4 &
-ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_baselines_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_baselines.mp4 &
-ffmpeg -y -r 5 -i ${path}/nigd_plus_snapshots/snapshot_ablation_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_ablation.mp4 &
-ffmpeg -y -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 &
-ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4
-
-wait
-
-rm ${path}/hvr_snapshots/snapshot_*.png &
-rm ${path}/nigd_plus_snapshots/snapshot_*.png &
-rm ${path}/metrics_snapshots/raincloud_*.png &
-rm ${path}/metrics_snapshots/scatter_*.png
+(ffmpeg -y -threads 4 -r 5 -i ${path}/hvr_snapshots/snapshot_baselines_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_baselines.mp4 && rm ${path}/hvr_snapshots/snapshot_baselines_*.png) &
+(ffmpeg -y -threads 4 -r 5 -i ${path}/hvr_snapshots/snapshot_ablation_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/hvr_snapshots/hvr_ablation.mp4 && rm ${path}/hvr_snapshots/snapshot_ablation_*.png) &
+(ffmpeg -y -threads 4 -r 5 -i ${path}/nigd_plus_snapshots/snapshot_baselines_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_baselines.mp4 && rm ${path}/nigd_plus_snapshots/snapshot_baselines_*.png) &
+(ffmpeg -y -threads 4 -r 5 -i ${path}/nigd_plus_snapshots/snapshot_ablation_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/nigd_plus_snapshots/nigd_plus_ablation.mp4 && rm ${path}/nigd_plus_snapshots/snapshot_ablation_*.png) &
+(ffmpeg -y -threads 4 -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 && rm ${path}/metrics_snapshots/raincloud_*.png) &
+ffmpeg -y -threads 4 -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -threads 4 -rc-lookahead 20 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4 && rm ${path}/metrics_snapshots/scatter_*.png
 
 wait
 
