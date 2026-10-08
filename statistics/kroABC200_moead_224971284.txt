@@ -1,0 +1,28 @@
+Number of objectives: 3
+Number of vertices: 200
+Seed: 224971284
+Time limit: 300
+Iterations limit: 4294967295
+Initial individuals: 0
+Maximum number of solutions: 500
+Maximum number of snapshots: 30
+Factor at which the time between snapshots are increased: 1.3462
+Factor at which the iterations between snapshots are increased: 1
+Number of iterations: 4579
+Solutions obtained: 500
+Solving time: 300.032
+Number of snapshots: 30
+Time next snapshot: 300.077
+Time when the last snapshot was taken: 300.022
+Number of iteration of the next snapshot: 4294967295
+Iteration when the last snapshot was taken: 4579
+Population size: 448
+Method used to generate the weights: low discrepancy
+Decomposition method: weighted
+Size of the weight’s neighborhood: 30
+Crossover parameter in the Differential Evolution operator: 0.02
+Parameter for the Differential Evolution operator: 0.84
+Distribution index used by the polynomial mutation: 1.39
+Chance that the neighbourhood is considered at each generation, rather than the whole population: 0.92
+Maximum number of copies reinserted in the population: 7
+Diversity preservation mechanisms activated: 1

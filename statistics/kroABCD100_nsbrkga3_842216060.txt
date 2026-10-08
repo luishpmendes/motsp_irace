@@ -1,0 +1,51 @@
+Number of objectives: 4
+Number of vertices: 100
+Seed: 842216060
+Time limit: 300
+Iterations limit: 4294967295
+Initial individuals: 0
+Maximum number of solutions: 500
+Maximum number of snapshots: 30
+Factor at which the time between snapshots are increased: 1.37035
+Factor at which the iterations between snapshots are increased: 1
+Number of iterations: 21827
+Solutions obtained: 500
+Solving time: 300.014
+Number of snapshots: 30
+Time next snapshot: 300.03
+Time when the last snapshot was taken: 300.012
+Number of iteration of the next snapshot: 4294967295
+Iteration when the last snapshot was taken: 21827
+Number of individuals in each population: 424
+Minimum percentage of individuals to become the elite set: 0.21
+Maximum percentage of individuals to become the elite set: 0.58
+Mutation probability: 0.01
+Mutation distribution: 9.28
+Number of total parents for mating: 2
+Number of elite parents for mating: 2
+Type of bias that will be used: CONSTANT
+Type of diversity that will be used: AVERAGE_DISTANCE_TO_CENTROID
+Type of crossover that will be used: ROULETTE
+Number of independent parallel populations: 2
+Interval at which the elite solutions are exchanged between populations: 268
+Number of elite individuals to be exchanged between populations: 70
+Type of path relink that will be used: ALLOCATION
+Distance function used in path relinking: HAMMING
+Percentage of the path to be computed: 0.64
+Interval at which the path relink is applied: 0
+Interval at which the populations are shaken: 0
+The intensity of the shaking: 0.69
+The distribution of the shaking: 76.41
+Interval at which the populations are reset: 0
+The intensity of the reset: 0.94
+Number of threads to be used during parallel decoding: 1
+Maximum number of local search iterations: 0
+Last update generation: 21827
+Last update time: 299.999
+Largest number of generations between improvements: 30
+Total path relink time: 0
+Total path relink calls: 0
+Improvements in the elite set: 0
+Best individual improvements: 0
+Total shakings calls: 0
+Total resets calls: 0
