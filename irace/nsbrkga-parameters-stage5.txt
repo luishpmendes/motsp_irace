@@ -4,34 +4,47 @@
 # Still no reset.
 # Note: no shake_interval >= reset_interval constraint here because
 # reset_interval is fixed at 0, so the original constraint is inapplicable.
+#
+# Focused retuning (round 2): each range is restricted to the region held by
+# the round-1 surviving ROULETTE configurations on this problem (p10-p90 band
+# where they were concentrated; interquartile band, extended to the a-priori
+# value, where they were diffuse). Crossover is fixed to ROULETTE and path
+# relinking (stages 4-6) to the binary-search IPR.
 
-population_size_factor      "--population-size-factor "      i   (25, 125)
-min_elites_percentage       "--min-elites-percentage "       r   (0.01, 0.99)
-max_elites_percentage       "--max-elites-percentage "       r   (0.01, 0.99)
-mutation_probability        "--mutation-probability "        r   (0.00, 1.00)
-mutation_distribution       "--mutation-distribution "       r   (1.00, 100.00)
-num_total_parents           "--num-total-parents "           i   (2, 5)
-num_elite_parents           "--num-elite-parents "           i   (1, 5)
+population_size_factor   "--population-size-factor "    i   (75, 125)
+min_elites_percentage    "--min-elites-percentage "     r   (0.05, 0.50)
+max_elites_percentage    "--max-elites-percentage "     r   (0.30, 0.75)
+mutation_probability     "--mutation-probability "      r   (0.01, 0.10)
+mutation_distribution    "--mutation-distribution "     r   (20.00, 50.00)
+num_total_parents        "--num-total-parents "         i   (2, 4)
+num_elite_parents        "--num-elite-parents "         i   (1, 3)
 # CONSTANT=0, CUBIC=1, EXPONENTIAL=2, LINEAR=3, LOGINVERSE=4, QUADRATIC=5, SQRT=6
-bias_type                "--bias-type "               c       (0, 1, 2, 3, 4, 5, 6)
+# Restricted to the mild-bias regime kept in round 1 (CONSTANT, LOGINVERSE, SQRT)
+bias_type                "--bias-type "                 c   (0, 4, 6)
 # NONE=0, AVERAGE_DISTANCE_TO_CENTROID=1, AVERAGE_DISTANCE_BETWEEN_ALL_PAIRS=2, POWER_MEAN_BASED=3
-diversity_type           "--diversity-type "          c       (0, 1, 2, 3)
+# Restricted: ALL_PAIRS dropped (O(e^3 n) per generation, prohibitive at
+# 1000-2000 keys); POWER_MEAN_BASED dropped (degenerate on long chromosomes)
+diversity_type           "--diversity-type "            c   (0, 1)
 # ROULETTE=0, GEOMETRIC=1
-crossover_type           "--crossover-type "          c       (0, 1)
-num_populations          "--num-populations "         i       (2, 5)
-exchange_interval        "--exchange-interval "       i       (1, 1000)
-num_exchange_individuals "--num-exchange-individuals " i      (1, 100)
+# Fixed: ROULETTE only (focused retuning)
+crossover_type           "--crossover-type "            c   (0)
+num_populations          "--num-populations "           i   (2, 4)
+exchange_interval        "--exchange-interval "         i   (200, 650)
+num_exchange_individuals "--num-exchange-individuals "  i   (30, 75)
 # ALLOCATION=0, PERMUTATION=1, BINARY_SEARCH=2
-pr_type                  "--pr-type "                 c       (0, 1, 2)
+# Fixed: binary-search IPR (the a-priori NS-BRKGA variant)
+pr_type                  "--pr-type "                   c   (2)
 # HAMMING=0, KENDALL_TAU=1, EUCLIDEAN=2
-pr_dist_func             "--pr-dist-func "            c       (0, 1, 2)
-pr_percentage            "--pr-percentage "           r       (0.01, 1.00)
-pr_interval              "--pr-interval "             i       (1, 1000)
-shake_interval           "--shake-interval "          i       (1, 1000)
-shake_intensity          "--shake-intensity "         r       (0.01, 1.00)
-shake_distribution       "--shake-distribution "      r       (1.00, 100.00)
+# Fixed: HAMMING, an O(n) distance (KENDALL_TAU is O(n^2) per pair)
+pr_dist_func             "--pr-dist-func "              c   (0)
+# Fixed: ignored by BINARY_SEARCH
+pr_percentage            "--pr-percentage "             c   (1.00)
+pr_interval              "--pr-interval "               i   (100, 700)
+shake_interval           "--shake-interval "            i   (25, 425)
+shake_intensity          "--shake-intensity "           r   (0.30, 1.00)
+shake_distribution       "--shake-distribution "        r   (45.00, 80.00)
 # Fixed: no reset
-reset_interval           "--reset-interval "          c       (0)
+reset_interval           "--reset-interval "            c   (0)
 
 [global]
 digits = 2
